@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    "@typescript-eslint/eslint-plugin"
+  ],
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    "@typescript-eslint/indent": ["error", 2],
+    "semi": ["error"],
+    "max-len": ["error", 100],
+    "arrow-body-style": ["error", "as-needed"]
+  }
+}
