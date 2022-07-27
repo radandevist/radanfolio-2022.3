@@ -1,0 +1,65 @@
+/* eslint-disable max-len */
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { about } from "../../data/about";
+import { Post, posts } from "../../data/posts";
+
+export type PostViewProps = {
+  post: Post;
+};
+
+const PostView: NextPage<PostViewProps> = ({ post }) => (
+  <div 
+    // initial={{ opacity: 0}}
+    // animate={{ opacity: 1}}
+    // exit={{ opacity: 0}}
+    className="w-full min-h-screen my-12">
+    <div className="mxw-sm w-full flex items-center flex-col justify-center space-y-6 text-center my-12">
+      <p className="animate animate__animated animate__fadeInDown animate__fast font-semibold capitalize">{post?.topic}</p>
+      <h2 className="animate animate__animated animate__fadeInDown animate__fast  text-4xl md:text-6xl font-bold capitalize">{post?.title}</h2>
+      <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{post?.excerpt}</p>
+      <div className="animate animate__animated animate__fadeIn animate__slow flex items-center space-x-3">
+        <img className="h-16 w-16 rounded-full object-cover shadow-lg" src={about?.avatar} />
+        <div className="text-left">
+          <p>{post?.author}</p>
+          <p className="italic">{post?.date}</p>
+        </div>
+      </div>
+    </div>
+    {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
+    {/* cover image */}
+    <section className="">
+      <div>
+        <img className="h-[70vh] w-full object-cover object-center" src={post?.cover} alt="cover image" />
+      </div>
+    </section>
+    {/* content */}
+    <section className="mxw-sm my-12">
+      <div className="flex justify-start my-12">
+        <h2 className="text-4xl md:text-6xl">Project Overview</h2>
+      </div>
+      <p className="text-2xl md:text-3xl font-light first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold">{post?.body}</p>
+    </section>
+    <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
+  </div>
+);
+
+export type PostViewParams = {
+  slug: string;
+};
+
+export const getStaticPaths: GetStaticPaths<PostViewParams> = () => ({
+  paths: posts.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+  })),
+  fallback: true,
+});
+
+export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = (context) => ({
+  props: {
+    post: posts.find((post) => post.slug === context.params?.slug)!
+  }
+});
+
+export default PostView;

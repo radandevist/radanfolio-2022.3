@@ -9,6 +9,7 @@
     "@typescript-eslint/indent": ["error", 2],
     "semi": ["error"],
     "max-len": ["error", 100],
-    "arrow-body-style": ["error", "as-needed"]
+    "arrow-body-style": ["error", "as-needed"],
+    "quotes": ["error", "double"]
   }
 }
