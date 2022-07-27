@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { redirect } from "next/dist/server/api-utils";
 import { about } from "../../data/about";
 import { Post, posts } from "../../data/posts";
 
@@ -53,13 +54,23 @@ export const getStaticPaths: GetStaticPaths<PostViewParams> = () => ({
       slug: post.slug,
     },
   })),
-  fallback: true,
+  fallback: "blocking",
 });
 
-export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = (context) => ({
-  props: {
-    post: posts.find((post) => post.slug === context.params?.slug)!
+export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = (context) => {
+  const post = posts.find((post) => post.slug === context.params?.slug);
+
+  if (!post) {
+    return {
+      notFound: true,
+    };
   }
-});
+
+  return ({
+    props: {
+      post,
+    }
+  });
+};
 
 export default PostView;

@@ -49,13 +49,23 @@ export const getStaticPaths: GetStaticPaths<ProjectViewParams> = () => ({
       slug: project.slug,
     },
   })),
-  fallback: true,
+  fallback: "blocking",
 });
 
-export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams> = (context) => ({
-  props: {
-    project: projects[parseInt(context.params?.slug!)],
-  },
-});
+export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams> = (context) => {
+  const project = projects.find((project) => project.slug === context.params?.slug);
+
+  if (!project) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      project,
+    },
+  };
+};
 
 export default ProjectView;
