@@ -16,7 +16,7 @@ export const Hero: FC<HeropProps> = ({ post }) => (
     <div className="mxw-sm grid gap-6 grid-cols-1 md:grid-cols-6">
       <div className="animate animate__animated animate__fadeIn md:col-span-4">
         <Link href={`/blog/${post?.slug}`} /* state={post} */>
-          <img className="h-full w-full object-cover rounded-lg shadow-lg" src={post?.cover}/>
+          <img className="h-full w-full object-cover rounded-lg shadow-lg" alt="cover_pic" src={post?.cover}/>
         </Link>
       </div>
       <div className="animate animate__animated animate__fadeIn md:col-span-2 h-full flex flex-col justify-center space-y-3">

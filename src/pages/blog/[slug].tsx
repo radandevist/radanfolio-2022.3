@@ -19,7 +19,7 @@ const PostView: NextPage<PostViewProps> = ({ post }) => (
       <h2 className="animate animate__animated animate__fadeInDown animate__fast  text-4xl md:text-6xl font-bold capitalize">{post?.title}</h2>
       <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{post?.excerpt}</p>
       <div className="animate animate__animated animate__fadeIn animate__slow flex items-center space-x-3">
-        <img className="h-16 w-16 rounded-full object-cover shadow-lg" src={about?.avatar} />
+        <img className="h-16 w-16 rounded-full object-cover shadow-lg" alt="avatar_pic" src={about?.avatar} />
         <div className="text-left">
           <p>{post?.author}</p>
           <p className="italic">{post?.date}</p>

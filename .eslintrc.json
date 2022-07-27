@@ -10,6 +10,7 @@
     "semi": ["error"],
     "max-len": ["error", 100],
     "arrow-body-style": ["error", "as-needed"],
-    "quotes": ["error", "double"]
+    "quotes": ["error", "double"],
+    "@next/next/no-img-element": ["off"]
   }
 }
