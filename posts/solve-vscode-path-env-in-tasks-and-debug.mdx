@@ -1,0 +1,33 @@
+---
+title: "Why VSCode doesn't load path environments? And How to solve it?"
+cover: https://images.pexels.com/photos/19677/pexels-photo.jpg?cs=srgb&dl=pexels-miguel-%C3%A1-padri%C3%B1%C3%A1n-19677.jpg&fm=jpg
+date: 2022-03-18
+topic: Linux Zsh
+
+excerpt: A weird behaviour occured to me in VSCode, here is how I dealt with it.
+featured: false
+---
+
+This issue occurs when we use zsh and we want to launch tasks or debugging sessions in VS Code. It typically throws the following error:
+
+```bash:terminal
+The terminal process \"/usr/bin/zsh '-c', 'yarn run start'\" failed to launch (exit code: 127)
+```
+
+The problem is that no commands are recognized because `~/.zshrc` was not sourced while launching VS Code and the `PATH` environment variable is not set at all.
+
+But notice that within the integrated terminal, `PATH` is correct.
+
+Plus, if we launch VS Code from a terminal instead of from the application menu, we don't encouner that error.
+
+What we need to do is to adjust the desktop entry file `/usr/share/applications/code.desktop` or `~/.local/share/applications/code.desktop` `Exec` field like below:
+
+```bash:bash
+Exec=zsh -c "source $HOME/.zshrc && code"
+```
+
+This is how my `code.desktop` file look like after editing: 
+
+![](/images/posts/solve-vscode-path-env-in-tasks-and-debug/Screenshot_20220318_092531.png)
+
+And so, our pain is gone🤗.
