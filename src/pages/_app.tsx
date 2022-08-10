@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { motion } from "framer-motion";
 import "animate.css";
 import "../styles/globals.css";
+import "../styles/prism-a11y-dark.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import NextLink, { LinkProps as InternalLinkProps } from "next/link";
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 
 export const Link: FC<
 Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>,keyof InternalLinkProps> & InternalLinkProps & {
@@ -8,8 +8,6 @@ Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>,keyof InternalLinkProps> & In
 } & React.RefAttributes<HTMLAnchorElement>
 > = ({ children, ...props }) => (
   <NextLink {...props}>
-    <a>
-      {children}
-    </a>
+    <a>{children}</a>
   </NextLink>
 );

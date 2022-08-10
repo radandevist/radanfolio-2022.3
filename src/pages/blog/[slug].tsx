@@ -6,6 +6,7 @@ import { z } from "zod";
 import { about } from "../../data/about";
 import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
 import { formatPostFileResult } from "../../functions/blog.functions";
+import { mdxComponents } from "../../components/mdx";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -61,7 +62,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
         <article className="text-2xl md:text-3xl font-light first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold space-y-10 prose">
           {/* {post.code} */}
           {/* {code} */}
-          <Component />
+          <Component components={mdxComponents} />
         </article>
       </section>
       <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />

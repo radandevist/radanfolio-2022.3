@@ -6,8 +6,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'future' : ['Rubik Glitch']
-      }
+        "future" : ["Rubik Glitch"]
+      },
+      colors: {
+        brand2: "#111d25",
+      },
     },
   },
   plugins: [],

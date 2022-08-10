@@ -22,13 +22,22 @@ Basically, you need to request:
   
   - several posts
   
-  - several comments, each of which:
-    
-    - belongs to their own respective posts
+  - several comments, each of which belongs to their own respective posts
 
 I initially imagined a system of sequential requests in for-loops, but after reflection, I found it inappropriate because it could jeopardize the viability of our back-end server.
 
-![](/images/posts/dont-worry-about-generic-routes/code.png)
+
+```typescript:manyRequests.ts
+// ❌ A very bad idea
+const user = get(`/api/user/${userId}`);
+const posts = get(`/api/posts?userId=${userId}`);
+const comments = get(`/api/comments?userId=${userID}`);
+
+comments.forEach((element, index) => {
+const commentPost = get(`/api/posts?id=${comment.postId}`);
+comments[index].post = commentPost;
+});
+```
 
 Another solution that came to my mind, is the implementation of a query parser inspired by the way one of the popular existing frameworks does to populate the relationships between entities. And I came across two examples in particular for inspiration:
 
@@ -44,7 +53,7 @@ Finally, I opted for the implementation of an endpoint specifically designed for
 
 This endpoint will return a response of type:
 
-```typescript
+```typescript:profilepage.ts
 interface ProfilePage {
   id: string;
   username: string;

@@ -3,6 +3,7 @@ import { getMDXComponent } from "mdx-bundler/client";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useMemo } from "react";
 import { z } from "zod";
+import { mdxComponents } from "../../components/mdx";
 import { formatProjectFileResult } from "../../functions/projects.functions";
 import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
 // import { projects } from "../../data/projects";
@@ -62,7 +63,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
           <h2 className="text-4xl md:text-6xl">Overview</h2>
         </div> */}
         <p className="text-2xl md:text-3xl font-light first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold space-y-10 prose">
-          <Component />
+          <Component components={mdxComponents} />
         </p>
       </section>
       <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
