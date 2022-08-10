@@ -2,9 +2,10 @@
 import { Link } from "../components/Link";
 import { FC } from "react";
 import { Post } from "../data/posts";
+import { BlogIndexPost } from "../pages/blog";
 
 export type HeropProps = {
-  post: Post;
+  post: BlogIndexPost;
 };
 
 export const Hero: FC<HeropProps> = ({ post }) => (

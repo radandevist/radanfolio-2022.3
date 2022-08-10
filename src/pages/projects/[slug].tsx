@@ -49,7 +49,7 @@ export const getStaticPaths: GetStaticPaths<ProjectViewParams> = () => ({
       slug: project.slug,
     },
   })),
-  fallback: "blocking",
+  fallback: false,
 });
 
 export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams> = (context) => {

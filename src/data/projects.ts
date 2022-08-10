@@ -1,4 +1,4 @@
-import { slugify } from "../utils/slugify";
+import { slugify } from "../utils/stringUtils";
 
 /* eslint-disable max-len */
 export type Stack = {

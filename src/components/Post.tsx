@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 import { FC } from "react";
-import { Post } from "../data/posts";
+import { BlogIndexPost } from "../pages/blog";
 import { Link } from "./Link";
 
 export type PostComponentProps = {
-  post: Post;
+  post: BlogIndexPost;
 };
 
 export const PostComponent: FC<PostComponentProps> = ({ post }) => (

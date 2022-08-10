@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { Post } from "../data/posts";
+import { BlogIndexPost } from "../pages/blog";
 import { PostComponent } from "./Post";
 
 export type FeedProps = {
-  posts: Post[];
+  posts: BlogIndexPost[];
 };
 
 export const Feed: FC<FeedProps> = ({ posts }) => (

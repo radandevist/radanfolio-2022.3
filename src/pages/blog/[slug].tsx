@@ -1,76 +1,99 @@
 /* eslint-disable max-len */
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { redirect } from "next/dist/server/api-utils";
+import { getMDXComponent } from "mdx-bundler/client";
+import { useMemo } from "react";
+import { z } from "zod";
 import { about } from "../../data/about";
-import { Post, posts } from "../../data/posts";
+import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
+import { formatPostFileResult } from "../../functions/blog.functions";
+
+export type Post = z.infer<typeof ZPost>;
+
+const ZPost = z.object({
+  code: z.string(),
+  topic: z.string(),
+  title: z.string(),
+  excerpt: z.string().optional(),
+  author: z.string(),
+  date: z.string(),
+  cover: z.string(),
+});
 
 export type PostViewProps = {
   post: Post;
+  // code: string;
 };
 
-const PostView: NextPage<PostViewProps> = ({ post }) => (
-  <div 
-    // initial={{ opacity: 0}}
-    // animate={{ opacity: 1}}
-    // exit={{ opacity: 0}}
-    className="w-full min-h-screen my-12">
-    <div className="mxw-sm w-full flex items-center flex-col justify-center space-y-6 text-center my-12">
-      <p className="animate animate__animated animate__fadeInDown animate__fast font-semibold capitalize">{post?.topic}</p>
-      <h2 className="animate animate__animated animate__fadeInDown animate__fast  text-4xl md:text-6xl font-bold capitalize">{post?.title}</h2>
-      <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{post?.excerpt}</p>
-      <div className="animate animate__animated animate__fadeIn animate__slow flex items-center space-x-3">
-        <img className="h-16 w-16 rounded-full object-cover shadow-lg" alt="avatar_pic" src={about?.avatar} />
-        <div className="text-left">
-          <p>{post?.author}</p>
-          <p className="italic">{post?.date}</p>
+// eslint-disable-next-line arrow-body-style
+const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
+  const Component = useMemo(() => getMDXComponent(code), [code]);
+
+  return (
+    <div 
+      // initial={{ opacity: 0}}
+      // animate={{ opacity: 1}}
+      // exit={{ opacity: 0}}
+      className="w-full min-h-screen my-12">
+      <div className="mxw-sm w-full flex items-center flex-col justify-center space-y-6 text-center my-12">
+        <p className="animate animate__animated animate__fadeInDown animate__fast font-semibold capitalize">{post.topic}</p>
+        <h2 className="animate animate__animated animate__fadeInDown animate__fast  text-4xl md:text-6xl font-bold capitalize">{post.title}</h2>
+        <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{post.excerpt}</p>
+        <div className="animate animate__animated animate__fadeIn animate__slow flex items-center space-x-3">
+          <img className="h-16 w-16 rounded-full object-cover shadow-lg" alt="avatar_pic" src={about.avatar} />
+          <div className="text-left">
+            <p>{post.author}</p>
+            <p className="italic">{post.date}</p>
+          </div>
         </div>
       </div>
+      {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
+      {/* cover image */}
+      <section className="">
+        <div>
+          <img className="h-[70vh] w-full object-cover object-center" src={post.cover} alt="cover image" />
+        </div>
+      </section>
+      {/* content */}
+      <section className="mxw-sm my-12">
+        {/* <div className="flex justify-start my-12">
+          <h2 className="text-4xl md:text-6xl">Project Overview</h2>
+        </div> */}
+        <article className="text-2xl md:text-3xl font-light first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold space-y-10 prose">
+          {/* {post.code} */}
+          {/* {code} */}
+          <Component />
+        </article>
+      </section>
+      <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
     </div>
-    {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
-    {/* cover image */}
-    <section className="">
-      <div>
-        <img className="h-[70vh] w-full object-cover object-center" src={post?.cover} alt="cover image" />
-      </div>
-    </section>
-    {/* content */}
-    <section className="mxw-sm my-12">
-      <div className="flex justify-start my-12">
-        <h2 className="text-4xl md:text-6xl">Project Overview</h2>
-      </div>
-      <p className="text-2xl md:text-3xl font-light first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold">{post?.body}</p>
-    </section>
-    <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
-  </div>
-);
+  );
+};
 
 export type PostViewParams = {
   slug: string;
 };
 
-export const getStaticPaths: GetStaticPaths<PostViewParams> = () => ({
-  paths: posts.map((post) => ({
-    params: {
-      slug: post.slug,
-    },
-  })),
-  fallback: "blocking",
-});
+export const getStaticPaths: GetStaticPaths<PostViewParams> = async () => {
+  const posts = await getFiles();
 
-export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = (context) => {
-  const post = posts.find((post) => post.slug === context.params?.slug);
+  return {
+    paths: posts.map((post) => ({
+      params: {
+        slug: post.replace(/\.mdx/, ""),
+      },
+    })),
+    fallback: false,
+  };
+};
 
-  if (!post) {
-    return {
-      notFound: true,
-    };
-  }
+export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = async (context) => {
+  const post = ZPost.parse(formatPostFileResult(await getFileBySlug(context.params?.slug!)));
 
-  return ({
+  return {
     props: {
       post,
     }
-  });
+  };
 };
 
 export default PostView;

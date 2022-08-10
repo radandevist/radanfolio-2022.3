@@ -1,0 +1,60 @@
+---
+title: Don't worry about generic routes
+cover: https://images.pexels.com/photos/1828469/pexels-photo-1828469.jpeg?cs=srgb&dl=pexels-sergio-souza-1828469.jpg&fm=jpg
+date: 2022-07-30
+topic: Rest API
+
+excerpt: Dealing with REST APIs is a hard job, and in this post, I'll show you why specific route is sometimes better in you API design.
+featured: true
+---
+
+I decided to create a dev.to clone app with express and react.
+
+One of the issues I'm currently facing is integrating REST API responses served by the back-end into my front-end.
+
+Let's take as an example a dev.to user's profile page. To render it, we need, in addition to the direct information of the user sought, his latest posts and comments.
+
+![](/images/posts/dont-worry-about-generic-routes/image848.png)
+
+Basically, you need to request:
+
+- A user, which itself contains:
+  
+  - several posts
+  
+  - several comments, each of which:
+    
+    - belongs to their own respective posts
+
+I initially imagined a system of sequential requests in for-loops, but after reflection, I found it inappropriate because it could jeopardize the viability of our back-end server.
+
+![](/images/posts/dont-worry-about-generic-routes/code.png)
+
+Another solution that came to my mind, is the implementation of a query parser inspired by the way one of the popular existing frameworks does to populate the relationships between entities. And I came across two examples in particular for inspiration:
+
+- one is the loopback farmework: [here](https://loopback.io/doc/en/lb3/Relation-REST-API.html)
+
+- and the other is the Strapi CMS: [here](https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.html#relation-media-fields)
+
+However, it takes a lot of work and is it really worth it?
+
+![](https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif)
+
+Finally, I opted for the implementation of an endpoint specifically designed for the task: `GET /api/users/:username/profilepage` which has the advantage of satisfying us in a single API call and without additional headache.
+
+This endpoint will return a response of type:
+
+```typescript
+interface ProfilePage {
+  id: string;
+  username: string;
+  firstname: string;
+  lastname?: string;
+  email: string;
+  profile?: Profile;
+  posts: PostElement[];
+  comments: ProfilePageComment[];
+}
+```
+
+So, why bother with generic routes?

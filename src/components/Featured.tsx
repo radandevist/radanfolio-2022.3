@@ -1,13 +1,15 @@
 import React, { FC } from "react";
-import { Post } from "../data/posts";
+import { BlogIndexPost } from "../pages/blog";
+import { getRandomElements } from "../utils/arrayUtils";
 import { PostComponent } from "./Post";
 
 export type FeaturedProps = {
-  posts: Post[];
+  posts: BlogIndexPost[];
 };
 
 export const Featured: FC<FeaturedProps> = ({ posts }) => {
-  let featuredPosts = posts.filter(post => post.featured === true);
+  const featuredPosts = posts.filter(post => post.featured === true);
+  // featuredPosts = getRandomElements(featuredPosts, 2);
 
   return (
     <div className="w-full">
