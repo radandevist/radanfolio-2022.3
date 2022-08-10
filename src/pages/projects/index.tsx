@@ -41,12 +41,12 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
         </div>
         <section className="mxw-sm grid gap-6 grid-cols-1 sm:grid-cols-2 pb-12">
           {featuredProjects && featuredProjects.slice(0,2).map((project) => (
-            <ProjectComponent key={project?.id} project={project} />
+            <ProjectComponent key={project.id} project={project} />
           ))}
         </section>
         <section className="mxw-sm grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-12">
           {allProjects && allProjects.map((project) => (
-            <ProjectComponent key={project?.id} project={project}/>
+            <ProjectComponent key={project.id} project={project}/>
           ))}
         </section>
       </div>

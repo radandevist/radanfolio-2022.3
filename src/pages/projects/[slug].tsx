@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { getMDXComponent } from "mdx-bundler/client";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Image from "next/image";
 import { useMemo } from "react";
 import { z } from "zod";
 import { mdxComponents } from "../../components/mdx";
@@ -42,19 +43,26 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
       // exit={{ x: window.innerWidth}}
       className="w-full min-h-screen my-12">
       <div className="mxw-sm w-full flex items-center flex-col justify-center space-y-6 text-left sm:text-center my-12">
-        <p className={project?.category === "web3" ? "animate animate__animated animate__fadeInDown animate__fast font-future uppercase" : "animate animate__animated animate__fadeInDown animate__fast font-bold uppercase"}>{project?.category}</p>
-        <h2 className="animate animate__animated animate__fadeInDown animate__fast text-4xl md:text-6xl font-bold capitalize">{project?.name}</h2>
-        <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{project?.summary}</p>
+        <p className={project.category === "web3" ? "animate animate__animated animate__fadeInDown animate__fast font-future uppercase" : "animate animate__animated animate__fadeInDown animate__fast font-bold uppercase"}>{project.category}</p>
+        <h2 className="animate animate__animated animate__fadeInDown animate__fast text-4xl md:text-6xl font-bold capitalize">{project.name}</h2>
+        <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{project.summary}</p>
         <div className="flex items-center space-x-2">
-          {project.liveUrl && <a target="_blank" rel="noreferrer" href={project.liveUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-rose-600 duration-200">Visit Project</a>}
-          <a target="_blank" rel="noreferrer" href={project?.repoUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-rose-600 duration-200">Github</a>
+          {project.liveUrl && <a target="_blank" rel="noreferrer" href={project.liveUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-brand1-500 duration-200">Visit Project</a>}
+          <a target="_blank" rel="noreferrer" href={project.repoUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-brand1-500 duration-200">Github</a>
         </div>
       </div>
       {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
       {/* cover image */}
       <section className="">
         <div>
-          <img className="h-[70vh] w-full object-cover object-center" src={project?.cover} alt="cover image" />
+          {/* <img className="h-[70vh] w-full object-cover object-center" src={project.cover} alt="cover image" /> */}
+          <Image
+            className="h-[70vh] w-full object-cover object-center"
+            src={project.cover}
+            alt="cover_image"
+            width={1640}
+            height={924}
+          />
         </div>
       </section>
       {/* content */}

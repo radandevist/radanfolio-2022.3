@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React, { FC } from "react";
 import { ProjectIndex } from "../pages/projects";
-// import { Project } from "../data/projects/projects.types";
 import { Link } from "./Link";
+import Image from "next/image";
 
 export type ProjectComponentProps = {
   project: ProjectIndex;
@@ -13,7 +13,14 @@ export const ProjectComponent: FC<ProjectComponentProps> = ({ project }) => (
     <Link href={`/projects/${project?.slug}`} /* state={project} */>
       <>
         <div className="animate animate__animated animate__fadeIn">
-          <img className="h-56 w-full object-cover rounded-lg" src={project?.cover} alt="project cover image" />
+          {/* <img className="h-56 w-full object-cover rounded-lg" src={project?.cover} alt="project cover image" /> */}
+          <Image
+            className="h-56 w-full object-cover rounded-lg"
+            width={1640}
+            height={924}
+            src={project.cover}
+            alt="project_cover_image"
+          />
         </div>
         <div className="py-4 space-y-3">
           <h2 className="text-xl md:text-2xl font-light">{project?.name}</h2>

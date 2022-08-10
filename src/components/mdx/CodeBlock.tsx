@@ -4,7 +4,7 @@ export const CodeBlock: FC = ({ children }) => (
   <div className="flex overflow-hidden relative flex-col
       p-5 mx-auto my-5 space-y-5 w-full font-mono
       text-lg md:text-xl
-      rounded-lg bg-brand2
+      rounded-lg bg-brand2-500
       !mt-0">
     {/* text-2xl md:text-3xl font-light first-letter:text-4xl */}
     <div className="flex space-x-3 w-full">

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 export const about = {
-  avatar: "https://images.pexels.com/photos/3231775/pexels-photo-3231775.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  avatar: "/images/profile_pic.jpg",
   name: "Daniel Adriananrisoa",
   email: "radandevist@gmail.com",
   github: "https://www.github.com/radandevist",

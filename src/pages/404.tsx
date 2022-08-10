@@ -13,8 +13,8 @@ const Page404 = () => {
         </div>
         <h2 className="text-2xl font-bold m-0 uppercase">Oops! Page not Found</h2>
         <p className="font-light mb-3">Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>
-        <Link href="/" ><span className="inline-block bg-rose-500 text-white font-semibold py-2 px-3 hover:bg-rose-600">Back to homepage</span></Link>
-        <a className="cursor-pointer ml-4 hover:text-rose-500 hover:underline" onClick={() => router.back()}>Or, Back to previous page</a>
+        <Link href="/" ><span className="inline-block bg-brand1-500 text-white font-semibold py-2 px-3 hover:bg-brand1-600">Back to homepage</span></Link>
+        <a className="cursor-pointer ml-4 hover:text-brand1-600 hover:underline" onClick={() => router.back()}>Or, Back to previous page</a>
       </div>
     </div>
   );

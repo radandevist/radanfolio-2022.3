@@ -13,7 +13,7 @@ export const Feed: FC<FeedProps> = ({ posts }) => (
     </div>
     <section className="mxw-sm grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
       {posts && posts.map((post) => (
-        <PostComponent key={post?.id} post={post}/>
+        <PostComponent key={post.id} post={post}/>
       ))}
     </section>
   </div>

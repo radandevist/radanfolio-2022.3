@@ -7,6 +7,7 @@ import { about } from "../../data/about";
 import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
 import { formatPostFileResult } from "../../functions/blog.functions";
 import { mdxComponents } from "../../components/mdx";
+import Image from "next/image";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -51,7 +52,14 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
       {/* cover image */}
       <section className="">
         <div>
-          <img className="h-[70vh] w-full object-cover object-center" src={post.cover} alt="cover image" />
+          {/* <img className="h-[70vh] w-full object-cover object-center" src={post.cover} alt="cover image" /> */}
+          <Image
+            className="h-[70vh] w-full object-cover object-center"
+            src={post.cover}
+            alt="cover_image"
+            height={1688}
+            width={3000}
+          />
         </div>
       </section>
       {/* content */}
