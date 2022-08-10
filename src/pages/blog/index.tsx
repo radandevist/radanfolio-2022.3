@@ -8,7 +8,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
 import { z } from "zod";
 import { getRandomElements } from "../../utils/arrayUtils";
-import { formatFrontmatter } from "../../functions/blog.functions";
+import { formatPostFrontmatter } from "../../functions/blog.functions";
 
 const ZBlogIndexPost = z.object({
   id: z.string(),
@@ -38,14 +38,17 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
 );
 
 export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
-  const posts = (await getAllFilesFrontMatter())
-    .map((frontMatter) => ZBlogIndexPost.parse(formatFrontmatter(frontMatter)));
+  const posts = (await getAllFilesFrontMatter("posts"))
+    .map(frontMatter => ZBlogIndexPost.parse(formatPostFrontmatter(frontMatter)));
 
   return {
     props: {
       posts,
       heroPost: getRandomElements(posts)[0],
-      featuredPosts: getRandomElements(posts.filter(post => post.featured === true), 2)
+      featuredPosts: getRandomElements(
+        posts.filter(post => post.featured === true),
+        2
+      )
     }
   };
 };

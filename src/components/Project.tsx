@@ -1,10 +1,11 @@
 /* eslint-disable max-len */
 import React, { FC } from "react";
-import { Project } from "../data/projects";
+import { ProjectIndex } from "../pages/projects";
+// import { Project } from "../data/projects/projects.types";
 import { Link } from "./Link";
 
 export type ProjectComponentProps = {
-  project: Project;
+  project: ProjectIndex;
 };
 
 export const ProjectComponent: FC<ProjectComponentProps> = ({ project }) => (
@@ -16,7 +17,7 @@ export const ProjectComponent: FC<ProjectComponentProps> = ({ project }) => (
         </div>
         <div className="py-4 space-y-3">
           <h2 className="text-xl md:text-2xl font-light">{project?.name}</h2>
-          <p className="text-md md:text-lg truncate">{project?.overview}</p>
+          <p className="text-md md:text-lg truncate">{project?.summary}</p>
         </div>
       </>
     </Link>

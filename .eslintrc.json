@@ -7,13 +7,16 @@
   ],
   "rules": {
     "@typescript-eslint/indent": ["error", 2],
-    "semi": ["error"],
+    "@typescript-eslint/semi": "error",
+    "semi": "off",
     "max-len": ["error", 100],
     "arrow-body-style": ["error", "as-needed"],
     "quotes": ["error", "double"],
     "@next/next/no-img-element": ["off"],
     "prefer-template": "error",
     "prefer-const": "error",
-    "no-unused-vars": "error"
+    "no-unused-vars": "error",
+    "@typescript-eslint/member-delimiter-style": "error",
+    "eol-last": "error"
   }
 }

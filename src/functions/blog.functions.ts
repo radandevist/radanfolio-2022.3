@@ -2,7 +2,7 @@ import { BlogIndexPost } from "../pages/blog";
 import { Post } from "../pages/blog/[slug]";
 // import { getFileBySlug } from "../utils/mdxUtils";
 
-export const formatFrontmatter = (frontMatter: Record<string, any>): BlogIndexPost => {
+export const formatPostFrontmatter = (frontMatter: Record<string, any>): BlogIndexPost => {
   const {
     cover, date, title, // * These are required
     author, excerpt, featured, /* topic, */
@@ -31,7 +31,7 @@ export const formatPostFileResult = (postFile: Record<string, any>): Post => {
   } = postFile as {
     code: string;
     frontMatter: {
-      readingTime: string; wordCount: string; slug: string;
+      readingTime: number; wordCount: number; slug: string;
       topic: string;
       title: string;
       excerpt: string;

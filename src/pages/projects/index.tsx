@@ -1,12 +1,37 @@
 /* eslint-disable max-len */
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { ProjectComponent } from "../../components/Project";
-import { projects } from "../../data/projects";
+import { z } from "zod";
+import { getRandomElements } from "../../utils/arrayUtils";
+import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
+import { formatProjectFrontMatter } from "../../functions/projects.functions";
+// import { projects } from "../../data/projects";
 
-const Projects: NextPage = () => {
-  let allProjects = projects;
-  let featuredProjects = allProjects.filter(project => project.featured === true);
+const ZProjectIndex = z.object({
+  id: z.string(),
+  name: z.string(),
+  cover: z.string(),
+  // liveUrl: z.string().nullable(),
+  summary: z.string(),
+  // repoUrl: z.string(),
+  stack: z
+    .object({ id: z.string(), name: z.string() })
+    .array(),
+  slug: z.string(),
+  featured: z.boolean(),
+});
+
+export type ProjectIndex = z.infer<typeof ZProjectIndex>;
+
+export type ProjectsProps = {
+  projects: ProjectIndex[];
+  featuredProjects: ProjectIndex[];
+};
+
+const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
+  const allProjects = projects;
+  // const featuredProjects = allProjects.filter(project => project.featured === true);
 
   return (
     <AnimatedPage>
@@ -27,6 +52,21 @@ const Projects: NextPage = () => {
       </div>
     </AnimatedPage>
   );
+};
+
+export const getServerSideProps: GetServerSideProps<ProjectsProps> = async () => {
+  const projects = (await getAllFilesFrontMatter("projects"))
+    .map(frontMatter => ZProjectIndex.parse(formatProjectFrontMatter(frontMatter)));
+
+  return {
+    props: {
+      projects,
+      featuredProjects: getRandomElements(
+        projects.filter(project => project.featured === true),
+        2
+      )
+    },
+  };
 };
 
 export default Projects;

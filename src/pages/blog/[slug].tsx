@@ -74,7 +74,7 @@ export type PostViewParams = {
 };
 
 export const getStaticPaths: GetStaticPaths<PostViewParams> = async () => {
-  const posts = await getFiles();
+  const posts = await getFiles("posts");
 
   return {
     paths: posts.map((post) => ({
@@ -87,7 +87,7 @@ export const getStaticPaths: GetStaticPaths<PostViewParams> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = async (context) => {
-  const post = ZPost.parse(formatPostFileResult(await getFileBySlug(context.params?.slug!)));
+  const post = ZPost.parse(formatPostFileResult(await getFileBySlug("posts", context.params?.slug!)));
 
   return {
     props: {

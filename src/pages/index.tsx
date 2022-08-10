@@ -4,7 +4,7 @@ import { AnimatedPage } from "../components/AnimatedPage";
 import { about } from "../data/about";
 
 const Home: NextPage = () => {
-  let info = about;
+  const info = about;
 
   return (
     <AnimatedPage>

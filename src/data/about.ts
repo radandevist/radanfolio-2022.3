@@ -1,21 +1,21 @@
 /* eslint-disable max-len */
 export const about = {
   avatar: "https://images.pexels.com/photos/3231775/pexels-photo-3231775.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  name: "The Hyggedev",
-  email: "blogfolio@mail.com",
-  github: "https://www.github.com/",
+  name: "Daniel Adriananrisoa",
+  email: "radandevist@gmail.com",
+  github: "https://www.github.com/radandevist",
   socials: [
-    { 
-      name: "Twitter",
-      url: "https://www.twitter.com"
-    },
+    // { 
+    //   name: "Twitter",
+    //   url: "https://www.twitter.com"
+    // },
     { 
       name: "Linkedin",
-      url: "https://www.linkedin.com"
+      url: "https://www.linkedin.com/in/radandevist"
     },
     { 
       name: "Instagram",
-      url: "https://www.instagram.com"
+      url: "https://www.instagram.com/radandevist"
     },
   ],
   skills: [
@@ -56,7 +56,7 @@ export const about = {
       name: "github"
     },
   ],
-  bioIntro: "Yo, Im Hyggedev!",
+  bioIntro: "Hey! I'm Radan",
   bioPreface: "Etsy typewriter food truck thundercats post-ironic. VHS church-key kickstarter, twee kitsch trust fund you probably havent heard of them man bun.",
   bioSub: "Cray enamel pin shaman cred lumbersexual. Trust fund raclette offal cray blog yr taxidermy schlitz williamsburg Irony snackwave ennui schlitz kitsch franzen intelligentsia bicycle rights tote bag la croix put a bird on it sartorial retro etsy.",
   bioMain: "Banh mi you probably havent heard of them yuccie beard deep v. Salvia roof party selvage jianbing, irony forage direct trade. Pug tumeric mixtape, church-key cray single-origin coffee selvage ugh prism keytar. Typewriter yr plaid post-ironic. Palo santo twee ethical, pug squid godard jianbing adaptogen."

@@ -14,15 +14,15 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 // import { BlogIndexPost } from "../pages/blog";
 
-export async function getFiles() {
-  return readdirSync(join(process.cwd(), "posts"));
+export async function getFiles(mdxFilesDir: string) {
+  return readdirSync(join(process.cwd(), mdxFilesDir));
 }
 
-export async function getFileBySlug(slug: string) {
+export async function getFileBySlug(mdxFilesDir: string, slug: string) {
   // we will pass in a slug of the page we want like /blogs/blog-1
   // example and we will get the parsed content for that particular
   // blog page.
-  const source = readFileSync(join(process.cwd(), "posts", `${slug}.mdx`),"utf8");
+  const source = readFileSync(join(process.cwd(), mdxFilesDir, `${slug}.mdx`),"utf8");
 
   const { code, frontmatter } = await bundleMDX({
     source,
@@ -48,25 +48,27 @@ export async function getFileBySlug(slug: string) {
     },
   });
 
+  const { words, minutes } = readingTime(source);
+
   return {
     // return the parsed content for our page along with it's metadata
     // we will be using gray-matter for this.
     code,
     frontMatter: {
       ...frontmatter,
-      wordCount: source.split(/\s+/gu).length,
-      readingTime: readingTime(source),
+      wordCount: words,
+      readingTime: minutes,
       slug,
     },
   };
 }
 
-export async function getAllFilesFrontMatter() {
-  const files = readdirSync(join(process.cwd(), "posts"));
+export async function getAllFilesFrontMatter(mdxFilesDir: string) {
+  const files = readdirSync(join(process.cwd(), mdxFilesDir));
 
   return files.map((postSlug) => {
     // returns the parsed data for all the files within the posts directory
-    const source = readFileSync(join(process.cwd(), "posts", postSlug), "utf8");
+    const source = readFileSync(join(process.cwd(), mdxFilesDir, postSlug), "utf8");
     const { data } = matter(source);
 
     return {
@@ -79,4 +81,4 @@ export async function getAllFilesFrontMatter() {
       readingTime: readingTime(source),
     };
   });
-}
+};
