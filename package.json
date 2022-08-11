@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "cloudinary-build-url": "^0.2.4",
     "framer-motion": "^6.5.1",
     "mdx-bundler": "^9.0.1",
     "next": "12.2.0",
@@ -20,6 +21,7 @@
     "zod": "^3.17.10"
   },
   "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
     "@types/node": "18.0.3",
     "@types/react": "^17",
     "@types/react-dom": "^17",

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 export const about = {
-  avatar: "/images/profile_pic.jpg",
+  avatar: "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660190042/radanfolio/profile_pic_imdxvm.jpg",
   name: "Daniel Adriananrisoa",
   email: "radandevist@gmail.com",
   github: "https://www.github.com/radandevist",
