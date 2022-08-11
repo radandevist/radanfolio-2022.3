@@ -57,7 +57,7 @@ export const about = {
     },
   ],
   bioIntro: "Hey! I'm Radan",
-  bioPreface: "Etsy typewriter food truck thundercats post-ironic. VHS church-key kickstarter, twee kitsch trust fund you probably havent heard of them man bun.",
-  bioSub: "Cray enamel pin shaman cred lumbersexual. Trust fund raclette offal cray blog yr taxidermy schlitz williamsburg Irony snackwave ennui schlitz kitsch franzen intelligentsia bicycle rights tote bag la croix put a bird on it sartorial retro etsy.",
-  bioMain: "Banh mi you probably havent heard of them yuccie beard deep v. Salvia roof party selvage jianbing, irony forage direct trade. Pug tumeric mixtape, church-key cray single-origin coffee selvage ugh prism keytar. Typewriter yr plaid post-ironic. Palo santo twee ethical, pug squid godard jianbing adaptogen."
+  bioPreface: "A full-stack Javascript and Typescript 👨🏿‍💻developer from 🇲🇬 Madagascar. I'm also a 🐧Linux user in an everyday basis.",
+  bioSub: "I am a mostly self-taught MERN Stack developer (despite the fact that I attended college) who values attention to detail and with a passion for solving complex problems. Offering the significant ability to work well both independently and in collaboration with close-knit teams. Building large and scalable web architectures is what I aim for.",
+  // bioMain: "Banh mi you probably havent heard of them yuccie beard deep v. Salvia roof party selvage jianbing, irony forage direct trade. Pug tumeric mixtape, church-key cray single-origin coffee selvage ugh prism keytar. Typewriter yr plaid post-ironic. Palo santo twee ethical, pug squid godard jianbing adaptogen."
 };
