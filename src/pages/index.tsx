@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { AnimatedPage } from "../components/AnimatedPage";
 import { about } from "../data/about";
 import Image from "next/image";
-import { getCloudinaryThumbnail } from "../helpers/getSmalCloudinary";
+import { getCloudinaryThumbnail } from "../helpers/cloudinary";
 import Head from "next/head";
 
 const Home: NextPage = () => {
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <meta property="og:url" content="radanfolio.vercel.app" />
         <meta property="og:description" content="Full-stack react and Node developer, building large scale apps." />
         <meta property="og:type" content="" />
-        <meta property="og:image" content="https://res.cloudinary.com/dhwkzyl32/image/upload/v1660292817/radanfolio/home_opengraph_xhclzs.jpg" />
+        <meta property="og:image" content="https://res.cloudinary.com/dhwkzyl32/image/upload/c_limit,h_630,w_1200/v1660292817/radanfolio/home_opengraph_xhclzs.jpg" />
       </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">

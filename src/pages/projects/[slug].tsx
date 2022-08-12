@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import { z } from "zod";
 import { mdxComponents } from "../../components/mdx";
 import { formatProjectFileResult } from "../../functions/projects.functions";
-import { getCloudinaryThumbnail } from "../../helpers/getSmalCloudinary";
+import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
 import Head from "next/head";
@@ -57,7 +57,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
         <meta
           property="og:image"
           // eslint-disable-next-line max-len
-          content={project.cover}
+          content={getCloudinaryOpenGraphImage(project.cover)}
         />
       </Head>
       <div 

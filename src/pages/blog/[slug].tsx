@@ -8,7 +8,7 @@ import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
 import { formatPostFileResult } from "../../functions/blog.functions";
 import { mdxComponents } from "../../components/mdx";
 import Image from "next/image";
-import { getCloudinaryThumbnail } from "../../helpers/getSmalCloudinary";
+import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import Head from "next/head";
 
@@ -51,7 +51,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
         <meta
           property="og:image"
           // eslint-disable-next-line max-len
-          content={post.cover}
+          content={getCloudinaryOpenGraphImage(post.cover)}
         />
       </Head>
       <div 

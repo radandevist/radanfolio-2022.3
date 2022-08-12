@@ -1,6 +1,6 @@
 import React, { FC, ImgHTMLAttributes } from "react";
 import Image from "next/image";
-import { getCloudinaryThumbnail } from "../../helpers/getSmalCloudinary";
+import { getCloudinaryThumbnail } from "../../helpers/cloudinary";
 
 export const ImageBlog: FC<ImgHTMLAttributes<HTMLImageElement>>
 = ({ alt, src, className, ...props}) => (
