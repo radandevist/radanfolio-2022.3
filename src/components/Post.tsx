@@ -3,6 +3,7 @@ import { FC } from "react";
 import { BlogIndexPost } from "../pages/blog";
 import { Link } from "./Link";
 import Image from "next/image";
+import { getCloudinaryThumbnail } from "../helpers/getSmalCloudinary";
 
 export type PostComponentProps = {
   post: BlogIndexPost;
@@ -20,6 +21,8 @@ export const PostComponent: FC<PostComponentProps> = ({ post }) => (
             height={1688}
             width={3000}
             src={post.cover}
+            placeholder="blur"
+            blurDataURL={getCloudinaryThumbnail(post.cover)}
           />
         </div>
         <figcaption className="py-4">

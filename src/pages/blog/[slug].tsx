@@ -8,6 +8,8 @@ import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
 import { formatPostFileResult } from "../../functions/blog.functions";
 import { mdxComponents } from "../../components/mdx";
 import Image from "next/image";
+import { getCloudinaryThumbnail } from "../../helpers/getSmalCloudinary";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -29,6 +31,7 @@ export type PostViewProps = {
 // eslint-disable-next-line arrow-body-style
 const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
+  const isLarge = useMediaQuery("(min-width: 1024px)");
 
   return (
     <div 
@@ -57,8 +60,11 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
             className="h-[70vh] w-full object-cover object-center"
             src={post.cover}
             alt="cover_image"
-            height={1688}
+            // height={1688}
+            height={isLarge ? 924 : 1688}
             width={3000}
+            placeholder="blur"
+            blurDataURL={getCloudinaryThumbnail(post.cover)}
           />
         </div>
       </section>

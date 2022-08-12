@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { AnimatedPage } from "../components/AnimatedPage";
 import { about } from "../data/about";
 import Image from "next/image";
+import { getCloudinaryThumbnail } from "../helpers/getSmalCloudinary";
 
 const Home: NextPage = () => {
   const info = about;
@@ -23,6 +24,8 @@ const Home: NextPage = () => {
                 src={info.avatar}
                 alt="radan's profile pic"
                 className="h-full w-full object-cover rounded-lg shrink-0"
+                placeholder="blur"
+                blurDataURL={getCloudinaryThumbnail(info.avatar)}
               />
             </div>
             <div className="sm:col-span-4 flex flex-col items-start justify-center space-y-3">

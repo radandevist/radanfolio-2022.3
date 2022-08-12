@@ -6,6 +6,8 @@ import { useMemo } from "react";
 import { z } from "zod";
 import { mdxComponents } from "../../components/mdx";
 import { formatProjectFileResult } from "../../functions/projects.functions";
+import { getCloudinaryThumbnail } from "../../helpers/getSmalCloudinary";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
 // import { projects } from "../../data/projects";
 // import { Project } from "../../data/projects/projects.types";
@@ -35,6 +37,7 @@ export type ProjectViewProps = {
 
 const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project } }) => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
+  const isLarge = useMediaQuery("(min-width: 1024px)");
 
   return (
     <div 
@@ -53,15 +56,19 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
       </div>
       {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
       {/* cover image */}
-      <section className="">
+      <section>
         <div>
           {/* <img className="h-[70vh] w-full object-cover object-center" src={project.cover} alt="cover image" /> */}
           <Image
-            className="h-[70vh] w-full object-cover object-center"
+            className="w-full object-cover object-center"
             src={project.cover}
             alt="cover_image"
             width={1640}
-            height={924}
+            // height={924}
+            height={isLarge ? 528 : 924}
+            placeholder="blur"
+            blurDataURL={getCloudinaryThumbnail(project.cover)}
+            // layout="fill"
           />
         </div>
       </section>

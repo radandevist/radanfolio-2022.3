@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { ProjectIndex } from "../pages/projects";
 import { Link } from "./Link";
 import Image from "next/image";
+import { getCloudinaryThumbnail } from "../helpers/getSmalCloudinary";
 
 export type ProjectComponentProps = {
   project: ProjectIndex;
@@ -20,6 +21,8 @@ export const ProjectComponent: FC<ProjectComponentProps> = ({ project }) => (
             height={924}
             src={project.cover}
             alt="project_cover_image"
+            placeholder="blur"
+            blurDataURL={getCloudinaryThumbnail(project.cover)}
           />
         </div>
         <div className="py-4 space-y-3">

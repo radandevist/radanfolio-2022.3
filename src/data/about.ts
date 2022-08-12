@@ -2,7 +2,7 @@ import { v4 } from "uuid";
 
 /* eslint-disable max-len */
 const preAbout = {
-  avatar: "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660190042/radanfolio/profile_pic_imdxvm.jpg",
+  avatar: "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660190042/radanfolio/profile_pic_imdxvm.jpg",
   name: "Daniel Adriananrisoa",
   email: "radandevist@gmail.com",
   github: "https://www.github.com/radandevist",

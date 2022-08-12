@@ -13,10 +13,12 @@ export const CustomLink: FC<CustomLinkProps> = (props) => {
   if (isInternalLink) {
     return (
       <Link href={href}>
-        {props.children}
+        <span className="text-brand1">
+          {props.children}
+        </span>
       </Link>
     );
   }
   
-  return <a target="_blank" rel="noopener noreferrer" {...props} />;
+  return <a className="text-brand1" target="_blank" rel="noopener noreferrer" {...props} />;
 };

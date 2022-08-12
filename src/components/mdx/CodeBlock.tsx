@@ -13,8 +13,11 @@ export const CodeBlock: FC = ({ children }) => (
       <span className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-600" />
     </div>
     <div>
-      <div className="new-rehype-code-title"></div>
-      <pre>
+      <pre className=""
+        style={{
+
+        }}
+      >
         {children}
       </pre>
     </div>

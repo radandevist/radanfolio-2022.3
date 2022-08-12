@@ -3,6 +3,7 @@ import { Link } from "../components/Link";
 import { FC } from "react";
 import { BlogIndexPost } from "../pages/blog";
 import Image from "next/image";
+import { getCloudinaryThumbnail } from "../helpers/getSmalCloudinary";
 
 export type HeropProps = {
   post: BlogIndexPost;
@@ -24,6 +25,8 @@ export const Hero: FC<HeropProps> = ({ post }) => (
             height={1688}
             width={3000}
             src={post.cover}
+            placeholder="blur"
+            blurDataURL={getCloudinaryThumbnail(post.cover)}
           />
         </Link>
       </div>
