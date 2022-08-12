@@ -6,6 +6,7 @@ import { z } from "zod";
 import { getRandomElements } from "../../utils/arrayUtils";
 import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
 import { formatProjectFrontMatter } from "../../functions/projects.functions";
+import Head from "next/head";
 // import { projects } from "../../data/projects";
 
 const ZProjectIndex = z.object({
@@ -35,6 +36,24 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
 
   return (
     <AnimatedPage>
+      <Head>
+        <title>Radanfolio Projects</title>
+
+        {/* opengraph */}
+        <meta property="og:title" content="Radanfolio Projects" />
+        <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta
+          property="og:description"
+          content="A collection of projects I've done." />
+        <meta property="og:type" content=""
+        />
+        <meta
+          property="og:image"
+          // eslint-disable-next-line max-len
+          content="https://res.cloudinary.com/dhwkzyl32/image/upload/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
+        />
+      </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">
           <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">The Projects.</h2>

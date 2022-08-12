@@ -9,6 +9,7 @@ import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
 import { z } from "zod";
 import { getRandomElements } from "../../utils/arrayUtils";
 import { formatPostFrontmatter } from "../../functions/blog.functions";
+import Head from "next/head";
 
 const ZBlogIndexPost = z.object({
   id: z.string(),
@@ -31,6 +32,24 @@ export type BlogProps = {
 
 const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
   <AnimatedPage>
+    <Head>
+      <title>Radanfolio Blog</title>
+
+      {/* opengraph */}
+      <meta property="og:title" content="Radanfolio Blog" />
+      <meta property="og:site_name" content="radanfolio" />
+      <meta property="og:url" content="radanfolio.vercel.app" />
+      <meta
+        property="og:description"
+        content="A place where I share what I learned through my journey." />
+      <meta property="og:type" content=""
+      />
+      <meta
+        property="og:image"
+        // eslint-disable-next-line max-len
+        content="https://res.cloudinary.com/dhwkzyl32/image/upload/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
+      />
+    </Head>
     <Hero post={heroPost}/>
     <Featured posts={featuredPosts} />
     <Feed posts={posts}/>

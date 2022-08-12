@@ -9,6 +9,7 @@ import { formatProjectFileResult } from "../../functions/projects.functions";
 import { getCloudinaryThumbnail } from "../../helpers/getSmalCloudinary";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
+import Head from "next/head";
 // import { projects } from "../../data/projects";
 // import { Project } from "../../data/projects/projects.types";
 
@@ -40,49 +41,69 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
   const isLarge = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <div 
-      // initial={{ width: 0}}
-      // animate={{ width: "100%"}}
-      // exit={{ x: window.innerWidth}}
-      className="w-full min-h-screen my-12">
-      <div className="mxw-sm w-full flex items-center flex-col justify-center space-y-6 text-left sm:text-center my-12">
-        <p className={project.category === "web3" ? "animate animate__animated animate__fadeInDown animate__fast font-future uppercase" : "animate animate__animated animate__fadeInDown animate__fast font-bold uppercase"}>{project.category}</p>
-        <h2 className="animate animate__animated animate__fadeInDown animate__fast text-4xl md:text-6xl font-bold capitalize">{project.name}</h2>
-        <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{project.summary}</p>
-        <div className="flex items-center space-x-2">
-          {project.liveUrl && <a target="_blank" rel="noreferrer" href={project.liveUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-brand1-500 duration-200">Visit Project</a>}
-          <a target="_blank" rel="noreferrer" href={project.repoUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-brand1-500 duration-200">Github</a>
+    <>
+      <Head>
+        <title>Radanfolio Project | {project.name}</title>
+
+        {/* opengraph */}
+        <meta property="og:title" content={project.name} />
+        <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta
+          property="og:description"
+          content={project.summary} />
+        <meta property="og:type" content=""
+        />
+        <meta
+          property="og:image"
+          // eslint-disable-next-line max-len
+          content={project.cover}
+        />
+      </Head>
+      <div 
+        // initial={{ width: 0}}
+        // animate={{ width: "100%"}}
+        // exit={{ x: window.innerWidth}}
+        className="w-full min-h-screen my-12">
+        <div className="mxw-sm w-full flex items-center flex-col justify-center space-y-6 text-left sm:text-center my-12">
+          <p className={project.category === "web3" ? "animate animate__animated animate__fadeInDown animate__fast font-future uppercase" : "animate animate__animated animate__fadeInDown animate__fast font-bold uppercase"}>{project.category}</p>
+          <h2 className="animate animate__animated animate__fadeInDown animate__fast text-4xl md:text-6xl font-bold capitalize">{project.name}</h2>
+          <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">{project.summary}</p>
+          <div className="flex items-center space-x-2">
+            {project.liveUrl && <a target="_blank" rel="noreferrer" href={project.liveUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-brand1-500 duration-200">Visit Project</a>}
+            <a target="_blank" rel="noreferrer" href={project.repoUrl} className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1 border-2 border-transparent hover:border-b-brand1-500 duration-200">Github</a>
+          </div>
         </div>
+        {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
+        {/* cover image */}
+        <section>
+          <div>
+            {/* <img className="h-[70vh] w-full object-cover object-center" src={project.cover} alt="cover image" /> */}
+            <Image
+              className="w-full object-cover object-center"
+              src={project.cover}
+              alt="cover_image"
+              width={1640}
+              // height={924}
+              height={isLarge ? 528 : 924}
+              placeholder="blur"
+              blurDataURL={getCloudinaryThumbnail(project.cover)}
+              // layout="fill"
+            />
+          </div>
+        </section>
+        {/* content */}
+        <section className="mxw-sm my-12">
+          {/* <div className="flex justify-start my-12">
+            <h2 className="text-4xl md:text-6xl">Overview</h2>
+          </div> */}
+          <p className="text-2xl md:text-3xl font-light first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold space-y-10 prose">
+            <Component components={mdxComponents} />
+          </p>
+        </section>
+        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
       </div>
-      {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
-      {/* cover image */}
-      <section>
-        <div>
-          {/* <img className="h-[70vh] w-full object-cover object-center" src={project.cover} alt="cover image" /> */}
-          <Image
-            className="w-full object-cover object-center"
-            src={project.cover}
-            alt="cover_image"
-            width={1640}
-            // height={924}
-            height={isLarge ? 528 : 924}
-            placeholder="blur"
-            blurDataURL={getCloudinaryThumbnail(project.cover)}
-            // layout="fill"
-          />
-        </div>
-      </section>
-      {/* content */}
-      <section className="mxw-sm my-12">
-        {/* <div className="flex justify-start my-12">
-          <h2 className="text-4xl md:text-6xl">Overview</h2>
-        </div> */}
-        <p className="text-2xl md:text-3xl font-light first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold space-y-10 prose">
-          <Component components={mdxComponents} />
-        </p>
-      </section>
-      <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
-    </div>
+    </>
   );
 };
 
