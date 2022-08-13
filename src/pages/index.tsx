@@ -12,6 +12,8 @@ const Home: NextPage = () => {
   return (
     <AnimatedPage>
       <Head>
+        <title>Radanfolio | Home &mdash; ANDRIANARISOA Daniel aka Radan Devist</title>
+        {/* opengraph */}
         <meta property="og:title" content="Radanfolio Home" />
         <meta property="og:site_name" content="radanfolio" />
         <meta property="og:url" content="radanfolio.vercel.app" />
