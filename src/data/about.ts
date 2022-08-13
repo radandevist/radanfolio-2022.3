@@ -24,6 +24,10 @@ const preAbout = {
       name: "Facebook Profile",
       url: "https://www.twitter.com/radandevist.me"
     },
+    {
+      name: "Github",
+      url: "https://github.com/radandevist"
+    }
   ],
   skills: [
     "HTML", "CSS", "Javascript", "Typescript", "React.js", "Node.js", "Express.js", "Microsoft Office", "Office computing",  "Responsive design", "Bootstrap", "Tailwind", "version control",
