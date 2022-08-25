@@ -10,6 +10,7 @@ import { z } from "zod";
 import { getRandomElements } from "../../utils/arrayUtils";
 import { formatPostFrontmatter } from "../../functions/blog.functions";
 import Head from "next/head";
+import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
 
 const ZBlogIndexPost = z.object({
   id: z.string(),
@@ -46,8 +47,10 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
       />
       <meta
         property="og:image"
-        // eslint-disable-next-line max-len
-        content="https://res.cloudinary.com/dhwkzyl32/image/upload/c_limit,h_630,w_1200/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
+        content={getCloudinaryOpenGraphImage(
+          // eslint-disable-next-line max-len
+          "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
+        )}
       />
     </Head>
     <Hero post={heroPost}/>
