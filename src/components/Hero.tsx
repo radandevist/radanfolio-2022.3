@@ -13,7 +13,6 @@ export const Hero: FC<HeropProps> = ({ post }) => (
   <div className="w-full full">
     <div className="mxw-sm w-full my-12 relative">
       <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">The Blog.</h2>
-      {/* <span className="text-slate-300 absolute -top-10 left-0 -z-10 text-9xl font-bold">Folio</span> */}
     </div>
     <div className="mxw-sm grid gap-6 grid-cols-1 md:grid-cols-6">
       <div className="animate animate__animated animate__fadeIn md:col-span-4">

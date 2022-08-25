@@ -7,6 +7,7 @@ import { getRandomElements } from "../../utils/arrayUtils";
 import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
 import { formatProjectFrontMatter } from "../../functions/projects.functions";
 import Head from "next/head";
+import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
 // import { projects } from "../../data/projects";
 
 const ZProjectIndex = z.object({
@@ -50,8 +51,10 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
         />
         <meta
           property="og:image"
-          // eslint-disable-next-line max-len
-          content="https://res.cloudinary.com/dhwkzyl32/image/upload/c_limit,h_630,w_1200/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
+          content={getCloudinaryOpenGraphImage(
+            // eslint-disable-next-line max-len
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
+          )}
         />
       </Head>
       <div className="w-full min-h-screen">
