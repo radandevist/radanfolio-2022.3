@@ -1,10 +1,16 @@
 import { FC } from "react";
 
-export const List: FC = ({ children }) => (
+export const UnOrderedList: FC = ({ children }) => (
   <ul
-    className="ml-6 list-outside"
-    style={{
-      listStyleImage: "url('/dash-icon.svg')"
-    }}
+    className="ml-6 list-outside list-disc"
+    // style={{
+    //   listStyleImage: "url('/dash-icon.svg')"
+    // }}
   >{children}</ul>
+);
+
+export const OrderedList: FC = ({ children }) => (
+  <ol
+    className="ml-6 list-outside list-decimal"
+  >{children}</ol>
 );
