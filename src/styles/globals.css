@@ -46,10 +46,18 @@ a {
   box-sizing: border-box;
 }
 
+/* ==============================
+Styling code block title generated
+the mdx rehype plugin
+============================== */
 .rehype-code-title {
   @apply italic text-center !mb-2 text-lg md:text-xl;
 }
 
+/* ==============================
+Make the images inside the blog
+posts fill entire available width
+============================== */
 .custom-img {
   object-fit: contain;
   width: 100% !important;
@@ -61,4 +69,22 @@ a {
 }
 .unset-img > span {
   position: unset !important;
+}
+
+/* ==============================
+Scrollbar styling for our block
+of codes inside of any blog post
+============================== */
+.code-block.pre-scrollbar::-webkit-scrollbar {
+  @apply bg-transparent h-3;
+}
+.code-block.pre-scrollbar::-webkit-scrollbar-track {
+  @apply rounded-lg bg-transparent;
+}
+.code-block.pre-scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-brand1;
+}
+.code-block.pre-scrollbar::-webkit-scrollbar-button {
+  @apply bg-transparent rounded-lg;
+  display: none;
 }
