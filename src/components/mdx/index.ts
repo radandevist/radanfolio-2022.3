@@ -3,12 +3,13 @@ import { CodeBlock } from "./CodeBlock";
 import { CustomLink } from "./CustomLink";
 import { ImageBlog } from "./ImageBlog";
 import { InlineCode } from "./InlineCode";
-import { List } from "./List";
+import { UnOrderedList, OrderedList } from "./List";
 
 export const mdxComponents: MDXComponents = {
   a: CustomLink,
   pre: CodeBlock,
-  ul: List,
+  ul: UnOrderedList,
+  ol: OrderedList,
   code: InlineCode,
   img: ImageBlog,
 };
