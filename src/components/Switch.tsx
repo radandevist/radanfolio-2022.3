@@ -3,9 +3,10 @@ import React, { FC } from "react";
 export type SwitchProps = {
   label: string;
   onToggle: () => void;
+  checked: boolean;
 };
 
-export const Switch: FC<SwitchProps> = ({ label, onToggle }) => (
+export const Switch: FC<SwitchProps> = ({ label, checked, onToggle }) => (
   <label className="relative inline-flex justify-between
     items-center group p-2 text-sm md:text-md lg:text-lg
     switch-toggler"
@@ -16,8 +17,8 @@ export const Switch: FC<SwitchProps> = ({ label, onToggle }) => (
       className="absolute left-1/2 -translate-x-1/2
         w-full h-full peer appearance-none rounded-md
         cursor-pointer"
-      // onChange={handleChange}
-      onChange={onToggle}
+      checked={checked}
+      onClick={onToggle}
     />
     <span
       className="w-12 h-[1.875rem] flex items-center

@@ -29,8 +29,7 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          {/* <button onClick={toggleTheme}>Toggle theme</button> */}
-          <Switch label="Dark mode" onToggle={toggleTheme} />
+          <Switch label="Dark mode" onToggle={toggleTheme} checked={theme === "dark"} />
         </div>
         {/* <div className="inline-flex md:hidden cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
