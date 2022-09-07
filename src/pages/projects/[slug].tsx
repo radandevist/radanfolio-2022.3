@@ -101,7 +101,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
             <Component components={mdxComponents} />
           </p>
         </section>
-        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
+        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
       </div>
     </>
   );

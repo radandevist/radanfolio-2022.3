@@ -55,7 +55,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </section>  
-        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
+        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
         <section className="mxw-sm my-12">
           <p className="text-2xl md:text-3xl py-6">{info.bioSub}</p>
           {/* <p className="text-2xl md:text-3xl font-light">{info.bioSub}</p> */}
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
           <p className="text-2xl md:text-3xl my-12">Skills include:</p>
           <div className="flex items-center flex-wrap">
             {about?.skills?.map((skill) => (
-              <span key={skill?.id} className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 bg-brand1-500 text-white font-semibold">{skill?.name}</span>
+              <span key={skill?.id} className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 dark:shadow-brand2-400 bg-brand1-500 text-white font-semibold">{skill?.name}</span>
             ))}
           </div>
           {/* <p className="text-2xl md:text-3xl py-6">{info.bioMain}</p> */}

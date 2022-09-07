@@ -7,7 +7,7 @@
 @layer base {
 
   body {
-    @apply bg-slate-100 text-slate-700;
+    @apply bg-slate-100 text-slate-700 dark:bg-brand2-500 dark:text-slate-200;
   }
 
   .mxw-lg {
@@ -19,7 +19,7 @@
   }
 
   h1,h2,h3,h4,h5,h6 {
-    @apply text-slate-800 font-bold;
+    @apply text-slate-800 font-bold dark:text-slate-100;
   }
 
 }
@@ -87,4 +87,12 @@ of codes inside of any blog post
 .code-block.pre-scrollbar::-webkit-scrollbar-button {
   @apply bg-transparent rounded-lg;
   display: none;
+}
+
+/* for the theme switch text hover effect */
+.text-label {
+  @apply border-2 border-transparent;
+}
+.switch-toggler:hover > .text-label {
+  @apply hover:text-brand1-500 border-b-brand1-500 duration-300 text-brand1-500;
 }
