@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { links } from "../data/links";
 import { Link } from "./Link";
 import Image from "next/image";import { useTheme } from "../contexts/theme";
-import { Switch } from "./Switch";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -29,7 +29,7 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Switch label="Dark mode" onToggle={toggleTheme} checked={theme === "dark"} />
+          <ThemeSwitch label="Dark mode" onToggle={toggleTheme} checked={theme === "dark"} />
         </div>
         {/* <div className="inline-flex md:hidden cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
