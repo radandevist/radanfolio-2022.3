@@ -46,9 +46,9 @@ const Home: NextPage = () => {
             <div className="sm:col-span-4 flex flex-col items-start justify-center space-y-3">
               <h2 className="text-4xl">{info.bioIntro}</h2>
               <p className="text-2xl font-light">{info.bioPreface}</p>
-              <div className="flex items-center space-x-4 flex-wrap justify-start">
+              <div className="flex items-center flex-wrap justify-start">
                 {info.socials && info.socials.map((social) => (
-                  <a key={social.name} target="_blank" rel="noreferrer" href={social.url} className="inline-block my-1 bg-brand1-500 text-white font-semibold py-2 px-3">{social?.name}</a>
+                  <a key={social.name} target="_blank" rel="noreferrer" href={social.url} className="inline-block my-1 bg-brand1-500 text-white font-semibold py-2 px-3 mr-4">{social?.name}</a>
                 ))}
               </div>
               <a rel="noreferrer" href={info.resumeUrl} className="block border border-brand1-500 bo text-brand1-500 font-semibold py-2 px-3">Download ny resume</a>
