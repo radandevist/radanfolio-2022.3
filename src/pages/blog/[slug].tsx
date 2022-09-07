@@ -99,7 +99,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
             <Component components={mdxComponents} />
           </article>
         </section>
-        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" />
+        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
       </div>
     </>
   );

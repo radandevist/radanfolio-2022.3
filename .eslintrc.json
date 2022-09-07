@@ -15,7 +15,8 @@
     "@next/next/no-img-element": ["off"],
     "prefer-template": "error",
     "prefer-const": "error",
-    "no-unused-vars": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/member-delimiter-style": "error",
     "eol-last": "error"
   }

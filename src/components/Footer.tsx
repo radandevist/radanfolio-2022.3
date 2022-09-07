@@ -3,7 +3,7 @@ import React from "react";
 
 export const Footer = () => (
   <div className="w-full">
-    <div className="mxw-lg grid gap-6 grid-cols-1 text-center border-t-slate-200 border-t-2 py-12">
+    <div className="mxw-lg grid gap-6 grid-cols-1 text-center border-t-slate-200 dark:border-t-brand2-400 border-t-2 py-12">
       <p>
         This portfolio is built from Chris Hansen&apos;s{" "}
         ( <a target="_blank" rel="noreferrer" href="https://www.hyggedev.com">Hyggedev</a> )
@@ -13,7 +13,7 @@ export const Footer = () => (
         </a>
       </p>
 
-      <a>Customization and addition of new features done by Radan Devist ( Me )</a>
+      <p>Customization and addition of new features done by Radan Devist ( Me )</p>
 
       <p className="flex justify-center items-center space-x-4">Crafted with{" "}
         <span className="mx-1">
@@ -23,10 +23,6 @@ export const Footer = () => (
         </span> and a little Next.js.
       </p>
 
-      <div>
-        {/* <p>A free to use portfolio template</p> */}
-        
-      </div>
     </div>
   </div>
 );

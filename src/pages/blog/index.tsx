@@ -61,7 +61,8 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
 
 export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
   const posts = (await getAllFilesFrontMatter("posts"))
-    .map(frontMatter => ZBlogIndexPost.parse(formatPostFrontmatter(frontMatter)));
+    .map(frontMatter => ZBlogIndexPost.parse(formatPostFrontmatter(frontMatter)))
+    .sort((x, y) => +new Date(y.date) - +new Date(x.date));
 
   return {
     props: {

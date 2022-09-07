@@ -2,8 +2,9 @@ import { FC } from "react";
 
 export const CodeBlock: FC = ({ children }) => (
   <div className="
-  bg-brand2-500 rounded-lg
+  bg-brand2-500 dark:bg-brand2-400 rounded-lg
   mx-auto my-5 !mt-0
+  radanfolio-code-block
   ">
     <div className="flex space-x-3 w-full py-5 pl-5">
       <span className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-red-600" />

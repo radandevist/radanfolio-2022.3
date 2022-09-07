@@ -6,8 +6,8 @@ export const Link: FC<
 Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>,keyof InternalLinkProps> & InternalLinkProps & {
   children?: React.ReactNode;
 } & React.RefAttributes<HTMLAnchorElement>
-> = ({ children, ...props }) => (
+> = ({ children, className, ...props }) => (
   <NextLink {...props}>
-    <a>{children}</a>
+    <a className={className}>{children}</a>
   </NextLink>
 );

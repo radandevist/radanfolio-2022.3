@@ -13,7 +13,7 @@ const Page404 = () => {
       </Head>
       <div className="notfound absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[32.5rem] w-full text-center leading-[1.4]">
         <div className="h-[7.2rem] md:h-[11.9rem] mb-4">
-          <h1 className="text-[5.375rem] md:text-[9.125rem] font-extrabold m-0">4<span className="inline-block w-[5.375rem] h-[5.375rem] md:w-[7.5rem] md:h-[7.5rem] bg-[url('/emoji.png')] bg-cover scale-[1.4]"></span>4</h1>
+          <h1 className="text-[5.375rem] md:text-[9.125rem] font-extrabold m-0">4<span className="inline-block w-[5.375rem] h-[5.375rem] md:w-[7.5rem] md:h-[7.5rem] bg-[url('/emoji-404.png')] bg-cover scale-[1.4]"></span>4</h1>
         </div>
         <h2 className="text-2xl font-bold m-0 uppercase">Oops! Page not Found</h2>
         <p className="font-light mb-3">Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>
