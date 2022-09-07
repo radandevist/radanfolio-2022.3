@@ -20,7 +20,7 @@ export const ThemeSwitch: FC<SwitchProps> = ({ label, checked, onToggle }) => (
       checked={checked}
       onClick={onToggle}
       onChange={() => {}}
-      defaultChecked={false}
+      // defaultChecked={false}
     />
     <span
       className="w-12 h-[1.875rem] flex items-center
