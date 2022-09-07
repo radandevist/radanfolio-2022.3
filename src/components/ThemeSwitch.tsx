@@ -6,7 +6,7 @@ export type SwitchProps = {
   checked: boolean;
 };
 
-export const Switch: FC<SwitchProps> = ({ label, checked, onToggle }) => (
+export const ThemeSwitch: FC<SwitchProps> = ({ label, checked, onToggle }) => (
   <label className="relative inline-flex justify-between
     items-center group p-2 text-sm md:text-md lg:text-lg
     switch-toggler"
@@ -19,6 +19,8 @@ export const Switch: FC<SwitchProps> = ({ label, checked, onToggle }) => (
         cursor-pointer"
       checked={checked}
       onClick={onToggle}
+      onChange={() => {}}
+      defaultChecked={false}
     />
     <span
       className="w-12 h-[1.875rem] flex items-center
