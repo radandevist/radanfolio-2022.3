@@ -14,7 +14,7 @@ One of the issues I'm currently facing is integrating REST API responses served 
 
 Let's take as an example a dev.to user's profile page. To render it, we need, in addition to the direct information of the user sought, his latest posts and comments.
 
-![](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660183935/radanfolio/posts/dont-worry-about-generic-routes/image848_nz5dlr.png)
+![Breaking the UI into differrent piece of informations](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660183935/radanfolio/posts/dont-worry-about-generic-routes/image848_nz5dlr.png)
 
 Basically, you need to request:
 
@@ -47,7 +47,7 @@ Another solution that came to my mind, is the implementation of a query parser i
 
 However, it takes a lot of work and is it really worth it?
 
-![](https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif)
+![Is it really worth it?](https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif)
 
 Finally, I opted for the implementation of an endpoint specifically designed for the task: `GET /api/users/:username/profilepage` which has the advantage of satisfying us in a single API call and without additional headache.
 

@@ -1,0 +1,57 @@
+---
+title: How to mount NTFS partitions at stratup on Linux
+cover: https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1664292257/radanfolio/posts/mount-ntfs-partitions/Posts_Covers_q8ie16.jpg
+date: 2021-09-15
+topic: Linux Partition
+
+excerpt: The beauty of Linux is that you have full control over your structure and mounting partitions does not make exception to that rule.
+featured: false
+---
+
+I have both linux and windows (dual boot) on my machine so the disk is partitioned in three:
+- the Linux OS,
+- Windows 10, and
+- a partition for sharing files between the two OS (because we can't browse linux file system from windows).
+
+Each time I boot up onto Linux and i want to explore my other partitions, I have to mount them first. But actually, we can make them mount automatically at startup.
+
+open the file `/etc/fstab` with your prefered editor:
+
+```bash:terminal
+sudo nano /etc/fstab
+```
+
+you will see something like this (it may slightly vary acccording to the distro):
+
+```bash:/etc/fstab
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a device; this may
+# be used with UUID= as a more robust way to name devices that works even if
+# disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>                 
+UUID=b57600bf-231d-4da2-bd44-e392eag85627 /              ext4    defaults,noatime 0 1
+```
+
+As you can see you will need the UUID of the partition you wanna auto-mount. To get it just run in a terminal:
+
+```bash:terminal
+sudo blkid
+```
+
+A list of your machine's devices will show up with some of their informations including their UUID's. Select your desired UUID and return back to `/etc/fstab` file.
+
+at the end of the file amend the line:
+
+```bash:/etc/fstab
+UUID=YOUR_UUID /path/to/mount/point  auto,nofail,uid=1000,gid=1000,utf8,umask=022,defaults 0 0
+```
+
+Don't forget to replace uuid, path to mount point and the partittion file system.
+
+### Information about ntfs partition file system:
+
+Personnally I wanted to mount a partition that can be explored from windows i.e. an <span class="text-brand1">ntfs</span> partition. On linux the corresponding key for mounting that type of file system is `ntfs-3g`. Youll' need the eponym package installed on your Linux OS. It's already preinstalled on almost all Linux distributions but check it however in case you removed it unintentionally. I strugled a little bit finding that out the first time I used Arch so I think it may help someone to mention it.
+
+I will not cover the mount options in this post but you can learn more about them [here](https://).
