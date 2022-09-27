@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { ProjectComponent } from "../../components/Project";
 import { z } from "zod";
@@ -76,7 +76,7 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<ProjectsProps> = async () => {
+export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
   const projects = (await getAllFilesFrontMatter("projects"))
     .map(frontMatter => ZProjectIndex.parse(formatProjectFrontMatter(frontMatter)));
 

@@ -3,7 +3,7 @@ import { Hero } from "../../components/Hero";
 import { Feed } from "../../components/Feed";
 import { Featured } from "../../components/Featured";
 import { AnimatedPage } from "../../components/AnimatedPage";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 // import { Post, /* posts */ } from "../../data/posts";
 import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
 import { z } from "zod";
@@ -59,7 +59,7 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
   </AnimatedPage>
 );
 
-export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
+export const getStaticProps: GetStaticProps<BlogProps> = async () => {
   const posts = (await getAllFilesFrontMatter("posts"))
     .map(frontMatter => ZBlogIndexPost.parse(formatPostFrontmatter(frontMatter)))
     .sort((x, y) => +new Date(y.date) - +new Date(x.date));
