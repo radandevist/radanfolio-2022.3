@@ -1,6 +1,5 @@
-import { BlogIndexPost } from "../pages/blog";
 import { Post } from "../pages/blog/[slug]";
-// import { getFileBySlug } from "../utils/mdxUtils";
+import { BlogIndexPost } from "../types/post";
 
 export const formatPostFrontmatter = (frontMatter: Record<string, any>): BlogIndexPost => {
   const {
@@ -24,7 +23,7 @@ export const formatPostFileResult = (postFile: Record<string, any>): Post => {
   const {
     code,
     frontMatter: {
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
       readingTime, slug, wordCount,
       topic, title, excerpt, author, date, cover,
     },

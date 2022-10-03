@@ -1,29 +1,16 @@
+import path from "path";
 import React from "react";
+import Head from "next/head";
 import { Hero } from "../../components/Hero";
 import { Feed } from "../../components/Feed";
 import { Featured } from "../../components/Featured";
 import { AnimatedPage } from "../../components/AnimatedPage";
-import { GetStaticProps, NextPage } from "next";
-// import { Post, /* posts */ } from "../../data/posts";
-import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
-import { z } from "zod";
+import { GetServerSideProps, NextPage } from "next";
 import { getRandomElements } from "../../utils/arrayUtils";
-import { formatPostFrontmatter } from "../../functions/blog.functions";
-import Head from "next/head";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
-
-const ZBlogIndexPost = z.object({
-  id: z.string(),
-  author: z.string(),
-  cover: z.string(),
-  date: z.string(),
-  excerpt: z.string().optional(),
-  featured: z.boolean(),
-  slug: z.string(),
-  title: z.string()
-});
-
-export type BlogIndexPost = z.infer<typeof ZBlogIndexPost>;
+import { BlogIndexPost, ZBlogIndexPost } from "../../types/post";
+import { getJSONFileData } from "../../utils/fsUtils";
+import { GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME } from "../../constants";
 
 export type BlogProps = {
   posts: BlogIndexPost[];
@@ -59,10 +46,10 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
   </AnimatedPage>
 );
 
-export const getStaticProps: GetStaticProps<BlogProps> = async () => {
-  const posts = (await getAllFilesFrontMatter("posts"))
-    .map(frontMatter => ZBlogIndexPost.parse(formatPostFrontmatter(frontMatter)))
-    .sort((x, y) => +new Date(y.date) - +new Date(x.date));
+export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
+  const posts: BlogIndexPost[] = ZBlogIndexPost.array().parse(
+    getJSONFileData(path.join(GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME)).posts
+  );
 
   return {
     props: {

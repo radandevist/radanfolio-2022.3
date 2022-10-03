@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prebuild": "yarn generate",
+    "predev": "yarn generate",
+    "generate": "yarn generate:posts-frontmatters",
+    "generate:posts-frontmatters": "node -r @swc-node/register src/scripts/generatePostsFrontMattersFile.ts"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
@@ -22,6 +26,8 @@
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",
+    "@swc-node/register": "^1.5.2",
+    "@swc/core": "^1.3.4",
     "@types/node": "18.0.3",
     "@types/react": "^17",
     "@types/react-dom": "^17",
@@ -39,6 +45,7 @@
     "rehype-prism-plus": "^1.4.2",
     "rehype-slug": "^5.0.1",
     "tailwindcss": "^3.1.4",
+    "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
   }
 }

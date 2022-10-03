@@ -77,7 +77,7 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
 };
 
 export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
-  const projects = (await getAllFilesFrontMatter("projects"))
+  const projects: ProjectIndex[] = (await getAllFilesFrontMatter("projects"))
     .map(frontMatter => ZProjectIndex.parse(formatProjectFrontMatter(frontMatter)));
 
   return {

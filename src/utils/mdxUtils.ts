@@ -4,15 +4,24 @@ import readingTime from "reading-time";
 import { readdirSync, readFileSync } from "fs";
 import { bundleMDX } from "mdx-bundler";
 import { v4 } from "uuid";
+import dynamic from "next/dynamic";
 
 // These plugins are completely dependent on the blog that you
 // are planning to build if you're just focused on building one without
 // any syntax highlighting of those sorts these all won't be necessary
-import rehypeSlug from "rehype-slug";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrism from "rehype-prism-plus";
-// import { BlogIndexPost } from "../pages/blog";
+// ! esm import seem to not work with @swc-node
+// import rehypeSlug from "rehype-slug";
+// import rehypeCodeTitles from "rehype-code-titles";
+// import rehypeAutolinkHeadings from "rehype-autolink-headings";
+// import rehypePrism from "rehype-prism-plus";
+// * we use dynamic import instead
+const rehypeSlug = dynamic(() => import("rehype-slug") as any, { ssr: false }) as any;
+const rehypeCodeTitles = dynamic(() => import("rehype-code-titles") as any, { ssr: false }) as any;
+const rehypeAutolinkHeadings = dynamic(
+  () => import("rehype-autolink-headings") as any,
+  { ssr: false },
+) as any;
+const rehypePrism = dynamic(() => import("rehype-prism-plus") as any, { ssr: false }) as any;
 
 export async function getFiles(mdxFilesDir: string) {
   return readdirSync(join(process.cwd(), mdxFilesDir));
