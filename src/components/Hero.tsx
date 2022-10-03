@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { Link } from "../components/Link";
 import { FC } from "react";
-import { BlogIndexPost } from "../pages/blog";
+import { BlogIndexPost } from "../types/post";
 import Image from "next/image";
 import { getCloudinaryThumbnail } from "../helpers/cloudinary";
 

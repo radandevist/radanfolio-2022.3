@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { BlogIndexPost } from "../pages/blog";
+import { BlogIndexPost } from "../types/post";
 import { PostComponent } from "./Post";
 
 export type FeaturedProps = {
