@@ -1,13 +1,22 @@
 /* eslint-disable max-len */
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { AnimatedPage } from "../components/AnimatedPage";
 import { about } from "../data/about";
-import Image from "next/image";
 import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../helpers/cloudinary";
-import Head from "next/head";
 
 const Home: NextPage = () => {
-  const info = about;
+  const { t } = useTranslation();
+  
+  const info = {
+    ...about,
+    bioIntro: t("home:about.bioIntro"),
+    bioPreface: t("home:about.bioPreface"),
+    bioSub: t("home:about.bioSub")
+  };
 
   return (
     <AnimatedPage>
@@ -27,7 +36,7 @@ const Home: NextPage = () => {
       </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">The Bio.</h2>
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">{t("home:theBio")}</h2>
         </div>
         <section className="animate animate__animated animate__fadeIn mxw-sm">
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-5">
@@ -51,7 +60,7 @@ const Home: NextPage = () => {
                   <a key={social.name} target="_blank" rel="noreferrer" href={social.url} className="inline-block my-1 bg-brand1-500 text-white font-semibold py-2 px-3 mr-4">{social?.name}</a>
                 ))}
               </div>
-              <a rel="noreferrer" href={info.resumeUrl} className="block border border-brand1-500 bo text-brand1-500 font-semibold py-2 px-3">Download ny resume</a>
+              <a rel="noreferrer" href={info.resumeUrl} className="block border border-brand1-500 bo text-brand1-500 font-semibold py-2 px-3">{t("home:downloadMyResume")}</a>
             </div>
           </div>
         </section>  
@@ -74,3 +83,10 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {
+    ...(await serverSideTranslations("en", ["common", "home"], null, ["fr", "mg"])),
+    // Will be passed to the page component as props
+  },
+});

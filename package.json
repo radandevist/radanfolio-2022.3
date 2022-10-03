@@ -18,6 +18,7 @@
     "framer-motion": "^6.5.1",
     "mdx-bundler": "^9.0.1",
     "next": "^12.3.1",
+    "next-i18next": "^12.1.0",
     "react": "^17",
     "react-dom": "^17",
     "sharp": "^0.30.7",

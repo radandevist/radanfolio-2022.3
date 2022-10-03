@@ -5,6 +5,7 @@ import { links } from "../data/links";
 import { Link } from "./Link";
 import Image from "next/image";import { useTheme } from "../contexts/theme";
 import { ThemeSwitch } from "./ThemeSwitch";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <ThemeSwitch label="Dark mode" onToggle={toggleTheme} checked={theme === "dark"} />
+          <LanguageSwitcher />
         </div>
         {/* <div className="inline-flex md:hidden cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
