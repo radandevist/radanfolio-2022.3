@@ -6,7 +6,7 @@ import { Feed } from "../../components/Feed";
 import { Featured } from "../../components/Featured";
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { GetServerSideProps, NextPage } from "next";
-import { getRandomElements } from "../../utils/arrayUtils";
+import { getRandomElementsImproved } from "../../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
 import { BlogIndexPost, ZBlogIndexPost } from "../../types/post";
 import { getJSONFileData } from "../../utils/fsUtils";
@@ -54,8 +54,8 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
   return {
     props: {
       posts,
-      heroPost: getRandomElements(posts)[0],
-      featuredPosts: getRandomElements(
+      heroPost: getRandomElementsImproved(posts)[0],
+      featuredPosts: getRandomElementsImproved(
         posts.filter(post => post.featured === true),
         2
       )
