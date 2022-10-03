@@ -36,4 +36,4 @@ yarn-error.log*
 
 # Additional from me
 # /generated removed from gitignore in an attempt to make it work on vercel
-/public/generated
+# /public/generated
