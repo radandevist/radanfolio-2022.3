@@ -17,7 +17,7 @@ export const formatProjectFileResult = (projectFile: Record<string, any>): Proje
   const {
     code,
     frontMatter: {
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
       readingTime, slug, wordCount,
       category, cover, name, stack: strStack, summary, liveUrl, repoUrl
     }
