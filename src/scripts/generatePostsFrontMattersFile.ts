@@ -14,7 +14,7 @@ const generatePostsFrontMattersFile = async (): Promise<void> => {
   if (!fs.existsSync(GENERATED_PATH)) await mkdir(GENERATED_PATH, { recursive: true });
 
   await writeFile(
-    path.join(GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME),
+    path.join(process.cwd(), GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME),
     JSON.stringify({ posts }, null, 2),
   );
 };

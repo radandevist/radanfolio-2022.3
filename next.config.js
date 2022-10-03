@@ -8,9 +8,9 @@ const nextConfig = {
       "media.giphy.com"
     ],
   },
-  experimental: { 
-    nftTracing: true 
-  }
+  // experimental: { 
+  //   nftTracing: true 
+  // }
 };
 
 

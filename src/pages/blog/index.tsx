@@ -48,7 +48,7 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
 
 export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
   const posts: BlogIndexPost[] = ZBlogIndexPost.array().parse(
-    getJSONFileData(path.join(GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME)).posts
+    getJSONFileData(path.join(process.cwd(), GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME)).posts
   );
 
   return {
