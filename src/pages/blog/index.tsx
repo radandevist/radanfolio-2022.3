@@ -10,7 +10,7 @@ import { getRandomElementsImproved } from "../../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
 import { BlogIndexPost, ZBlogIndexPost } from "../../types/post";
 import { getJSONFileData } from "../../utils/fsUtils";
-import { GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME } from "../../constants";
+import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FILENAME } from "../../constants";
 
 export type BlogProps = {
   posts: BlogIndexPost[];
@@ -48,7 +48,9 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
 
 export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
   const posts: BlogIndexPost[] = ZBlogIndexPost.array().parse(
-    getJSONFileData(path.join(process.cwd(), GENERATED_PATH, POSTS_FRONTMATTERS_FILENAME)).posts
+    getJSONFileData(
+      path.join(process.cwd(), GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FILENAME)
+    ).posts
   );
 
   return {

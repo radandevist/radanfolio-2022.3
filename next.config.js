@@ -7,12 +7,7 @@ const nextConfig = {
       "res.cloudinary.com",
       "media.giphy.com"
     ],
-  },
-  // experimental: { 
-  //   nftTracing: true 
-  // }
+  }
 };
 
-
 module.exports = nextConfig;
-

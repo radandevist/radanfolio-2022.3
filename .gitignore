@@ -35,5 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 # Additional from me
-/generated # removed from gitignore in an attempt to make it work on vercel
+/generated
 /public/generated
