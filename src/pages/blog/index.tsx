@@ -1,16 +1,18 @@
 import path from "path";
 import React from "react";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetServerSideProps, NextPage } from "next/types";
 import { Hero } from "../../components/Hero";
 import { Feed } from "../../components/Feed";
 import { Featured } from "../../components/Featured";
 import { AnimatedPage } from "../../components/AnimatedPage";
-import { GetServerSideProps, NextPage } from "next";
 import { getRandomElementsImproved } from "../../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
 import { BlogIndexPost, ZBlogIndexPost } from "../../types/post";
 import { getJSONFileData } from "../../utils/fsUtils";
 import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FILENAME } from "../../constants";
+
 
 export type BlogProps = {
   posts: BlogIndexPost[];
@@ -60,7 +62,8 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
       featuredPosts: getRandomElementsImproved(
         posts.filter(post => post.featured === true),
         2
-      )
+      ),
+      ...(await serverSideTranslations("en", ["common", "home"], null, ["fr", "mg"])),
     }
   };
 };

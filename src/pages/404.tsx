@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { GetStaticProps } from "next/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Link } from "../components/Link";
 
 const Page404 = () => {
@@ -25,3 +27,10 @@ const Page404 = () => {
 };
 
 export default Page404;
+
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {
+    ...(await serverSideTranslations("en", ["common", "home"], null, ["fr", "mg"])),
+    // Will be passed to the page component as props
+  },
+});

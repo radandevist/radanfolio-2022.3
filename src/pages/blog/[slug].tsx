@@ -11,6 +11,7 @@ import Image from "next/image";
 import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -128,6 +129,7 @@ export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = asy
   return {
     props: {
       post,
+      ...(await serverSideTranslations("en", ["common", "home"], null, ["fr", "mg"])),
     }
   };
 };
