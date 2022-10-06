@@ -70,7 +70,7 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale
         ["common", "blog"],
         null,
         locales
-      )),
+      ))
     }
   };
 };

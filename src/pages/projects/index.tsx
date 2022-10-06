@@ -2,31 +2,16 @@
 import { GetStaticProps, NextPage } from "next";
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { ProjectComponent } from "../../components/Project";
-import { z } from "zod";
-import { getRandomElements } from "../../utils/arrayUtils";
-import { getAllFilesFrontMatter } from "../../utils/mdxUtils";
-import { formatProjectFrontMatter } from "../../functions/projects.functions";
+import { getRandomElementsImproved } from "../../utils/arrayUtils";
 import Head from "next/head";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
-// import { projects } from "../../data/projects";
+import { ProjectIndex } from "../../types/project";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GENERATED_FOLDER_PATH, PROJECTS_FRONT_MATTERS_FOLDER_NAME } from "../../constants";
+import path from "path";
+import { getJSONFileData } from "../../utils/fsUtils";
 
-const ZProjectIndex = z.object({
-  id: z.string(),
-  name: z.string(),
-  cover: z.string(),
-  // liveUrl: z.string().nullable(),
-  summary: z.string(),
-  // repoUrl: z.string(),
-  stack: z
-    .object({ id: z.string(), name: z.string() })
-    .array(),
-  slug: z.string(),
-  featured: z.boolean(),
-});
-
-export type ProjectIndex = z.infer<typeof ZProjectIndex>;
-
-export type ProjectsProps = {
+type ProjectsProps = {
   projects: ProjectIndex[];
   featuredProjects: ProjectIndex[];
 };
@@ -52,7 +37,6 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
-            // eslint-disable-next-line max-len
             "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
           )}
         />
@@ -76,17 +60,29 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
-  const projects: ProjectIndex[] = (await getAllFilesFrontMatter("projects"))
-    .map(frontMatter => ZProjectIndex.parse(formatProjectFrontMatter(frontMatter)));
+export const getStaticProps: GetStaticProps<ProjectsProps> = async ({ locale, locales }) => {
+  const { projects }: { projects: ProjectIndex[] } = getJSONFileData(
+    path.join(
+      process.cwd(),
+      GENERATED_FOLDER_PATH,
+      PROJECTS_FRONT_MATTERS_FOLDER_NAME,
+      `${locale}.json`
+    )
+  );
 
   return {
     props: {
       projects,
-      featuredProjects: getRandomElements(
+      featuredProjects: getRandomElementsImproved(
         projects.filter(project => project.featured === true),
         2
-      )
+      ),
+      ...(await serverSideTranslations(
+        locale!,
+        ["common", "blog"],
+        null,
+        locales
+      ))
     },
   };
 };

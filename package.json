@@ -9,8 +9,9 @@
     "lint": "next lint",
     "prebuild": "yarn generate",
     "predev": "yarn generate",
-    "generate": "yarn generate:posts-frontmatters",
-    "generate:posts-frontmatters": "node -r @swc-node/register src/scripts/generatePostsFrontMattersFile.ts"
+    "generate": "yarn generate:posts-front-matters && yarn generate:projects-front-matters",
+    "generate:posts-front-matters": "node -r @swc-node/register src/scripts/generatePostsFrontMatterFiles.ts",
+    "generate:projects-front-matters": "node -r @swc-node/register src/scripts/generateProjectsFrontMatterFiles.ts"
   },
   "dependencies": {
     "animate.css": "^4.1.1",

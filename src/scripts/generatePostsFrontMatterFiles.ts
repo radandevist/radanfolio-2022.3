@@ -1,8 +1,11 @@
-import { POSTS_FOLDER } from "./../constants";
 import fs from "fs";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
-import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FOLDER_NAME } from "../constants";
+import {
+  GENERATED_FOLDER_PATH,
+  POSTS_FRONT_MATTERS_FOLDER_NAME,
+  POSTS_FOLDER
+} from "../constants";
 import { formatPostFrontmatter } from "../functions/blog.functions";
 import { BlogIndexPost, ZBlogIndexPost } from "../types/post";
 import { getAllFilesFrontMatterV3 } from "../utils/mdxUtils.generate";

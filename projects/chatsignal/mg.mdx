@@ -1,0 +1,42 @@
+---
+name: "ChatSignal"
+cover: "https://res.cloudinary.com/dhwkzyl32/image/upload/v1662558499/radanfolio/projects/chatsignal/chatsignal-cover_ivli4u.png"
+# liverUrl: null
+summary: "Application ana appel vidéo tsotra ary mandeha tsara, mba hifandraisana amin'ny namana"
+repoUrl: "https://github.com/radandevist/webrtc-front-ts"
+stack: ["React", "Typescript", "Node", "WebRTC"]
+featured: true
+category: "React sy Node"
+---
+
+ChatSignal dia application web, mampiasa ny herin'ny WebRTC hanaovana antso vidéo peer to peer ary React librairie front-end nanamboarana azy. Mampiasa ny Node.js amin'ny serveur ihany koa izy, ho an'ny asa famantarana na signalisation (échange de descriptions de session, etc)..
+Raha fintinina dia fananvana antso video izy io.
+
+## Antony?
+
+Eny ary, tamin'izany fotoana izany dia teo afovoan'ny valan'aretina COVID-19 isika. Noho ny fameperana natao amin'ny olona (tsy navela hivoaka ny vahoaka, sns), dia nitombo be ny fampiasana ireny applications toa ny Zoom ireny sady nalaza tokoa. Ireo applications ireo dia nahafahan'ny olona nifandray tamin'ny namana, fianakaviana ary mpiara-miasa.
+Noho izany, nanontany tena aho hoe ahoana no fiasan'ireo applications ireo sy ny fomba nananganana azy ireo ary tonga ny hevitra momba ity tetikasa ity.
+
+## Outils & Stack
+
+React, Typescript, ESLint, Vite.js, Node.js, Express.js, WebRTC
+
+## Démo
+
+![](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1662558503/radanfolio/projects/chatsignal/demo-chatsignal_bayclp.gif)
+
+## Fanatsarana
+
+- **Fifandefasana de fichiers** tkony afak mifanandefa fichiers ireo olona mifandray amin'alalan'ny `RTCDatachannel`.
+
+- **Ampieakarina amin'ny ambaratonga ambony ho lasa application ana vidéo conférence feno**: Amin'izao, ny fifandraisana vidéo ao amin'ny ChatSignal dia natao ho an'ny mpandray anjara roa ihany. Afaka ampitomboana izany isa izany izany ary torohevitra omeko manokana: ny fampiasana librairie na serivice dédié toa an'i Twilio na Agora fa tsy mikasika mivantana ny API WebRTC izany.
+
+## Teny Farany
+
+Azo lazaina sarotra iahny ny nampifanaraka React amin'ny APIs WebRTC, indrindra indrindra:
+
+* amin'ny fahafantarana fa ny objet `RTCPeerConnection` dia tokony déclréna ho Ref mba hi-persister eo anelanelan'ny re-renders ny components.
+
+* mi-send sy mi-receive ireo objets `RTCSessionDescription` entre ireo mpifanantso, ary mitady fomba hampirindrana azy amin'ny paradigme an'i React.
+
+Na izany aza dia tetikasa nahafinaritra sy tena nampianatra. Aza misalasala mizara, mikaroka ary mitondra fanamarihana amin'ny ity projet ity. Happy hacking 😉.
