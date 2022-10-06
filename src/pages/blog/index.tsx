@@ -12,8 +12,6 @@ import { BlogIndexPost } from "../../types/post";
 import { getJSONFileData } from "../../utils/fsUtils";
 import path from "path";
 import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FOLDER_NAME } from "../../constants";
-import nextI18nConfig from "../../../next-i18next.config.js";
-
 
 export type BlogProps = {
   posts: BlogIndexPost[];
@@ -49,15 +47,13 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
   </AnimatedPage>
 );
 
-export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale }) => {
-  const theLocale = locale ?? "en";
-
+export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale, locales }) => {
   const { posts }: { posts: BlogIndexPost[] } = getJSONFileData(
     path.join(
       process.cwd(),
       GENERATED_FOLDER_PATH,
       POSTS_FRONT_MATTERS_FOLDER_NAME,
-      `${theLocale}.json`
+      `${locale}.json`
     )
   );
 
@@ -70,10 +66,11 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale
         2
       ),
       ...(await serverSideTranslations(
-        theLocale,
+        locale!,
         ["common", "blog"],
         null,
-        nextI18nConfig.i18n.locales)),
+        locales
+      )),
     }
   };
 };

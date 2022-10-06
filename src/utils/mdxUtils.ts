@@ -5,7 +5,7 @@ import readingTime from "reading-time";
 import { readdirSync, readFileSync } from "fs";
 import { bundleMDX } from "mdx-bundler";
 import { v4 } from "uuid";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import { getDirectories } from "./fsUtils";
 import { formatPostFrontmatter } from "../functions/blog.functions";
 import { objectFromArray } from "./arrayUtils";
@@ -14,23 +14,15 @@ import nextI18nConfig from "../../next-i18next.config.js";
 // These plugins are completely dependent on the blog that you
 // are planning to build if you're just focused on building one without
 // any syntax highlighting of those sorts these all won't be necessary
-// ! esm import seem to not work with @swc-node
-// import rehypeSlug from "rehype-slug";
-// import rehypeCodeTitles from "rehype-code-titles";
-// import rehypeAutolinkHeadings from "rehype-autolink-headings";
-// import rehypePrism from "rehype-prism-plus";
-// * we use dynamic import instead
-const rehypeSlug = dynamic(() => import("rehype-slug") as any, { ssr: false }) as any;
-const rehypeCodeTitles = dynamic(() => import("rehype-code-titles") as any, { ssr: false }) as any;
-const rehypeAutolinkHeadings = dynamic(
-  () => import("rehype-autolink-headings") as any,
-  { ssr: false },
-) as any;
-const rehypePrism = dynamic(() => import("rehype-prism-plus") as any, { ssr: false }) as any;
+import rehypeSlug from "rehype-slug";
+import rehypeCodeTitles from "rehype-code-titles";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrism from "rehype-prism-plus";
 
 export async function getFiles(mdxFilesDir: string) {
   return readdirSync(join(process.cwd(), mdxFilesDir));
 }
+
 export async function getPostsSlugs(postsDir: string) {
   return getDirectories(join(process.cwd(), postsDir));
 }
@@ -40,6 +32,51 @@ export async function getFileBySlug(mdxFilesDir: string, slug: string) {
   // example and we will get the parsed content for that particular
   // blog page.
   const source = readFileSync(join(process.cwd(), mdxFilesDir, `${slug}.mdx`),"utf8");
+
+  const { code, frontmatter } = await bundleMDX({
+    source,
+    mdxOptions(options) {
+      // you can add your plugins right here if you'd rather use
+      // remark plugins then you can add them similary just replace
+      // the occurances of rehype with remark.
+      options.rehypePlugins = [
+        ...(options?.rehypePlugins ?? []),
+        rehypeSlug,
+        rehypeCodeTitles,
+        rehypePrism,
+        [
+          rehypeAutolinkHeadings,
+          {
+            properties: {
+              className: ["anchor"],
+            },
+          },
+        ],
+      ];
+      return options;
+    },
+  });
+
+  const { words, minutes } = readingTime(source);
+
+  return {
+    // return the parsed content for our page along with it's metadata
+    // we will be using gray-matter for this.
+    code,
+    frontMatter: {
+      ...frontmatter,
+      wordCount: words,
+      readingTime: minutes,
+      slug,
+    },
+  };
+}
+
+export async function getFileV3(postsDir: string, slug: string, locale: string) {
+  // we will pass in a slug of the page we want like /blogs/blog-1
+  // example and we will get the parsed content for that particular
+  // blog page.
+  const source = readFileSync(join(process.cwd(), postsDir, slug, `${locale}.mdx`),"utf8");
 
   const { code, frontmatter } = await bundleMDX({
     source,

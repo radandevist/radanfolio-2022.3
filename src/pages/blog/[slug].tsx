@@ -4,7 +4,7 @@ import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import { z } from "zod";
 import { about } from "../../data/about";
-import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
+import { getFileV3, getPostsSlugs } from "../../utils/mdxUtils";
 import { formatPostFileResult } from "../../functions/blog.functions";
 import { mdxComponents } from "../../components/mdx";
 import Image from "next/image";
@@ -12,6 +12,9 @@ import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpe
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { POSTS_FOLDER } from "../../constants";
+import path from "path";
+import fs from "fs";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -110,26 +113,38 @@ export type PostViewParams = {
   slug: string;
 };
 
-export const getStaticPaths: GetStaticPaths<PostViewParams> = async () => {
-  const posts = await getFiles("posts");
+export const getStaticPaths: GetStaticPaths<PostViewParams> = async ({ locales }) => {
+  const slugs = await getPostsSlugs(POSTS_FOLDER);
+
+  const paths: { params: PostViewParams; locale: string }[] = [];
+
+  slugs.forEach(slug => {
+    locales?.forEach(locale => {
+      const fullPath = path.join(
+        process.cwd(),
+        POSTS_FOLDER,
+        slug,
+        `${locale}.mdx`
+      );
+      if (fs.existsSync(fullPath)) {
+        paths.push({ params: { slug }, locale });
+      };
+    });
+  });
 
   return {
-    paths: posts.map((post) => ({
-      params: {
-        slug: post.replace(/\.mdx/, ""),
-      },
-    })),
-    fallback: false,
+    paths,
+    fallback: false
   };
 };
 
-export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = async (context) => {
-  const post = ZPost.parse(formatPostFileResult(await getFileBySlug("posts", context.params?.slug!)));
+export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = async ({ params, locale, locales }) => {
+  const post = ZPost.parse(formatPostFileResult(await getFileV3(POSTS_FOLDER, params?.slug!, locale!)));
 
   return {
     props: {
       post,
-      ...(await serverSideTranslations("en", ["common", "home"], null, ["fr", "mg"])),
+      ...(await serverSideTranslations("en", ["common", "blog"], null, locales)),
     }
   };
 };
