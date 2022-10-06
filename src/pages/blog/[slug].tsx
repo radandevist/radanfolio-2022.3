@@ -118,6 +118,7 @@ export const getStaticPaths: GetStaticPaths<PostViewParams> = async ({ locales }
 
   const paths: { params: PostViewParams; locale: string }[] = [];
 
+  // TODO: Refactor this function: it is the same as in /projecst/[slug].tsx
   slugs.forEach(slug => {
     locales?.forEach(locale => {
       const fullPath = path.join(

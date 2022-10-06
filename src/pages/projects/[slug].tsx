@@ -8,10 +8,12 @@ import { mdxComponents } from "../../components/mdx";
 import { formatProjectFileResult } from "../../functions/projects.functions";
 import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { getFileBySlug, getFiles } from "../../utils/mdxUtils";
+import { getFileV3, getPostsSlugs } from "../../utils/mdxUtils";
 import Head from "next/head";
-// import { projects } from "../../data/projects";
-// import { Project } from "../../data/projects/projects.types";
+import { PROJECTS_FOLDER } from "../../constants";
+import path from "path";
+import fs from "fs";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ZProject = z.object({
   // id: z.string(),
@@ -111,26 +113,38 @@ export type ProjectViewParams = {
   slug: string;
 };
 
-export const getStaticPaths: GetStaticPaths<ProjectViewParams> = async () => {
-  const projects = await getFiles("projects");
+export const getStaticPaths: GetStaticPaths<ProjectViewParams> = async ({ locales }) => {
+  const slugs = await getPostsSlugs(PROJECTS_FOLDER);
+
+  const paths: { params: ProjectViewParams; locale: string }[] = [];
+
+  slugs.forEach(slug => {
+    locales?.forEach(locale => {
+      const fullPath = path.join(
+        process.cwd(),
+        PROJECTS_FOLDER,
+        slug,
+        `${locale}.mdx`
+      );
+      if (fs.existsSync(fullPath)) {
+        paths.push({ params: { slug }, locale });
+      };
+    });
+  });
 
   return {
-    paths: projects.map((project) => ({
-      params: {
-        slug: project.replace(/\.mdx/, ""),
-      },
-    })),
+    paths,
     fallback: false,
   };
 };
 
-export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams> = async (context) => {
-  // const project = projects.find((project) => project.slug === context.params?.slug);
-  const project = ZProject.parse(formatProjectFileResult(await getFileBySlug("projects", context.params?.slug!)));
+export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams> = async ({ params, locale, locales }) => {
+  const project = ZProject.parse(formatProjectFileResult(await getFileV3(PROJECTS_FOLDER, params?.slug!, locale!)));
 
   return {
     props: {
       project,
+      ...(await serverSideTranslations("en", ["common", "blog"], null, locales)),
     },
   };
 };
