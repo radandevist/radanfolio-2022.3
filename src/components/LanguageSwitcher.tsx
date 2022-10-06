@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import { useTranslation } from "next-i18next";
+import React/* , { useEffect } */ from "react";
+// import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 export const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
+  // const { i18n } = useTranslation();
   const router = useRouter();
-  const { pathname, query, asPath, locale } = router;
+  const { pathname, query, asPath/* , locale */ } = router;
 
-  useEffect(() => {
-    i18n.changeLanguage(locale);
-  }, [i18n, locale, i18n.language]);
+  // useEffect(() => {
+  //   i18n.changeLanguage(locale);
+  // }, [i18n, locale, i18n.language]);
 
   return (
     <div>

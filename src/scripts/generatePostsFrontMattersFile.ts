@@ -1,26 +1,34 @@
 import fs from "fs";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
-import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FILENAME } from "../constants";
+import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FOLDER_NAME } from "../constants";
 import { formatPostFrontmatter } from "../functions/blog.functions";
 import { BlogIndexPost, ZBlogIndexPost } from "../types/post";
-import { getAllFilesFrontMatter } from "../utils/mdxUtils";
+import { getAllFilesFrontMatterV3 } from "../utils/mdxUtils";
+import nextI18nConfig from "../../next-i18next.config.js";
 
-const generatePostsFrontMattersFile = async (): Promise<void> => {
-  const posts: BlogIndexPost[] = (await getAllFilesFrontMatter("posts"))
-    .map(frontMatter => ZBlogIndexPost.parse(formatPostFrontmatter(frontMatter)))
-    .sort((x, y) => +new Date(y.date) - +new Date(x.date));
+const generatePostsFrontMatterFiles = async (): Promise<void> => {
+  const frontMattersFolderPath = path.join(
+    process.cwd(),
+    GENERATED_FOLDER_PATH,
+    POSTS_FRONT_MATTERS_FOLDER_NAME
+  );
 
-  const generatedFolderPath = path.join(process.cwd(), GENERATED_FOLDER_PATH);
-
-  if (!fs.existsSync(generatedFolderPath)) {
-    await mkdir(generatedFolderPath, { recursive: true });
+  if (!fs.existsSync(frontMattersFolderPath)) {
+    await mkdir(frontMattersFolderPath, { recursive: true });
   }
 
-  await writeFile(
-    path.join(generatedFolderPath, POSTS_FRONT_MATTERS_FILENAME),
-    JSON.stringify({ posts }, null, 2),
-  );
+  Promise.all(nextI18nConfig.i18n.locales.map(async (locale) => {
+    const posts: BlogIndexPost[] = ZBlogIndexPost.array().parse(
+      (await getAllFilesFrontMatterV3("posts", locale))
+        .map(frontMatter => formatPostFrontmatter(frontMatter))
+    ).sort((x, y) => +new Date(y.date) - +new Date(x.date));
+
+    await writeFile(
+      path.join(frontMattersFolderPath, `${locale}.json`),
+      JSON.stringify({ posts }, null, 2),
+    );
+  }));
 };
 
-generatePostsFrontMattersFile();
+generatePostsFrontMatterFiles();

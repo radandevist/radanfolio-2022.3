@@ -20,3 +20,20 @@ export function getRandomElementsImproved<T>(arr: T[], n: number = 1) {
   }
   return result;
 }
+
+export function objectFromArray (array: string[], defaultValues?: any[]) {
+  const obj: Record<string, any> = {};
+
+  if (!defaultValues) {
+    defaultValues = [];
+    for (let index = 0; index < array.length; index++) {
+      defaultValues[index] = {};
+    }
+  };
+
+  for (const key of array) {
+    obj[key] = defaultValues![array.indexOf(key)];
+  }
+
+  return obj;
+}

@@ -1,0 +1,48 @@
+---
+title: Ataovy azo alaina ny sakan'ny Next.js Image fameno nefa tsy mamaritra ny haavony sy ny sakany
+cover: https://res.cloudinary.com/dhwkzyl32/image/upload/q_80/v1664121075/radanfolio/posts/full-width-next-image/full-width-next-image-cover_buwphd.jpg
+date: 2022-09-25
+topic: Next.js Image
+
+excerpt: Combining the Next.js Image component with a Blog that uses mdx. How did I do to harmonize them? 
+featured: true
+---
+
+Following one of my previous post about lazy loading Next.js images inside mdx generated blog posts ([read that post](/blog/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary)), one another issue emerged: the images were not occupying the full-width of the container. 
+
+Although the Next.js Image component has built-in lazy loading, you are still required to specify a width and height. However, this knowledge is typically unknown to you upfront. You also don't want photos that have been given the incorrect width or height to seem chopped.
+
+I learned that you can get around this with a few lines of CSS. Your photos will therefore take up the entire area in the div.
+
+As a result, wrap the Image component in a div with `img-contain` and give it (the Image component) the className `custom-img`. Note that `fill` must be selected as the layout mode.
+
+```jsx:ImageBlog.jsx
+<div className="img-contain">
+  <Image
+    className="custom-img"
+    alt="Mountains"
+    src="/project/pexels-photo.jpeg"
+    layout="fill"
+  />
+</div>
+```
+
+Here is the CSS styles that overrides the capabilities of next.js.
+
+```css:imgage-blog.css
+.custom-img {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
+
+.img-contain {
+  width: 100%;
+}
+.img-contain > div {
+  position: unset !important;
+}
+```
+
+I came across that solution, afters sweat and tears, thanks to the to the following [github discussion](https://github.com/vercel/next.js/discussions/18739#discussioncomment-344932) 🤣.

@@ -1,4 +1,3 @@
-import path from "path";
 import React from "react";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -9,9 +8,11 @@ import { Featured } from "../../components/Featured";
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { getRandomElementsImproved } from "../../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
-import { BlogIndexPost, ZBlogIndexPost } from "../../types/post";
+import { BlogIndexPost } from "../../types/post";
 import { getJSONFileData } from "../../utils/fsUtils";
-import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FILENAME } from "../../constants";
+import path from "path";
+import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FOLDER_NAME } from "../../constants";
+import nextI18nConfig from "../../../next-i18next.config.js";
 
 
 export type BlogProps = {
@@ -48,11 +49,16 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
   </AnimatedPage>
 );
 
-export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
-  const posts: BlogIndexPost[] = ZBlogIndexPost.array().parse(
-    getJSONFileData(
-      path.join(process.cwd(), GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FILENAME)
-    ).posts
+export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale }) => {
+  const theLocale = locale ?? "en";
+
+  const { posts }: { posts: BlogIndexPost[] } = getJSONFileData(
+    path.join(
+      process.cwd(),
+      GENERATED_FOLDER_PATH,
+      POSTS_FRONT_MATTERS_FOLDER_NAME,
+      `${theLocale}.json`
+    )
   );
 
   return {
@@ -63,7 +69,11 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async () => {
         posts.filter(post => post.featured === true),
         2
       ),
-      ...(await serverSideTranslations("en", ["common", "home"], null, ["fr", "mg"])),
+      ...(await serverSideTranslations(
+        theLocale,
+        ["common", "blog"],
+        null,
+        nextI18nConfig.i18n.locales)),
     }
   };
 };

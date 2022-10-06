@@ -1,10 +1,15 @@
+import { BlogIndexPost } from "./../types/post";
 import matter from "gray-matter";
-import { join } from "path";
+import { basename, join } from "path";
 import readingTime from "reading-time";
 import { readdirSync, readFileSync } from "fs";
 import { bundleMDX } from "mdx-bundler";
 import { v4 } from "uuid";
 import dynamic from "next/dynamic";
+import { getDirectories } from "./fsUtils";
+import { formatPostFrontmatter } from "../functions/blog.functions";
+import { objectFromArray } from "./arrayUtils";
+import nextI18nConfig from "../../next-i18next.config.js";
 
 // These plugins are completely dependent on the blog that you
 // are planning to build if you're just focused on building one without
@@ -25,6 +30,9 @@ const rehypePrism = dynamic(() => import("rehype-prism-plus") as any, { ssr: fal
 
 export async function getFiles(mdxFilesDir: string) {
   return readdirSync(join(process.cwd(), mdxFilesDir));
+}
+export async function getPostsSlugs(postsDir: string) {
+  return getDirectories(join(process.cwd(), postsDir));
 }
 
 export async function getFileBySlug(mdxFilesDir: string, slug: string) {
@@ -73,11 +81,13 @@ export async function getFileBySlug(mdxFilesDir: string, slug: string) {
 }
 
 export async function getAllFilesFrontMatter(mdxFilesDir: string) {
-  const files = readdirSync(join(process.cwd(), mdxFilesDir));
+  const CWD = process.cwd();
+
+  const files = readdirSync(join(CWD, mdxFilesDir));
 
   return files.map((postSlug) => {
     // returns the parsed data for all the files within the posts directory
-    const source = readFileSync(join(process.cwd(), mdxFilesDir, postSlug), "utf8");
+    const source = readFileSync(join(CWD, mdxFilesDir, postSlug), "utf8");
     const { data } = matter(source);
 
     return {
@@ -90,4 +100,55 @@ export async function getAllFilesFrontMatter(mdxFilesDir: string) {
       readingTime: readingTime(source),
     };
   });
+};
+
+export async function getAllFilesFrontMatterV3(dir: string, locale: string) {
+  const CWD = process.cwd();
+
+  const slugs = await getPostsSlugs(dir);
+
+  return slugs.map((slug) => {
+    // returns the parsed data for all the files within the posts directory
+    const source = readFileSync(join(CWD, dir, slug, `${locale}.mdx`), "utf8");
+    const { data } = matter(source);
+
+    return {
+      ...data,
+      // * the rest is generated
+      id: v4(),
+      // we will be using the filename by removing the extension
+      // as our slug for the file.
+      slug: slug.replace(".mdx", ""),
+      readingTime: readingTime(source),
+    };
+  });
+};
+
+export async function getAllFilesFrontMatterV2(mdxFilesDir: string) {
+  const CWD = process.cwd();
+
+  const files = readdirSync(join(CWD, mdxFilesDir));
+
+  const postLocales: Record<string, BlogIndexPost> =
+    objectFromArray(nextI18nConfig.i18n.locales);
+
+  await Promise.all(files
+    .map(file => file.replace(".mdx", ""))
+    .map(async (locale) => {
+      // returns the parsed data for all the files within the posts directory
+      const source = readFileSync(join(CWD, mdxFilesDir, `${locale}.mdx`), "utf8");
+      const { data } = matter(source);
+
+      postLocales[locale] = formatPostFrontmatter({
+        ...data,
+        // * the rest is generated
+        id: v4(),
+        // we will be using the filename by removing the extension
+        // as our slug for the file.
+        slug: basename(mdxFilesDir),
+        readingTime: readingTime(source),
+      });
+    }));
+
+  return postLocales;
 };
