@@ -1,7 +1,13 @@
-import React, { createContext, FC, useCallback, useContext, useEffect, useMemo } from "react";
+import React, {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo
+} from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-
-type Props = {};
 
 enum Theme {
   DARK = "dark",
@@ -22,7 +28,7 @@ const themeContext = createContext<ThemeContextValue>({
 
 export const useTheme = () => useContext(themeContext);
 
-export const ThemeProvider: FC<Props> = ({ children }) => {
+export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useLocalStorage(LOCAL_STORAGE_THEME_KEY, Theme.LIGHT);
 
   useEffect(() => {

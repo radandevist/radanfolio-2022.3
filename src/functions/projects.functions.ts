@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { ProjectIndex } from "../pages/projects";
+import { ProjectIndex } from "../types/project";
 import { Project } from "../pages/projects/[slug]";
 
 export const formatProjectFrontMatter = (frontMatter: Record<string, any>): ProjectIndex => {

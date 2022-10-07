@@ -1,10 +1,10 @@
 // import Link from "next/link";
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 import { Link } from "../Link";
 
-export type CustomLinkProps = {
+export type CustomLinkProps = PropsWithChildren<{
   href?: string;
-};
+}>;
 
 export const CustomLink: FC<CustomLinkProps> = (props) => {
   const href = props.href;

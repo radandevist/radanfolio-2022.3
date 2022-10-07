@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 
-export const CodeBlock: FC = ({ children }) => (
+export const CodeBlock: FC<PropsWithChildren> = ({ children }) => (
   <div className="
   bg-brand2-500 dark:bg-brand2-400 rounded-lg
   mx-auto my-5 !mt-0
