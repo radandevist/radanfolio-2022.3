@@ -5,10 +5,10 @@ import { useClickOutside } from "../hooks/useClickOutside";
 
 const languagesProperties: Record<string, any> = {
   en: {
-    label: "🇬🇧 English",
+    label: <>{"🇬🇧 English"}&nbsp;&nbsp;&nbsp;</>,
   },
   fr: {
-    label: "🇫🇷 Français",
+    label: <>{"🇫🇷 Français"}&nbsp;</>,
   },
   mg: {
     label: "🇲🇬 Malagasy",
@@ -28,12 +28,13 @@ export const LanguageSwitcher = () => {
   }, [isOpen]);
 
   return (
-    <div ref={node} className="relative inline-block text-left w-[7.6rem]">
+    // eslint-disable-next-line max-len
+    <div ref={node} className="relative inline-block text-left text-sm md:text-md lg:text-lg">
       <button
         type="button"
         onClick={toggleDropdown}
         // eslint-disable-next-line max-len
-        className="inline-flex w-full justify-center rounded-md p-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand1 focus:ring-offset-2 ring-offset-slate-100 dark:ring-offset-brand2"
+        className="inline-flex w-full justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-brand1"
         id="menu-button"
         aria-expanded="true"
         aria-haspopup="true"
@@ -41,7 +42,7 @@ export const LanguageSwitcher = () => {
         {languagesProperties[locale!].label}
         {/* Heroicon name: mini/chevron-down */}
         <svg
-          className="-mr-1 ml-2 h-5 w-5"
+          className="-mr-1 ml-2 h-5 w-5 mt-1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20" fill="currentColor"
           aria-hidden="true"
@@ -83,7 +84,7 @@ export const LanguageSwitcher = () => {
               role="menuitem"
             >
               <a
-                className="text-gray-700 block px-4 py-2 text-sm"
+                className="text-gray-700 block px-4 py-2"
                 onClick={toggleDropdown}
               >
                 {properties.label}
