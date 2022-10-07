@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 const languagesProperties: Record<string, any> = {
   en: {
@@ -18,30 +19,13 @@ export const LanguageSwitcher = () => {
   const router = useRouter();
   const { pathname, query, asPath, locale } = router;
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const node = useRef<HTMLDivElement>(null);
+  const { node } = useClickOutside<HTMLDivElement>({
+    onClickOutside: () => { setIsOpen(false); }
+  });
 
   const toggleDropdown = useCallback(() => {
     setIsOpen(!isOpen);
   }, [isOpen]);
-
-  const clickOutside = useCallback((event: Event) => {
-    if(node?.current?.contains(event.target as Node)) {
-      // click inside the scope
-      return;
-    } 
-    // outside click
-    setIsOpen(false);
-  }, []);
-
-  // Do something after component renders
-  useEffect(() => {
-    document.addEventListener("mousedown", clickOutside);
-
-    // clean up function before running new effect
-    return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, [clickOutside]);
 
   return (
     <div ref={node} className="relative inline-block text-left w-[7.6rem]">
