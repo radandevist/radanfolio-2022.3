@@ -15,6 +15,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { POSTS_FOLDER } from "../../constants";
 import path from "path";
 import fs from "fs";
+import { AnimatedPage } from "../../components/AnimatedPage";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -39,7 +40,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
   const isLarge = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <>
+    <AnimatedPage>
       <Head>
         <title>Radanfolio Blog | {post.title}</title>
 
@@ -105,7 +106,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
         </section>
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
       </div>
-    </>
+    </AnimatedPage>
   );
 };
 

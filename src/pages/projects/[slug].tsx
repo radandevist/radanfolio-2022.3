@@ -14,6 +14,7 @@ import { PROJECTS_FOLDER } from "../../constants";
 import path from "path";
 import fs from "fs";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { AnimatedPage } from "../../components/AnimatedPage";
 
 const ZProject = z.object({
   // id: z.string(),
@@ -43,7 +44,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
   const isLarge = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <>
+    <AnimatedPage>
       <Head>
         <title>Radanfolio Project | {project.name}</title>
 
@@ -105,7 +106,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
         </section>
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
       </div>
-    </>
+    </AnimatedPage>
   );
 };
 
