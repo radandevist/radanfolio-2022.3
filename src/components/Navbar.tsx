@@ -47,7 +47,6 @@ export const Navbar = () => {
           <LanguageSwitcher />
           <ThemeSwitcher
             onToggle={toggleTheme}
-            isDark={theme === "dark"}
             className="relative top-[10px] lg:top-2"
           />
         </div>
