@@ -31,7 +31,7 @@ const Home: NextPage = () => {
         {/* <meta property="og:image" content="https://res.cloudinary.com/dhwkzyl32/image/upload/c_limit,h_630,w_1200/v1660292817/radanfolio/home_opengraph_xhclzs.jpg" /> */}
         <meta
           property="og:image"
-          content={getCloudinaryOpenGraphImage("https://res.cloudinary.com/dhwkzyl32/image/upload/v1660292817/radanfolio/home_opengraph_xhclzs.jpg")}
+          content={getCloudinaryOpenGraphImage("https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg")}
         />
       </Head>
       <div className="w-full min-h-screen">
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
           <p className="text-2xl md:text-3xl py-6">{info.bioSub}</p>
           {/* <p className="text-2xl md:text-3xl font-light">{info.bioSub}</p> */}
           {/* skills  */}
-          <p className="text-2xl md:text-3xl my-12">Skills include:</p>
+          <p className="text-2xl md:text-3xl my-12">{t("home:skillsInclude")}:</p>
           <div className="flex items-center flex-wrap">
             {about?.skills?.map((skill) => (
               <span key={skill?.id} className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 dark:shadow-brand2-400 bg-brand1-500 text-white font-semibold">{skill?.name}</span>

@@ -37,7 +37,7 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
           )}
         />
       </Head>

@@ -17,7 +17,7 @@ export const ImageBlog: FC<ImgHTMLAttributes<HTMLImageElement>>
       blurDataURL={src?.startsWith("https://res.cloudinary.com")
         ? getCloudinaryThumbnail(src)
         // eslint-disable-next-line max-len
-        : "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660283678/radanfolio/my_gray_blur_um9q82.webp"}
+        : "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660283678/radanfolio/my_gray_blur_um9q82.webp"}
     />
   </span>
 );

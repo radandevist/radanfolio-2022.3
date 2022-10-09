@@ -37,7 +37,7 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
         property="og:image"
         content={getCloudinaryOpenGraphImage(
           // eslint-disable-next-line max-len
-          "https://res.cloudinary.com/dhwkzyl32/image/upload/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
+          "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
         )}
       />
     </Head>

@@ -1,1 +1,9 @@
-{}
+{
+  "home": "Accueil",
+  "projects": "Tetikasa",
+  "blog": "Blog",
+  "posts": "Lahatsoratra",
+  "builtFrom": "Ity portfolio ity dia natsangana avy amin'ny maodely ana portfolio maimaim-poana nataon'i Chris Hansen (<1>Hyggedev</1>): <2>Forkeo</2>",
+  "customizedBy": "Fanamboarana sy fampidirana endri-javatra vaovao nataon'i Radan Devist ( Izaho )",
+  "craftedWithLove": "Noforonina am-<heartIcon /> ary Next.js kely"
+}

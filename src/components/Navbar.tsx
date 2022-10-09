@@ -1,23 +1,37 @@
 /* eslint-disable max-len */
 import React from "react";
 import { useRouter } from "next/router";
-import { links } from "../data/links";
 import { Link } from "./Link";
 import Image from "next/image";import { useTheme } from "../contexts/theme";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useTranslation } from "next-i18next";
 
 export const Navbar = () => {
   const router = useRouter();
-  const { toggleTheme, theme } = useTheme();
+  const { toggleTheme, theme } = useTheme(); // ! TODO: The problem with hydration comes from here
+  const { t } = useTranslation();
+
+  const links = [
+    {
+      name: t("common:home"),
+      route: "/",
+    },
+    {
+      name: t("common:projects"),
+      route: "/projects",
+    },
+    {
+      name: t("common:posts"),
+      route: "/blog",
+    },
+  ];
 
   return (
     <div className="fixed bg-slate-100/70 dark:bg-brand2/70 top-0 left-0 right-0 w-full h-10 py-12 flex items-center backdrop-blur-lg z-50">
       <nav className="mxw-lg flex items-center justify-between">
-        <div>
-          <div className="h-10 w-10 md:h-14 md:w-14 rounded-full shadow-lg grid place-items-center text-lg text-white font-bold">
-            <Image width={1181} height={1181} src={`/devist-logo-${theme === "dark" ? "light" : "dark"}.png`} alt="devist logo" />
-          </div>
+        <div className="h-10 w-10 md:h-14 md:w-14 rounded-full shadow-lg grid place-items-center text-lg text-white font-bold">
+          <Image width={1181} height={1181} src={`/devist-logo-${theme === "dark" ? "light" : "dark"}.png`} alt="devist logo" />
         </div>
         <div className="space-x-1 md:space-x-4">   
           {links && links.map((link) => (
@@ -30,9 +44,12 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          {/* <ThemeSwitch label="Dark mode" onToggle={toggleTheme} checked={theme === "dark"} /> */}
           <LanguageSwitcher />
-          <ThemeSwitcher onToggle={toggleTheme} isDark={theme === "dark"} className="relative top-[10px] lg:top-2" />
+          <ThemeSwitcher
+            onToggle={toggleTheme}
+            isDark={theme === "dark"}
+            className="relative top-[10px] lg:top-2"
+          />
         </div>
         {/* Hamburger menu icon */}
         {/* <div className="inline-flex md:hidden cursor-pointer">
