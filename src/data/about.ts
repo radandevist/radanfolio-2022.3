@@ -14,11 +14,11 @@ const preAbout = {
     },
     { 
       name: "Instagram",
-      url: "https://www.instagram.com/radandevist"
+      url: "https://www.instagram.com/devist.english"
     },
     { 
       name: "Facebook Page",
-      url: "https://www.facebook.com/radandevist"
+      url: "https://www.facebook.com/devist.english"
     },
     { 
       name: "Facebook Profile",
