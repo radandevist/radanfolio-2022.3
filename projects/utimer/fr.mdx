@@ -2,41 +2,41 @@
 name: "UTimer"
 cover: "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660189800/radanfolio/projects/utimer/utimer-cover_cx1y5u.png"
 # liverUrl: null
-summary: "Yet anoher simple timer mobile app"
+summary: "Encore une autre application mobile de minuterie simple"
 repoUrl: "https://github.com/radandevist/utimer"
 stack: ["React Native", "Javascript"]
 featured: false
 category: "React Native"
 ---
 
-Utimer is yet another rather simple timer android app which I built with the help of React native.
+Utimer est encore une autre application Android de minuterie assez simple que j'ai construite avec l'aide de React native.
 
-## Why?
+## Pourquoi?
 
-At the time, I was wondering how to make Android apps and busted my head against the android developers website. What I can say is that android development with the native langages (i.e. Java and Kotlin) is very intimidating ant not friendly at all for beginners.
+À l'époque, je me demandais comment créer des applications Android et je me suis cassé la tête contre le site Web des développeurs Android. Ce que je peux dire, c'est que le développement Android avec les langages natifs (c'est-à-dire Java et Kotlin) est très intimidant et pas du tout convivial pour les débutants.
 
-Then I have started to get interested in alternative frameworks such React Native to do the work. I already heard of React Native before, A Javascript Framework that lets you build Android apps by leveraging React's paradigm. The choice was evident since I already had a knowledge of React and Javascript at that time. And I can say that I've been impressed by how easy it is to get started with React Native and how easy it is to make changes on your app thanks to React's JSX compared to native android development and the ugly XML.
+Ensuite, j'ai commencé à m'intéresser à des frameworks alternatifs tels que React Native pour faire le travail. J'ai déjà entendu parler de React Native auparavant, un framework Javascript qui vous permet de créer des applications Android en tirant parti du paradigme de React. Le choix était évident puisque j'avais déjà une connaissance de React et Javascript à cette époque. Et je peux dire que j'ai été impressionné par la facilité avec laquelle il est possible de démarrer avec React Native et par la facilité avec laquelle il est possible d'apporter des modifications à votre application grâce au JSX de React par rapport au développement Android natif et au moche XML.
 
-## Demo
+## Démo
 
 ![Utimer Demo](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1662559396/radanfolio/projects/utimer/utimer-demo_urkgct.gif)
 
 ## The process
 
-Utimer is a simple app, all it's logic is inside the a single component: [Main.js](https://github.com/radandevist/utimer/blob/master/src/pages/main/Main.js), and it doesn't use any native API inside it. All I've done is just to do some number calculations and use Javascript's timer funcions: `setInterval` and `clearInterval` to update some states which would be used for the counter's screening.
+Utimer est une application simple, toute sa logique est à l'intérieur d'un seul composant: [Main.js](https://github.com/radandevist/utimer/blob/master/src/pages/main/Main.js), et il n'utilise aucune API native à l'intérieur. Tout ce que j'ai fait, c'est juste faire quelques calculs de nombres et utiliser les fonctions de minuterie de Javascript: `setInterval` et `clearInterval` pour mettre à jour certains états qui seraient utilisés pour le filtrage du compteur.
 
-The main challenge was rather how build and animate the counter's progerss ring, as you can see in the previous gif demonstration, with the counter's state value.
+Le défi principal était plutôt de savoir comment construire et animer l'anneau de progression du compteur, comme vous pouvez le voir dans la démonstration gif précédente, avec la valeur d'état du compteur.
 
-To do so, I used to draw an SVG circle's stroke and managed to link the style property `strokeDashOffset` of that SVG with the remaining seconds of the counter count. You can see what I'm talkin about in the `<ProgressRing />` component [here](https://github.com/radandevist/utimer/blob/master/src/components/ProgressRing.js).
+Pour ce faire, j'avais l'habitude de dessiner le trait d'un cercle SVG et j'ai réussi à lier la propriété de style `strokeDashOffset` de ce SVG avec les secondes restantes du compteur. Vous pouvez voir de quoi je parle dans le composant `<ProgressRing />` [ici](https://github.com/radandevist/utimer/blob/master/src/components/ProgressRing.js).
 
-## Improvements
+## Améliorations
 
-A lot of features could be added to this app, such as, to mention a few:
+De nombreuses fonctionnalités pourraient être ajoutées à cette application, telles que, pour n'en citer que quelques-unes:
 
-- persistence of the counter state  and ability to run on the background, because sometimes, the user needs to check other apps and don't want to lose the actual timer count.
+- persistance de l'état du compteur et capacité à s'exécuter en arrière-plan, car parfois, l'utilisateur doit vérifier d'autres applications et ne veut pas perdre le décompte réel du minuteur.
 
-- Notification on timer count completion, to get the user up to date with his count.
+- Notification à la fin du décompte du minuteur, pour que l'utilisateur soit informé de son décompte.
 
-## Finally
+## Finalement
 
-I don't see anything more to say than It was a fun project and feel free to inspect the code and bring your remarks if you want to. 😉
+Je ne vois rien de plus à dire que c'était un projet amusant et n'hésitez pas à inspecter le code et à apporter vos remarques si vous le souhaitez. 😉
