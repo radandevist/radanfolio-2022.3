@@ -46,7 +46,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio | {project.name}</title>
+        <title>{`Radanfolio | ${project.name}`}</title>
 
         {/* opengraph */}
         <meta property="og:title" content={project.name} />

@@ -24,7 +24,7 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
   return (
     <AnimatedPage>
       <Head>
-        <title>RadanFolio | {t("common:projects")}</title>
+        <title>{`RadanFolio | ${t("common:projects")}`}</title>
 
         {/* opengraph */}
         <meta property="og:title" content={t("projects:openGraph.title")} />

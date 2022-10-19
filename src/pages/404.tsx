@@ -14,7 +14,7 @@ const Page404 = () => {
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio | {t("common:pageNotFound")}</title>
+        <title>{`Radanfolio | ${t("common:pageNotFound")}`}</title>
       </Head>
       <div className="relative h-[26rem]">
         <div className="notfound absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[32.5rem] w-full text-center leading-[1.4]">

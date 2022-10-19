@@ -26,7 +26,7 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => {
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio | {t("common:posts")}</title>
+        <title>{`Radanfolio | ${t("common:posts")}`}</title>
 
         {/* opengraph */}
         <meta property="og:title" content={t("blog:openGraph.title")} />

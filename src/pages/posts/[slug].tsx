@@ -42,7 +42,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio | {post.title}</title>
+        <title>{`Radanfolio | ${post.title}`}</title>
 
         {/* opengraph */}
         <meta property="og:title" content={post.title} />
