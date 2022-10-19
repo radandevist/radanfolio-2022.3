@@ -6,5 +6,9 @@
   },
   "theBio": "La Bio.",
   "downloadMyResume": "Télécharger mon CV",
-  "skillsInclude": "Compétences incluent"
+  "skillsInclude": "Compétences incluent",
+  "openGraph": {
+    "title": "Accueil Radanfolio",
+    "description": "Développeur Full Stack React et Node, conçevant des applications évolutives"
+  }
 }

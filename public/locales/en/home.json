@@ -6,5 +6,9 @@
   },
   "theBio": "The Bio.",
   "downloadMyResume": "Download my resume",
-  "skillsInclude": "Skills include"
+  "skillsInclude": "Skills include",
+  "openGraph": {
+    "title": "Radanfolio Home",
+    "description": "Full-stack React and Node developer, building large scale apps"
+  }
 }

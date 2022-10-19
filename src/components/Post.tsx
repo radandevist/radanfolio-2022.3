@@ -10,7 +10,7 @@ export type PostComponentProps = {
 };
 
 export const PostComponent: FC<PostComponentProps> = ({ post }) => (
-  <Link href={`/blog/${post.slug}`} /*  state={post} */>
+  <Link href={`/posts/${post.slug}`} /*  state={post} */>
     <article className="w-full min-h-64 cursor-pointer">
       <figure className="">
         <div id="imageWrapper" className="h-full w-full">

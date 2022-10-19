@@ -1,4 +1,4 @@
-import { Post } from "../pages/blog/[slug]";
+import { Post } from "../pages/posts/[slug]";
 import { BlogIndexPost } from "../types/post";
 
 export const formatPostFrontmatter = (frontMatter: Record<string, any>): BlogIndexPost => {

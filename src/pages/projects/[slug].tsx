@@ -46,7 +46,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio Project | {project.name}</title>
+        <title>Radanfolio | {project.name}</title>
 
         {/* opengraph */}
         <meta property="og:title" content={project.name} />
@@ -145,7 +145,7 @@ export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams>
   return {
     props: {
       project,
-      ...(await serverSideTranslations("en", ["common", "blog"], null, locales)),
+      ...(await serverSideTranslations("en", ["common", "projects"], null, locales)),
     },
   };
 };

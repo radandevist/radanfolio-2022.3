@@ -42,7 +42,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio Blog | {post.title}</title>
+        <title>Radanfolio | {post.title}</title>
 
         {/* opengraph */}
         <meta property="og:title" content={post.title} />
@@ -50,9 +50,9 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
         <meta property="og:url" content="radanfolio.vercel.app" />
         <meta
           property="og:description"
-          content={post.excerpt || `A blog post by ${post.author}`} />
-        <meta property="og:type" content=""
+          content={post.excerpt || `A blog post by ${post.author}`}
         />
+        <meta property="og:type" content="" />
         <meta
           property="og:image"
           // eslint-disable-next-line max-len

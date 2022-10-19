@@ -10,6 +10,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GENERATED_FOLDER_PATH, PROJECTS_FRONT_MATTERS_FOLDER_NAME } from "../../constants";
 import path from "path";
 import { getJSONFileData } from "../../utils/fsUtils";
+import { useTranslation } from "next-i18next";
 
 type ProjectsProps = {
   projects: ProjectIndex[];
@@ -18,22 +19,22 @@ type ProjectsProps = {
 
 const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
   const allProjects = projects;
-  // const featuredProjects = allProjects.filter(project => project.featured === true);
+  const { t } = useTranslation();
 
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio Projects</title>
+        <title>RadanFolio | {t("common:projects")}</title>
 
         {/* opengraph */}
-        <meta property="og:title" content="Radanfolio Projects" />
+        <meta property="og:title" content={t("projects:openGraph.title")} />
         <meta property="og:site_name" content="radanfolio" />
         <meta property="og:url" content="radanfolio.vercel.app" />
         <meta
           property="og:description"
-          content="A collection of projects I've done." />
-        <meta property="og:type" content=""
+          content={t("projects:openGraph.description")}
         />
+        <meta property="og:type" content="" />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
@@ -43,7 +44,7 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
       </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">The Projects.</h2>
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">{t("projects:theProjects")}</h2>
         </div>
         <section className="mxw-sm grid gap-6 grid-cols-1 sm:grid-cols-2 pb-12">
           {featuredProjects && featuredProjects.slice(0,2).map((project) => (
@@ -79,7 +80,7 @@ export const getStaticProps: GetStaticProps<ProjectsProps> = async ({ locale, lo
       ),
       ...(await serverSideTranslations(
         locale!,
-        ["common", "blog"],
+        ["common", "projects"],
         null,
         locales
       ))

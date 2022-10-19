@@ -12,6 +12,7 @@ import { BlogIndexPost } from "../../types/post";
 import { getJSONFileData } from "../../utils/fsUtils";
 import path from "path";
 import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FOLDER_NAME } from "../../constants";
+import { useTranslation } from "next-i18next";
 
 export type BlogProps = {
   posts: BlogIndexPost[];
@@ -19,33 +20,37 @@ export type BlogProps = {
   featuredPosts: BlogIndexPost[];
 };
 
-const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => (
-  <AnimatedPage>
-    <Head>
-      <title>Radanfolio Blog</title>
+const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => {
+  const { t } = useTranslation();
 
-      {/* opengraph */}
-      <meta property="og:title" content="Radanfolio Blog" />
-      <meta property="og:site_name" content="radanfolio" />
-      <meta property="og:url" content="radanfolio.vercel.app" />
-      <meta
-        property="og:description"
-        content="A place where I share what I learned through my journey." />
-      <meta property="og:type" content=""
-      />
-      <meta
-        property="og:image"
-        content={getCloudinaryOpenGraphImage(
-          // eslint-disable-next-line max-len
-          "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
-        )}
-      />
-    </Head>
-    <Hero post={heroPost}/>
-    <Featured posts={featuredPosts} />
-    <Feed posts={posts}/>
-  </AnimatedPage>
-);
+  return (
+    <AnimatedPage>
+      <Head>
+        <title>Radanfolio | {t("common:posts")}</title>
+
+        {/* opengraph */}
+        <meta property="og:title" content={t("blog:openGraph.title")} />
+        <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta
+          property="og:description"
+          content={t("blog:openGraph.description")}
+        />
+        <meta property="og:type" content="" />
+        <meta
+          property="og:image"
+          content={getCloudinaryOpenGraphImage(
+            // eslint-disable-next-line max-len
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
+          )}
+        />
+      </Head>
+      <Hero post={heroPost}/>
+      <Featured posts={featuredPosts} />
+      <Feed posts={posts}/>
+    </AnimatedPage>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale, locales }) => {
   const { posts }: { posts: BlogIndexPost[] } = getJSONFileData(

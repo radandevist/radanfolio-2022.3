@@ -23,7 +23,7 @@ export const Navbar = () => {
     },
     {
       name: t("common:posts"),
-      route: "/blog",
+      route: "/posts",
     },
   ];
 

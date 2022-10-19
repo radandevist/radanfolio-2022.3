@@ -6,5 +6,10 @@
   },
   "theBio": "Ny Bio.",
   "downloadMyResume": "Haka ny CV ako",
-  "skillsInclude": "Compétences anisany"
+  "skillsInclude": "Compétences anisany",
+  "openGraph": {
+    "title": "Accueil Radanfolio",
+    
+    "description": "Développeur Full Stack React sy Node, mamorona applications mora havaozina"
+  }
 }
