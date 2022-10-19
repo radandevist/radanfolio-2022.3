@@ -9,7 +9,7 @@ import { useTranslation } from "next-i18next";
 
 export const Navbar = () => {
   const router = useRouter();
-  const { toggleTheme, theme } = useTheme(); // ! TODO: The problem with hydration comes from here
+  const { toggleTheme, theme } = useTheme();
   const { t } = useTranslation();
 
   const links = [
@@ -40,7 +40,8 @@ export const Navbar = () => {
               href={link.route}
               className={router.pathname === link.route
                 ? "p-1 text-brand1-500 border-2 border-transparent border-b-brand1-500 text-sm md:text-md lg:text-lg"
-                : "p-1 hover:text-brand1-500 border-2 border-transparent hover:border-b-brand1-500 duration-300 text-sm md:text-md lg:text-lg"}>
+                : "p-1 hover:text-brand1-500 border-2 border-transparent hover:border-b-brand1-500 duration-300 text-sm md:text-md lg:text-lg"}
+            >
               {link.name}
             </Link>
           ))}

@@ -23,10 +23,10 @@ const Home: NextPage = () => {
       <Head>
         <title>Radanfolio | Home &mdash; ANDRIANARISOA Daniel aka Radan Devist</title>
         {/* opengraph */}
-        <meta property="og:title" content="Radanfolio Home" />
+        <meta property="og:title" content={t("common:openGraph.title")} />
         <meta property="og:site_name" content="radanfolio" />
         <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:description" content="Full-stack react and Node developer, building large scale apps." />
+        <meta property="og:description" content={t("common:openGraph.description")} />
         <meta property="og:type" content="" />
         {/* <meta property="og:image" content="https://res.cloudinary.com/dhwkzyl32/image/upload/c_limit,h_630,w_1200/v1660292817/radanfolio/home_opengraph_xhclzs.jpg" /> */}
         <meta
