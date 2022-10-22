@@ -41,6 +41,39 @@ module.exports = {
           "900": "#000000"
         },
       },
+      animation: {
+        "spin-slow": "spin 4s linear infinite",
+        showMenu: "menuIn 0.3s ease-in-out",
+        hideMenu: "menuOut 0.3s ease-in-out",
+        fadeIn: "twFadeIn 0.3s ease-in-out",
+        fadeOut: "twFadeOut 0.3s ease-in-out",
+      },
+      keyframes: {
+        menuIn: {
+          from: { right: "-130%" },
+          to: { right: "0%" },
+        },
+        menuOut: {
+          from: { right: "0%" },
+          to: { right: "-130%" },
+        },
+        // menuIn: {
+        //   from: { "margin-left": "-130%" },
+        //   to: { "margin-left": "0%" },
+        // },
+        // menuOut: {
+        //   from: { "margin-left": "0%" },
+        //   to: { "margin-left": "-130%" },
+        // },
+        twFadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 0.5 },
+        },
+        twFadeOut: {
+          from: { opacity: 0.5 },
+          to: { opacity: 0 },
+        },
+      },
     },
   },
   plugins: [],
