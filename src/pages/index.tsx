@@ -39,8 +39,8 @@ const Home: NextPage = () => {
           <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">{t("home:theBio")}</h2>
         </div>
         <section className="animate animate__animated animate__fadeIn mxw-sm">
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-5">
-            <div className="sm:col-span-1">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-6">
+            <div className="sm:col-span-2">
               {/* <img alt="profile_pic" className="h-full w-full 4 object-cover rounded-lg shrink-0" src={info.avatar} /> */}
               <Image
                 height={1032}

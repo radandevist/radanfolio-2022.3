@@ -38,7 +38,7 @@ export const Navbar = () => {
             <Image width={1181} height={1181} src="/devist-logo-light.png" alt="devist logo" />
           </div>
         </div>
-        <div className="space-x-1 md:space-x-4">   
+        <div className="hidden md:block space-x-1 md:space-x-4">   
           {links && links.map((link) => (
             <Link
               key={link.name}
@@ -57,11 +57,11 @@ export const Navbar = () => {
           />
         </div>
         {/* Hamburger menu icon */}
-        {/* <div className="inline-flex md:hidden cursor-pointer">
+        <div className="inline-flex md:hidden cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-        </div> */}
+        </div>
       </nav>
     </div>
   );
