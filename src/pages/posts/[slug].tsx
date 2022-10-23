@@ -146,7 +146,7 @@ export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = asy
   return {
     props: {
       post,
-      ...(await serverSideTranslations("en", ["common", "blog"], null, locales)),
+      ...(await serverSideTranslations(locale!, ["common", "blog"], null, locales)),
     }
   };
 };

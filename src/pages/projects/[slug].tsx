@@ -145,7 +145,7 @@ export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams>
   return {
     props: {
       project,
-      ...(await serverSideTranslations("en", ["common", "projects"], null, locales)),
+      ...(await serverSideTranslations(locale!, ["common", "projects"], null, locales)),
     },
   };
 };

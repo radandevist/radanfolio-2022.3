@@ -1,11 +1,13 @@
 {
-  "home": "Accueil",
+  "home": "Fandraisana",
   "projects": "Tetikasa",
   "blog": "Blog",
   "posts": "Lahatsoratra",
   "builtFrom": "Ity portfolio ity dia natsangana avy amin'ny maodely ana portfolio maimaim-poana nataon'i Chris Hansen (<1>Hyggedev</1>): <2>Forkeo</2>",
   "customizedBy": "Fanamboarana sy fampidirana endri-javatra vaovao nataon'i Radan Devist ( Izaho )",
   "craftedWithLove": "Noforonina am-<heartIcon /> ary Next.js kely",
-  "pageNotFound": "Pejy tsy misy",
-  "sorryPageNotFound": "Miala tsiny fa tsy misy ny pejy tadiavinao, nesorina. niova anarana na tsy misy vonjimaika"
+  "pageNotFound": "Oay! Pejy tsy misy",
+  "sorryPageNotFound": "Miala tsiny fa tsy misy ny pejy tadiavinao.<1/>Mety nofanfana, niova anarana na nesorina vonjimaika",
+  "goToHomePage": "Andeha amin'ny pejy fandraisana",
+  "orGoToPreviousPage": "Na, Hiverina eo amin'ny pejy teo aloha"
 }

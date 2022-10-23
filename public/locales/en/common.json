@@ -6,6 +6,8 @@
   "builtFrom": "This portfolio is built from Chris Hansen's ( <1>Hyggedev</1> ) free portfolio template: <2>Fork it</2>",
   "customizedBy": "Customization and addition of new features done by me ( Radan Devist )",
   "craftedWithLove": "Crafted wit <heartIcon /> and a little Next.js",
-  "pageNotFound": "Page not found",
-  "sorryPageNotFound": "Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable"
+  "pageNotFound": "Oops! Page not found",
+  "sorryPageNotFound": "Sorry but the page you are looking for does not exist.<1/>It could have been removed, changed name or is temporarily unavailable",
+  "goToHomePage": "Go to home page",
+  "orGoToPreviousPage": "Or, Go back to previous page"
 }
