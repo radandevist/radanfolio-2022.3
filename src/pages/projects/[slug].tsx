@@ -14,6 +14,7 @@ import path from "path";
 import fs from "fs";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { AnimatedPage } from "../../components/AnimatedPage";
+import { useTranslation } from "next-i18next";
 
 const ZProject = z.object({
   // id: z.string(),
@@ -41,6 +42,7 @@ export type ProjectViewProps = {
 const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project } }) => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
   const isLarge = useMediaQuery("(min-width: 1024px)");
+  const { t } = useTranslation();
 
   return (
     <AnimatedPage>
@@ -95,7 +97,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
                 className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1
                   border-2 border-transparent hover:border-b-brand1-500 duration-200"
               >
-                Visit Project
+                {t("projects:visitProject")}
               </a>
             )}
             <a
@@ -156,15 +158,8 @@ export const getStaticPaths: GetStaticPaths<ProjectViewParams> = async ({ locale
 
   slugs.forEach(slug => {
     locales?.forEach(locale => {
-      const fullPath = path.join(
-        process.cwd(),
-        PROJECTS_FOLDER,
-        slug,
-        `${locale}.mdx`
-      );
-      if (fs.existsSync(fullPath)) {
-        paths.push({ params: { slug }, locale });
-      };
+      const fullPath = path.join(process.cwd(), PROJECTS_FOLDER, slug, `${locale}.mdx`);
+      if (fs.existsSync(fullPath)) paths.push({ params: { slug }, locale });
     });
   });
 
