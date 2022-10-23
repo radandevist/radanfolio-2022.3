@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import NextLink, { LinkProps as InternalLinkProps } from "next/link";
 import { FC } from "react";
 

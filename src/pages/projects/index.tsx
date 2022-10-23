@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { GetStaticProps, NextPage } from "next";
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { ProjectComponent } from "../../components/Project";
@@ -38,20 +37,26 @@ const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
+            // eslint-disable-next-line max-len
             "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
           )}
         />
       </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">{t("projects:theProjects")}</h2>
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">
+            {t("projects:theProjects")}
+          </h2>
         </div>
         <section className="mxw-sm grid gap-6 grid-cols-1 sm:grid-cols-2 pb-12">
           {featuredProjects && featuredProjects.slice(0,2).map((project) => (
             <ProjectComponent key={project.id} project={project} />
           ))}
         </section>
-        <section className="mxw-sm grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-12">
+        <section
+          className="mxw-sm grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+            pb-12"
+        >
           {allProjects && allProjects.map((project) => (
             <ProjectComponent key={project.id} project={project}/>
           ))}
@@ -78,12 +83,7 @@ export const getStaticProps: GetStaticProps<ProjectsProps> = async ({ locale, lo
         projects.filter(project => project.featured === true),
         2
       ),
-      ...(await serverSideTranslations(
-        locale!,
-        ["common", "projects"],
-        null,
-        locales
-      ))
+      ...(await serverSideTranslations(locale!, ["common", "projects"], null, locales))
     },
   };
 };

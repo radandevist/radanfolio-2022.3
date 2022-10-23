@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
 import { useTheme } from "../contexts/theme";
@@ -40,25 +39,29 @@ export const MobileNav: FC<Props> = ({ links, toggle, visible }) => {
   return (
     <>
       <div className="absolute top-0 left-0 bottom-0">
-        <nav className={`fixed w-full h-full z-50 transition-all duration-300 ${visible ? "visible" : "invisible"}`}>
+        <nav
+          className={`fixed w-full h-full z-50
+            transition-all duration-300 ${visible ? "visible" : "invisible"}`}
+        >
           {/* Overlay */}
           <div
             onClick={toggle}
-            className={`fixed bg-black opacity-50 w-full h-full ${visible ? "animate-fadeIn" : "animate-fadeOut"}`}
+            className={`fixed bg-black opacity-50 w-full h-full
+              ${visible ? "animate-fadeIn" : "animate-fadeOut"}`}
           />
 
           {/* Menu container */}
-          <div className={`pt-2 px-4 fixed right-0 w-[90%] max-w-[70%] h-full bg-slate-100 dark:bg-brand2 overflow-y-scroll flex flex-col overscroll-y-contain ${visible ? "animate-showMenu" : "animate-hideMenu"}`}>
+          <div
+            className={`pt-2 px-4 fixed right-0 w-[90%] max-w-[70%] h-full
+            bg-slate-100 dark:bg-brand2 overflow-y-scroll flex flex-col overscroll-y-contain
+              ${visible ? "animate-showMenu" : "animate-hideMenu"}`}
+          >
             {links.map((link) => (
               <Link
                 key={link.name}
                 href={link.route}
-                // className={`p-1 text-sm md:text-md lg:text-lg ${
-                //   router.pathname === link.route
-                //     ? "text-brand1-500 border-2 border-transparent border-b-brand1-500 "
-                //     : "hover:text-brand1-500 border-2 border-transparent hover:border-b-brand1-500 duration-300"
-                // }`}
-                className={`text-center py-2 ${router.pathname === link.route ? "text-brand1-500" : ""}`}
+                className={`text-center py-2
+                  ${router.pathname === link.route ? "text-brand1-500" : ""}`}
               >
                 {link.name}
               </Link>

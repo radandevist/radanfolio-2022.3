@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 
-/* eslint-disable max-len */
 const preAbout = {
+  // eslint-disable-next-line max-len
   avatar: "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660190042/radanfolio/profile_pic_imdxvm.jpg",
   name: "Daniel Adrianarisoa",
   email: "radandevist@gmail.com",
@@ -30,9 +30,36 @@ const preAbout = {
     }
   ],
   skills: [
-    "HTML", "CSS", "Javascript", "Typescript", "React.js", "Node.js", "Express.js", "Microsoft Office", "Office computing",  "Responsive design", "Bootstrap", "Tailwind", "version control",
-    "github", "Googling", "Duckling", "Test Driven Development", "ESLint", "ESBuild", "Webpack", "Vite.js", "Imkscape", "Linux", "Socket.IO", "WebRTC", "Prisma", "Sequelize", "Mocha.js",
-    "Chai.js", "Sinon.js", "Jest"
+    "HTML",
+    "CSS",
+    "Javascript",
+    "Typescript",
+    "React.js",
+    "Node.js",
+    "Express.js",
+    "Microsoft Office",
+    "Office computing",  "Responsive design",
+    "Bootstrap",
+    "Tailwind",
+    "version control",
+    "github",
+    "Googling",
+    "Duckling",
+    "Test Driven Development",
+    "ESLint",
+    "ESBuild",
+    "Webpack",
+    "Vite.js",
+    "Imkscape",
+    "Linux",
+    "Socket.IO",
+    "WebRTC",
+    "Prisma",
+    "Sequelize",
+    "Mocha.js",
+    "Chai.js",
+    "Sinon.js",
+    "Jest"
   ],
 };
 

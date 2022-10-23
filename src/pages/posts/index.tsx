@@ -70,12 +70,7 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale
         posts.filter(post => post.featured === true),
         2
       ),
-      ...(await serverSideTranslations(
-        locale!,
-        ["common", "blog"],
-        null,
-        locales
-      ))
+      ...(await serverSideTranslations(locale!, ["common", "blog"], null, locales))
     }
   };
 };

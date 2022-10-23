@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { FC } from "react";
 import { ProjectIndex } from "../types/project";
 import { Link } from "./Link";
@@ -14,7 +13,6 @@ export const ProjectComponent: FC<ProjectComponentProps> = ({ project }) => (
     <Link href={`/projects/${project?.slug}`} /* state={project} */>
       <>
         <div className="animate animate__animated animate__fadeIn">
-          {/* <img className="h-56 w-full object-cover rounded-lg" src={project?.cover} alt="project cover image" /> */}
           <Image
             className="h-56 w-full object-cover rounded-lg"
             width={1640}

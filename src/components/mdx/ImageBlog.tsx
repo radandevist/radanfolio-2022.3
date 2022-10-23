@@ -8,8 +8,6 @@ export const ImageBlog: FC<ImgHTMLAttributes<HTMLImageElement>>
     <Image
       alt={alt || "blog image"}
       src={src as string}
-      // height="100%"
-      // width="100%"
       layout="fill"
       className={`custom-img ${className}`}
       {...props}

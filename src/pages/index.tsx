@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -28,10 +27,12 @@ const Home: NextPage = () => {
         <meta property="og:url" content="radanfolio.vercel.app" />
         <meta property="og:description" content={t("home:openGraph.description")} />
         <meta property="og:type" content="" />
-        {/* <meta property="og:image" content="https://res.cloudinary.com/dhwkzyl32/image/upload/c_limit,h_630,w_1200/v1660292817/radanfolio/home_opengraph_xhclzs.jpg" /> */}
         <meta
           property="og:image"
-          content={getCloudinaryOpenGraphImage("https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg")}
+          content={getCloudinaryOpenGraphImage(
+            // eslint-disable-next-line max-len
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg"
+          )}
         />
         <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" />
       </Head>
@@ -42,7 +43,6 @@ const Home: NextPage = () => {
         <section className="animate animate__animated animate__fadeIn mxw-sm">
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-6">
             <div className="sm:col-span-2">
-              {/* <img alt="profile_pic" className="h-full w-full 4 object-cover rounded-lg shrink-0" src={info.avatar} /> */}
               <Image
                 height={1032}
                 width={774}
@@ -58,10 +58,25 @@ const Home: NextPage = () => {
               <p className="text-2xl font-light">{info.bioPreface}</p>
               <div className="flex items-center flex-wrap justify-start">
                 {info.socials && info.socials.map((social) => (
-                  <a key={social.name} target="_blank" rel="noreferrer" href={social.url} className="inline-block my-1 bg-brand1-500 text-white font-semibold py-2 px-3 mr-4">{social?.name}</a>
+                  <a
+                    key={social.name}
+                    target="_blank"
+                    rel="noreferrer"
+                    href={social.url}
+                    className="inline-block my-1 bg-brand1-500 text-white
+                      font-semibold py-2 px-3 mr-4">
+                    {social?.name}
+                  </a>
                 ))}
               </div>
-              <a rel="noreferrer" href={info.resumeUrl} className="block border border-brand1-500 bo text-brand1-500 font-semibold py-2 px-3">{t("home:downloadMyResume")}</a>
+              <a
+                rel="noreferrer"
+                href={info.resumeUrl}
+                className="block border border-brand1-500
+                text-brand1-500 font-semibold py-2 px-3"
+              >
+                {t("home:downloadMyResume")}
+              </a>
             </div>
           </div>
         </section>  
@@ -73,7 +88,13 @@ const Home: NextPage = () => {
           <p className="text-2xl md:text-3xl my-12">{t("home:skillsInclude")}:</p>
           <div className="flex items-center flex-wrap">
             {about?.skills?.map((skill) => (
-              <span key={skill?.id} className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 dark:shadow-brand2-400 bg-brand1-500 text-white font-semibold">{skill?.name}</span>
+              <span
+                key={skill?.id}
+                className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 dark:shadow-brand2-400
+                bg-brand1-500 text-white font-semibold"
+              >
+                {skill?.name}
+              </span>
             ))}
           </div>
           {/* <p className="text-2xl md:text-3xl py-6">{info.bioMain}</p> */}
@@ -88,6 +109,5 @@ export default Home;
 export const getStaticProps: GetStaticProps = async ({ locale, locales }) => ({
   props: {
     ...(await serverSideTranslations(locale!, ["common", "home"], null, locales)),
-    // Will be passed to the page component as props
   },
 });

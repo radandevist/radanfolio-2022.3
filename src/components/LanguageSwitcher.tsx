@@ -28,13 +28,13 @@ export const LanguageSwitcher = () => {
   }, [isOpen]);
 
   return (
-    // eslint-disable-next-line max-len
+    
     <div ref={node} className="relative inline-block text-left text-sm md:text-md lg:text-lg">
       <button
         type="button"
         onClick={toggleDropdown}
-        // eslint-disable-next-line max-len
-        className="inline-flex w-full justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-brand1"
+        className="inline-flex w-full justify-center rounded-md p-2
+          focus:outline-none focus:ring-2 focus:ring-brand1"
         id="menu-button"
         aria-expanded="true"
         aria-haspopup="true"
@@ -49,8 +49,8 @@ export const LanguageSwitcher = () => {
         >
           <path
             fillRule="evenodd"
-            // eslint-disable-next-line max-len
-            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0
+              111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
             clipRule="evenodd"
           />
         </svg>
@@ -67,8 +67,9 @@ export const LanguageSwitcher = () => {
           To: "transform opacity-0 scale-95"
       --> */}
       <div
-        // eslint-disable-next-line max-len
-        className={`${isOpen ? "" : "hidden"} absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+        className={`${isOpen ? "" : "hidden"} absolute right-0 z-10 mt-2 w-full
+          origin-top-right rounded-md bg-white shadow-lg
+          ring-1 ring-black ring-opacity-5 focus:outline-none`}
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"
