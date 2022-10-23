@@ -1,17 +1,20 @@
 import { useRouter } from "next/router";
 import { Link } from "./Link";
-import Image from "next/image";import { useTheme } from "../contexts/theme";
+import Image from "next/image";
+import { useTheme } from "../contexts/theme";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTranslation } from "next-i18next";
 import { MobileNav } from "./MobileNav";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 export const Navbar = () => {
   const router = useRouter();
   const { toggleTheme } = useTheme();
   const { t } = useTranslation();
   const [isMobileNavVisible, setMobileNavVisibility] = useState(false);
+  const isMedium = useMediaQuery("(min-width: 768px)");
 
   const links = [
     {
@@ -28,9 +31,13 @@ export const Navbar = () => {
     },
   ];
 
-  const toggleMobileNav = () => {
+  const toggleMobileNav = useCallback(() => {
     setMobileNavVisibility(!isMobileNavVisible);
-  };
+  }, [isMobileNavVisible]);
+
+  useEffect(() => {
+    if (isMedium && isMobileNavVisible) toggleMobileNav();
+  }, [isMedium, isMobileNavVisible, toggleMobileNav]);
 
   return (
     <>
