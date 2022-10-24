@@ -1,0 +1,246 @@
+---
+title: Setup a Node-Express template with  Typescript, ESbuild and ESLint
+cover: https://res.cloudinary.com/dhwkzyl32/image/upload/v1666625346/radanfolio/posts/setup-a-node-express-template-with-typescript-esbuild-and-eslint/cover_gjaqft.jpg
+date: 2022-03-20
+topic: Node Template
+
+excerpt: How do we setup a Node boilerplate by leverraging Esbuild and Eslint? Here we go.
+featured: true
+---
+
+This article is a continuation of another post: [Setup a React and Typescript project boilerplate with Vite, TailwindCSS and ESlint](/posts/setup-a-react-and-typescript-project-boilerplate-with-vite-tailwindcss-and-eslint).
+
+In A previous post, we mentioned the necessity of templates in order to quickstart a project with our set of custom preferences, so we made a template for our future react projects.
+
+But React is a front-end only tech we also need  a back-end to make apps work! We need to create a template for the back-ends of our apps and that's what we're going to cover in this post.
+
+**Note:**  While setting up our React template precedenlty, **vite** already did most of the configurations (typescript, hot-refresh while developping, etc) for us. Then we just added some extras like: **ESLint** for code standard plus **TailwindCSS** for styling. Unlike in the react template setup, this one is a little bit handy cause we will configure everything from the bottom-up! Don't panic, thiss post is there to show you all you need to know: just follow along.
+
+## Create a node project
+
+The first thing we need to do is to create a directory to contain all our projects files and initialze it with **yarn** (or **npm**). Below we named that directory **express-template**, but you can choose to name it differently (coca-cola for example 🙃).
+
+```bash:terminal
+mkdir express-template && cd express-template
+yarn init -y
+```
+
+So basically, we created a folder named **express-template**, moved to that directory then initialized it wiht yarn.
+
+We are going to use yarn as node dependency manager by the way. But feel free to use whatever dependency manager you want to. 
+
+## Install the core dependencies
+
+```bash:terminal
+yarn add -D typescript esbuild @types/express && yarn add express
+```
+
+These dependencies are the one which I consider being the pillars of our template. I think most of us are familiar with Typescript and Express, so let's just talk a bit of **ESBuild**.
+
+Vite is yet another javascript bundling  tool like webpack plus it supports typescript compiling built-in directly, but it is way much faster. Remember **Vite**? Well, it is using ESBuild under the hood and that's why it's so fast.
+
+![comparing other bundlers with esbuild](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660288463/radanfolio/posts/setup-a-node-express-template-with-typescript-esbuild-and-eslint/bundlers-comparison_hr6fzf.png)
+
+The reasons behind Esbuild's performance are:
+
+- It is written in go: go compiles directly to machine code thus better interaction with the machine's resources.
+
+- It doesn't do type-checking, it just compiles typescript code. Instead, type-checking is done by our editor (VS Code in my case): editors will highlight any wrong code for us.
+
+## Write some Typescript code
+
+Generally, inside a node project the application's code is written in a `src` directory, to separate them from config or miscelleanous files. It is a way of organize our project's files too.
+
+```bash:terminal
+mkdir src
+```
+
+Under the newly created `src` folder, create a new typescript file: `index.ts` and write in the following code:
+
+```typescript:index.ts
+import express, { Request, Response } from "express"
+
+const app = express()
+const port = 3000
+
+app.get('/', (req: Request, res: Response) => res.send("Hello World!"))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+```
+
+## Configure the Typescript compiler
+
+We're not gonna use the Typescript compiler during build phases but, we still need it for type-checking. Our editor will use it to for code inspection and it is necessary to provide is the correct configuration for our project.
+
+Start by initiating a Typsecript config file:
+
+```bash:terminal
+yarn tsc --init
+```
+
+Notice that a `tsconfig.json` file has bee created with the default configurations enabled inside which are just fine for our use. But still we don't want tsc to emit output files when we'll call it so we should enable the `noEmit` option to true:
+
+```json:tsconfig.json
+"noEmit": true
+```
+
+## Bundle Typescript code with esbuild
+
+At the root folder of our porject, create the file `build.mjs` and inside it, write the following code:
+
+```javascript:build.mjs
+#!/usr/bin/env node
+import { build } from "esbuild";
+import { nodeExternalsPlugin } from "esbuild-node-externals";
+
+const isProd = process.env.NODE_ENV === "production";
+
+build({
+  entryPoints: ["src/index.ts"],
+  outfile: "dist/main.bundle.js",
+  platform: "node",
+  target: "node14",
+  bundle: true,
+  logLevel: isProd ? "info" : "warning",
+  minify: isProd,
+  format: "cjs",
+  plugins: [nodeExternalsPlugin()],
+  sourcemap: !isProd,
+});
+```
+
+Don't forget to install the **esbuild-node-externals** package as dev dependency.
+
+Now if you call `./build.mjs` in terminal from the root directory of the project, the code in our entrypoint file and all the imported files from it will be bundled in `dist/main.bundle.js` except the pacakages defined as externals by the **node externals** plugin.
+
+Once being able to build/bundle our code, let's define some **run-scripts** in our `package.json`:
+
+```json:package.json
+...
+"scripts" : {
+    "start": "node --enable-source-maps dist/main.bundle.js",
+    "build": "./build.mjs",
+},
+...
+```
+
+As their name suggest, these scripts are used to build/bundle and start our app' code. You can notice  the flag `--enable-source-maps` being used in the **start** script: esbuild is also generating sourcemaps alongside the code bundle and sourcemaps helps node to provide stack trace directly to our typescript code instead indicating the ugly bundle javascript code when errors occurs.
+
+## Install and configure ESLint
+
+Eslint is known for for enforcing code standard, this is how to install it and init it: 
+
+```bash:terminal
+yarn add eslint
+yarn eslint --init
+```
+
+The second command above, will prompt us a series of questions about our eslint config preferences. We are not going to dig in further but just choose the config that suits you the most.
+
+Me for example, I choosed to follow the popular **google style guide** with some personal flavors and I ended up with the following `.eslintrc.json` file:
+
+```json:.eslintrc.json
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "ignorePatterns": [
+    "dist",
+    "node_modules"
+  ],
+  "extends": [
+    "google",
+    "plugin:jsdoc/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "import",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "quotes": ["error", "double"],
+    "semi": "off",
+    "@typescript-eslint/semi": ["error"],
+    "indent": ["error", 2],
+    "no-console": "warn",
+    "object-curly-spacing": ["error", "always"],
+    "no-unused-vars": "off",
+    "max-len": ["error", 100],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-member-accessibility": "error",
+    "operator-linebreak": ["error", "before", {
+      "overrides": { "=": "after" }
+    }],
+    "import/order": ["error", {
+      "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+      "newlines-between": "always"
+    }],
+    "require-jsdoc": "off",
+    "valid-jsdoc": "off",
+    "jsdoc/require-jsdoc": ["warn", {
+        "require": {
+          "ClassDeclaration": true,
+          "MethodDefinition": true
+        }
+      }
+    ]
+  }
+}
+```
+
+If you ever choose to follow my settings above, you'll also need to install the corresponding dependencies like so:
+
+```bash:terminal
+yarn add -D eslint-config-google eslint-plugin-import eslint-plugin-jsdoc @typescript-eslint/eslint-plugin @typescript-eslint/parser
+```
+
+Finally, Lint run-script in `package.json`:
+
+```json:package.json
+...
+"scripts": {
+  ...
+  "lint": "eslint 'src/**/*.ts'"
+},
+```
+
+## Enable automatic reloading
+
+Automatic reloading is a must during developement process: we want our changes immediately applyed everytime we save files. Thankfully, the package nodemon is there to help us:
+
+```bash:terminal
+yarn add -D nodemon
+```
+
+Create a `nodemon.json` file and fill it with the below configuration:
+
+```json:nodemon.json
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["src/**/*.{test,spec}.ts"],
+  "exec": "./build.mjs && node --enable-source-maps",
+  "verbose": true
+}
+```
+
+Add a new run-script in `package.json`:
+
+```json:package.json
+...
+"scripts": {
+  ...
+  "dev": "nodemon dist/main.bundle.js" 
+},
+```
+
+Basicaly, what it is doing is executing the command specified in the `exec` option of `nodemon.json` whenever a change is spoted (a file has changes saved) in the `src` folder (`watch` option).
+
+## Finally
+
+Congratulations 🥳!! We just completed a template for our node projects. Our template features fast build time, typescript support and automatic reloading on file change saves plus code standard enforcing thanks to **esbuild**, **nodemon**, and **eslint**. We are finally ready to quickstart every new project ideas that'll com in ou brain without spending much time with configurations and so on. All we will have to do is clone this template and here we go!!
