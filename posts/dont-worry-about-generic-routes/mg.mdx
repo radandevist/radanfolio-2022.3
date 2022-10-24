@@ -1,34 +1,34 @@
 ---
-title: Aza miasa saina amin'ny ny routes géneriques
+title: Aza miasa saina amin'ny routes génériques ao amin'ny REST APIs anao
 cover: https://res.cloudinary.com/dhwkzyl32/image/upload/v1666628937/radanfolio/posts/dont-worry-about-generic-routes/cover_pexels_200_xdfoyx.jpg
 date: 2022-07-30
 topic: Rest API
 
-excerpt: Dealing with REST APIs is a hard job, and in this post, I'll show you why specific route is sometimes better in you API design.
+excerpt: Ny fiatrehana ny REST API dia asa mafy, ary ato amin'ity lahatsoratra ity dia hasehoko anao ny antony mahatonga ny route spécifique ho tsara kokoa indraindray amin'ny famolavolana API anao.
 featured: true
 ---
 
-I decided to create a dev.to clone app with express and react.
+Nanapa-kevitra ny hi-cloner dev.to miaraka amin'ny Express sy React aho.
 
-One of the issues I'm currently facing is integrating REST API responses served by the back-end into my front-end.
+Ny iray amin'ireo olana atrehiko amin'izao fotoana izao dia ny fampidirana ny valintenin'ny REST API atolotry ny back-end amin'ny front-end-ko.
 
-Let's take as an example a dev.to user's profile page. To render it, we need, in addition to the direct information of the user sought, his latest posts and comments.
+Andeha horaisintsika ho ohatra ny pejin'ny mombamomba ny mpampiasa dev.to. Mba hanaovana izany, mila, ankoatry ny fampahalalana mivantana an'ilay mpampiasa nokarohina, ny hafatra sy ny fanehoan-keviny farany.
 
-![Breaking the UI into differrent piece of informations](https://res.cloudinary.com/dhwkzyl32/image/upload/v1666626423/radanfolio/posts/dont-worry-about-generic-routes/webpage-parts_jirtj7.jpg)
+![Fizarana ny user interface araka ny informations misy samihafa](https://res.cloudinary.com/dhwkzyl32/image/upload/v1666626423/radanfolio/posts/dont-worry-about-generic-routes/webpage-parts_jirtj7.jpg)
 
-Basically, you need to request:
+Amin'ny ankapobeny, mila ataonao requête avy:
 
-- A user, which itself contains:
+- Mpampiasa iray, izay ahitana:
   
-  - several posts
+  - toerana maromaro
   
-  - several comments, each of which belongs to their own respective posts
+  - fanehoan-kevitra marobe, izay samy manana ny lahatsorany avy
 
-I initially imagined a system of sequential requests in for-loops, but after reflection, I found it inappropriate because it could jeopardize the viability of our back-end server.
+Tany am-boalohany dia nieritreritra rafitra fangatahana misesy aho ao anaty for loop, saingy rehefa nandinika dia hitako fa tsy mety izany satria mety hampidi-doza ny fahafahan'ny serveur back-end.
 
 
 ```typescript:manyRequests.ts
-// ❌ A very bad idea
+// ❌ Hevitra tena ratsy
 const user = get(`/api/user/${userId}`);
 const posts = get(`/api/posts?userId=${userId}`);
 const comments = get(`/api/comments?userId=${userID}`);
@@ -39,19 +39,19 @@ comments[index].post = commentPost;
 });
 ```
 
-Another solution that came to my mind, is the implementation of a query parser inspired by the way one of the popular existing frameworks does to populate the relationships between entities. And I came across two examples in particular for inspiration:
+Vahaolana iray hafa tonga tao an-tsaiko dia ny fampiharana parser fanontaniana aingam-panahy avy amin'ny fomba iray amin'ireo rafitra malaza efa misy mba hamenoana ny fifandraisana eo amin'ny sampana. Ary nahita ohatra roa manokana aho mba hanentanana ahy:
 
-- one is the loopback farmework: [here](https://loopback.io/doc/en/lb3/Relation-REST-API.html)
+- ny iray dia ny farmework Loopback: [eto](https://loopback.io/doc/en/lb3/Relation-REST-API.html)
 
-- and the other is the Strapi CMS: [here](https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.html#relation-media-fields)
+- ary ny anakiray hafa dia ny CMS Strapi: [eto](https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.html#relation-media-fields)
 
-However, it takes a lot of work and is it really worth it?
+Mila asa be anefa izany ary tena mendrika tokoa ve izany?
 
-![Is it really worth it?](https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif)
+![tena mendrika tokoa ve izany?](https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif)
 
-Finally, I opted for the implementation of an endpoint specifically designed for the task: `GET /api/users/:username/profilepage` which has the advantage of satisfying us in a single API call and without additional headache.
+Farany, nisafidy ny hametraka teboka iray natao manokana ho an'ny asa aho: `GET /api/users/:username/profilepage` izay manana tombony amin'ny fanomezana fahafaham-po antsika amin'ny antso API tokana ary tsy misy aretin'andoha fanampiny.
 
-This endpoint will return a response of type:
+Ity endpoint ity dia hamerina valiny toy izao:
 
 ```typescript:profilepage.ts
 interface ProfilePage {
@@ -66,4 +66,4 @@ interface ProfilePage {
 }
 ```
 
-So, why bother with generic routes?
+Noho izany, Ka maninona no hisahirana amin'ny routes générique?
