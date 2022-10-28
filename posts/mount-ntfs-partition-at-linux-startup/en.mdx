@@ -1,5 +1,5 @@
 ---
-title: How to mount NTFS partitions at stratup on Linux
+title: How to automatically mount NTFS partitions at stratup on Linux
 cover: https://res.cloudinary.com/dhwkzyl32/image/upload/v1666625579/radanfolio/posts/mount-ntfs-partitions/cover_tly4u5.jpg
 date: 2021-09-15
 topic: Linux Partition
@@ -15,13 +15,13 @@ I have both linux and windows (dual boot) on my machine so the disk is partition
 
 Each time I boot up onto Linux and i want to explore my other partitions, I have to mount them first. But actually, we can make them mount automatically at startup.
 
-open the file `/etc/fstab` with your prefered editor:
+Open the file `/etc/fstab` with your prefered editor:
 
 ```bash:terminal
 sudo nano /etc/fstab
 ```
 
-you will see something like this (it may slightly vary acccording to the distro):
+You will see something like this (it may slightly vary acccording to the distro):
 
 ```bash:/etc/fstab
 # /etc/fstab: static file system information.
@@ -42,7 +42,7 @@ sudo blkid
 
 A list of your machine's devices will show up with some of their informations including their UUID's. Select your desired UUID and return back to `/etc/fstab` file.
 
-at the end of the file amend the line:
+At the end of the file amend the line:
 
 ```bash:/etc/fstab
 UUID=YOUR_UUID /path/to/mount/point  auto,nofail,uid=1000,gid=1000,utf8,umask=022,defaults 0 0

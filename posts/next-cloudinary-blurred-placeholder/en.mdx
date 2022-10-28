@@ -1,5 +1,5 @@
 ---
-title: How to make a blurred placeholder for next.js image with cloudinary
+title: How to make a blurred placeholder for next.js Image component with Cloudinary
 cover: https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1661448247/radanfolio/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary/cover_ryrfey.jpg
 date: 2022-08-25
 topic: Next.js Image
@@ -12,15 +12,15 @@ When building my blog, I noticed that blank space would be displayed before the 
 
 To improve the user experience of media content on the website it is better to show a blurred image before the image supplied in the url prop loads. Just like any blog site out ther by the way!
 
-To achieve that, Next image has a handy feature which is the `placeholder` prop and specifically the option it has: `"blur"`.
+To achieve that, Next Image has a handy feature which is the `placeholder` prop and specifically the option it has: `"blur"`.
 
 So we end up getting something like this:
 
-![](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1661446615/radanfolio/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary/with-blur_dpxnoe.gif)
+![Image component with a blurred placeholder](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1661446615/radanfolio/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary/with-blur_dpxnoe.gif)
 
 instead of something like this:
 
-![](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1661446615/radanfolio/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary/no-blur_vvj87q.gif)
+![Image component without a blurred placeholder](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1661446615/radanfolio/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary/no-blur_vvj87q.gif)
 
 ## Getting images from cloudinary
 
@@ -34,7 +34,7 @@ https://res.cloudinary.com/<CLOUDINARY_ID>/image/upload/<FILTER>/v1660292817/img
 
 As you can see, `<FILTER>` is where we place the filtering parameters of our images. And you can play with filtering options via the cloudinary app itself in its dashboard:
 
-![](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1661446616/radanfolio/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary/Peek_2022-08-25_19-33_l0aows.gif)
+![Cloudinary dashboard for manipulating images](https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1661446616/radanfolio/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary/Peek_2022-08-25_19-33_l0aows.gif)
 
 To form a thumbnail of a cloudinary image we need the filter to be set as `"c_thumb,w_200"` and the final url will look like:
 
@@ -69,4 +69,4 @@ Then to get a thumbnail we made the following function:
 export const getCloudinaryThumbnail = (url: string) => setFilter(url, "c_thumb,w_200");
 ```
 
-And Voila! The magic of next image blurred placeholders and cloudinary have been combined into an effective way of making our app perform in a more pleasing manner for your end user - one in which they are less likely to be left gazing at areas of blank space in the initial moments of loading your app.
+And Voilà! The magic of next image blurred placeholders and cloudinary have been combined into an effective way of making our app perform in a more pleasing manner for your end user - one in which they are less likely to be left gazing at areas of blank space in the initial moments of loading your app.
