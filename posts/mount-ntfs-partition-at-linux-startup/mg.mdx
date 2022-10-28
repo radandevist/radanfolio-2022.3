@@ -1,27 +1,27 @@
 ---
-title: How to mount NTFS partitions at stratup on Linux
+title: Ahoana ny mi-monter Partition NTFS izy ho azy eo amin'ny Boot amin'ny Linux
 cover: https://res.cloudinary.com/dhwkzyl32/image/upload/v1666625579/radanfolio/posts/mount-ntfs-partitions/cover_tly4u5.jpg
 date: 2021-09-15
 topic: Linux Partition
 
-excerpt: The beauty of Linux is that you have full control over your structure and mounting partitions does not make exception to that rule.
+excerpt: Ny hatsaran'ny Linux dia ny fifehezanao tanteraka ny rafitra ao aminy ary ny montage ny partitions dia tsy maningana amin'izany fitsipika izany.
 featured: false
 ---
 
-I have both linux and windows (dual boot) on my machine so the disk is partitioned in three:
-- the Linux OS,
-- Windows 10, and
-- a partition for sharing files between the two OS (because we can't browse linux file system from windows).
+Samy manana Linux sy Windows (dual boot) installé amin'ny PC-ko aho, ka mizara telo ny disque dur:
+- ny OS Linux,
+- Windows 10, ary
+- partition hizarana rakitra eo amin'ireo OS roa samihafa teo aloha ireo (satria tsy afaka mijery ny partition Linux avy amin'ny Windows isika).
 
-Each time I boot up onto Linux and i want to explore my other partitions, I have to mount them first. But actually, we can make them mount automatically at startup.
+Isaky ny miditra ao amin'ny Linux aho ary te hijery ny fizarako hafa dia tsy maintsy mi-monter azy ireo aloha aho. Saingy raha ny marina dia azontsika atao ny mi-monter azy ireo ho azy eo amin'ny boot na démarrage.
 
-open the file `/etc/fstab` with your prefered editor:
+Sokafy ny fichier `/etc/fstab` miaraka amin'ny éditeur izay tianao:
 
 ```bash:terminal
 sudo nano /etc/fstab
 ```
 
-you will see something like this (it may slightly vary acccording to the distro):
+Hahita zavatra toy izao ianao (mety hiova kely izany arakaraka ny distro):
 
 ```bash:/etc/fstab
 # /etc/fstab: static file system information.
@@ -34,24 +34,24 @@ you will see something like this (it may slightly vary acccording to the distro)
 UUID=b57600bf-231d-4da2-bd44-e392eag85627 /              ext4    defaults,noatime 0 1
 ```
 
-As you can see you will need the UUID of the partition you wanna auto-mount. To get it just run in a terminal:
+Araka ny hitanao dia mila ny UUID amin'ny fizarazarana tianao halefa ianao. Mba hahazoana izany, mandehana fotsiny amin'ny terminal:
 
 ```bash:terminal
 sudo blkid
 ```
 
-A list of your machine's devices will show up with some of their informations including their UUID's. Select your desired UUID and return back to `/etc/fstab` file.
+Ny lisitr'ireo fitaovana ao amin'ny masininao dia haseho miaraka amin'ny mombamomba azy, anisan'izany ny UUID-ny. Safidio ny UUID tianao ary avereno any amin'ny fichier `/etc/fstab`.
 
-at the end of the file amend the line:
+Any amin'ny faran'ny fichier ovay ny ligne:
 
 ```bash:/etc/fstab
 UUID=YOUR_UUID /path/to/mount/point  auto,nofail,uid=1000,gid=1000,utf8,umask=022,defaults 0 0
 ```
 
-Don't forget to replace uuid, path to mount point and the partittion file system.
+Aza adino ny manolo uuid, mount point path ary ny partition filesystem.
 
-### Information about ntfs partition file system:
+### Tsara ho hay momba ny système de fichiers NTFS:
 
-Personnally I wanted to mount a partition that can be explored from windows i.e. an <span class="text-brand1">ntfs</span> partition. On linux the corresponding key for mounting that type of file system is `ntfs-3g`. Youll' need the eponym package installed on your Linux OS. It's already preinstalled on almost all Linux distributions but check it however in case you removed it unintentionally. I strugled a little bit finding that out the first time I used Arch so I think it may help someone to mention it.
+Izaho manokana dia te-hametraka fizarazarana azo jerena avy amin'ny Windows, izany hoe fizaràna <span class="text-brand1">ntfs</span>. Amin'ny Linux, ny lakile mifanaraka amin'ny fametrahana an'ity karazana système de fichiers ity ity dia ny `ntfs-3g`. Ny package mitovy anarana amin'izany no ilaintsika ao amin'ny système Linux antsika raha izany. Efa pré-installé amin'ny ankamaroan'ny distributions Linux izy io, fa jereo ihany raha sendra voafafa tsy nahy. Somary sarotra tamiko ny nikaroka an'io tamin'ny fotoana voalohany nampiasako ny Arch Linux, ka heveriko fa mety hanampy olona hafa ny milaza izany eto.
 
-I will not cover the mount options in this post but you can learn more about them [here](https://wiki.archlinux.org/title/fstab).
+Tsy horesahiko ato amin'ity lahatsoratra ity ny options de montage rehetra, fa afaka mamaky bebe kokoa momba azy ireo ianao [eto](https://wiki.archlinux.org/title/fstab).
