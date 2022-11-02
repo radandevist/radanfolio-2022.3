@@ -8,7 +8,7 @@ export const PropellerAds = () => (
 
     {/*  */}
     <Script data-cfasync="false" type="text/javascript" src="/propellerad-1.js" strategy="lazyOnload"/>
-    <Script src="/propellerad-2.js" strategy="lazyOnload"/>
+    {/* <Script src="/propellerad-2.js" strategy="lazyOnload"/> */}
     {/*  */}
   </>
 );
