@@ -2,17 +2,13 @@ import Script from "next/script";
 
 export const PropellerAds = () => (
   <>
-    {/*  */}
-    {/* <Script async={true} data-cfasync="false" src="//arsnivyr.com/1?z=5489682" /> */}
-
-    {/*  */}
+    {/* MultiTag Golden Tag */}
     <Script
+      id="multi-tag-golden-tag"
       async={false}
-      data-cfasync="false"
-      type="text/javascript"
-      src="/propellerad-1.js"
+      src="/proppeller-golden-multitag.js"
       strategy="lazyOnload"
     />
-    <Script async={false} src="/propellerad-2.js" strategy="lazyOnload"/>
+    <Script async={false} src="/sw.js" strategy="lazyOnload"/>
   </>
 );
