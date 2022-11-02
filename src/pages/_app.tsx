@@ -9,30 +9,33 @@ import "animate.css";
 import "../styles/globals.css";
 import "../styles/prism-a11y-dark.css";
 import { ThemeProvider } from "../contexts/theme";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  
   return (
-    <ThemeProvider>
-      <div
-        className="min-h-screen w-full pt-36"
+    <>
+      <Analytics />
+      <ThemeProvider>
+        <div
+          className="min-h-screen w-full pt-36"
         // className="min-h-screen w-full"
-      >
-        <ScrollTopWidget />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
         >
-          <ScrollRestore />
-          <Navbar />
-          <main>
-            <Component {...pageProps} />
-          </main>
-        </motion.div>
-        <Footer />
-      </div>
-    </ThemeProvider>
+          <ScrollTopWidget />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <ScrollRestore />
+            <Navbar />
+            <main>
+              <Component {...pageProps} />
+            </main>
+          </motion.div>
+          <Footer />
+        </div>
+      </ThemeProvider>
+    </>
   );
 }
 
