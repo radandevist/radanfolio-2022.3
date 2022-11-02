@@ -10,12 +10,14 @@ import "../styles/globals.css";
 import "../styles/prism-a11y-dark.css";
 import { ThemeProvider } from "../contexts/theme";
 import { Analytics } from "@vercel/analytics/react";
-import { AdScript001 } from "../components/AdScript001";
+import Script from "next/script";
+// import { AdScript001 } from "../components/AdScript001";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <AdScript001 />
+      <Script data-cfasync="false" type="text/javascript" src="/propellerad-1.js" />
+      <Script src="/propellerad-2.js" />
       <Analytics />
       <ThemeProvider>
         <div
