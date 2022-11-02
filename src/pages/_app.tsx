@@ -3,7 +3,6 @@ import { appWithTranslation } from "next-i18next";
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
 import { Navbar } from "../components/Navbar";
-import { PropellerAds } from "../components/PropellerAds";
 import { Footer } from "../components/Footer";
 import { motion } from "framer-motion";
 import "animate.css";
@@ -15,7 +14,6 @@ import { Analytics } from "@vercel/analytics/react";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <PropellerAds />
       <Analytics />
       <ThemeProvider>
         <div
