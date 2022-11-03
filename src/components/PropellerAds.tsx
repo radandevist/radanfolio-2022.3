@@ -17,8 +17,8 @@ export const PropellerAds = () => (
       strategy="lazyOnload"
       data-cfasync="false"
       type="text/javascript"
-      src="/public/propeller-vignette-banner-a.js"
+      src="/propeller-vignette-banner-a.js"
     />
-    <Script async={false} strategy="lazyOnload" src="/public/propeller-vignette-banner-b.js"/>
+    <Script async={false} strategy="lazyOnload" src="/propeller-vignette-banner-b.js"/>
   </>
 );
