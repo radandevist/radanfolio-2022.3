@@ -11,11 +11,13 @@ import "../styles/globals.css";
 import "../styles/prism-a11y-dark.css";
 import { ThemeProvider } from "../contexts/theme";
 import { Analytics } from "@vercel/analytics/react";
+import { AdSense } from "../components/AdSense";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <PropellerAds />
+      <AdSense />
       <Analytics />
       <ThemeProvider>
         <div
