@@ -4,17 +4,17 @@ cover: https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1664121075/radanf
 date: 2022-09-25
 topic: Next.js Image
 
-excerpt: Combining the Next.js Image component with a Blog that uses mdx. How did I do to harmonize them? 
+excerpt: Ampifandraiso amin'ny bilaogy iray mampiasa mdx ny component Image an'ny Next.js. Ahoana no nampirindra azy ireo?
 featured: true
 ---
 
-Following one of my previous post about lazy loading Next.js images inside mdx generated blog posts ([read that post](/posts/how-to-make-a-blurred-placeholder-for-next-js-image-with-cloudinary)), one another issue emerged: the images were not occupying the full-width of the container. 
+Manaraka ny iray amin'ireo lahatsoratro teo aloha momba ny lazy loading ny sary Next.js ao amin'ny lahatsoratra généré par mdx ([vakio ity lahatsoratra ity](/posts/next-cloudinary-blurred-placeholder)), olana hafa no niseho: tsy fenoin'ireo sary ao anatin'ny lahatsoratra ny sakan'ny conteneur (élément parent ny lahatsoratra).
 
-Although the Next.js Image component has built-in lazy loading, you are still required to specify a width and height. However, this knowledge is typically unknown to you upfront. You also don't want photos that have been given the incorrect width or height to seem chopped.
+Mbola mila faritana koa ny sakany sy haavo ny component Image Next.js raha te ampiasa azy amin'ny laoniny isika. Na izany aza, matetika io fahalalana io dia tsy fantatrao tany am-boalohany. Tsy tianao koa ny sary nomena ny sakany na ny haavony tsy mety ho hita fa voapaika na tsy mifandanja.
 
-I learned that you can get around this with a few lines of CSS. Your photos will therefore take up the entire area in the div.
+Taty aoriana kely nahalàla aho fa afaka mamaha ity olana ity ianao amin'ny alàlzn'ny andalana CSS vitsivitsy. Noho izany, ny sarinao dia hibodo ny faritra manontolo ao amin'ny div parent.
 
-As a result, wrap the Image component in a div with `img-contain` and give it (the Image component) the className `custom-img`. Note that `fill` must be selected as the layout mode.
+Arak'izany, enveloppé-o amin'ny div ny component Image miaraka amin'ny classe CSS `img-contain` ary omeo azy (ny ) ny anaran'ny classe CSS `custom-img`. Mariho fa ny `fill` dia tsy maintsy voafantina ho fomba fandrafetana `layout="fill"`.
 
 ```jsx:ImageBlog.jsx
 <div className="img-contain">
@@ -27,7 +27,7 @@ As a result, wrap the Image component in a div with `img-contain` and give it (t
 </div>
 ```
 
-Here is the CSS styles that overrides the capabilities of next.js.
+Ireto ny styles CSS manafoana ny fahafahan'ny next.js.
 
 ```css:imgage-blog.css
 .custom-img {
@@ -45,4 +45,4 @@ Here is the CSS styles that overrides the capabilities of next.js.
 }
 ```
 
-I came across that solution, afters sweat and tears, thanks to the to the following [github discussion](https://github.com/vercel/next.js/discussions/18739#discussioncomment-344932) 🤣.
+Hitako ity vahaolana ity, taorian'ny hatsembohana sy ny ranomaso, noho ny [github discussion](https://github.com/vercel/next.js/discussions/18739#discussioncomment-344932) 🤣.
