@@ -10,15 +10,24 @@ import { GENERATED_FOLDER_PATH, PROJECTS_FRONT_MATTERS_FOLDER_NAME } from "../..
 import path from "path";
 import { getJSONFileData } from "../../utils/fsUtils";
 import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
 
 type ProjectsProps = {
   projects: ProjectIndex[];
-  featuredProjects: ProjectIndex[];
+  // featuredProjects: ProjectIndex[];
 };
 
-const Projects: NextPage<ProjectsProps> = ({ projects, featuredProjects }) => {
+const Projects: NextPage<ProjectsProps> = ({ projects, /* featuredProjects */ }) => {
   const allProjects = projects;
   const { t } = useTranslation();
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectIndex[]>();
+
+  useEffect(() => {
+    setFeaturedProjects(
+      getRandomElementsImproved(projects.filter(project => project.featured === true), 2)
+    );
+  }, [projects]);
+  
 
   return (
     <AnimatedPage>
@@ -79,10 +88,10 @@ export const getStaticProps: GetStaticProps<ProjectsProps> = async ({ locale, lo
   return {
     props: {
       projects,
-      featuredProjects: getRandomElementsImproved(
-        projects.filter(project => project.featured === true),
-        2
-      ),
+      // featuredProjects: getRandomElementsImproved(
+      //   projects.filter(project => project.featured === true),
+      //   2
+      // ),
       ...(await serverSideTranslations(locale!, ["common", "projects"], null, locales))
     },
   };
