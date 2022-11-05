@@ -3,7 +3,7 @@ import { appWithTranslation } from "next-i18next";
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
 import { Navbar } from "../components/Navbar";
-import { PropellerAds } from "../components/PropellerAds";
+import { PropellerAds } from "../components/ads/PropellerAds";
 import { Footer } from "../components/Footer";
 import { motion } from "framer-motion";
 import "animate.css";
@@ -11,7 +11,7 @@ import "../styles/globals.css";
 import "../styles/prism-a11y-dark.css";
 import { ThemeProvider } from "../contexts/theme";
 import { Analytics } from "@vercel/analytics/react";
-import { AdSense } from "../components/AdSense";
+import { AdSense } from "../components/ads/AdSense";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

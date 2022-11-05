@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { GetServerSideProps, NextPage } from "next/types";
+import { /* GetServerSideProps, */ GetStaticProps, NextPage } from "next/types";
 import { Hero } from "../../components/Hero";
 import { Feed } from "../../components/Feed";
 import { Featured } from "../../components/Featured";
@@ -16,12 +16,19 @@ import { useTranslation } from "next-i18next";
 
 export type BlogProps = {
   posts: BlogIndexPost[];
-  heroPost: BlogIndexPost;
-  featuredPosts: BlogIndexPost[];
+  // heroPost: BlogIndexPost;
+  // featuredPosts: BlogIndexPost[];
 };
 
-const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => {
+const Blog: NextPage<BlogProps> = ({ posts,/*  heroPost, featuredPosts */ }) => {
   const { t } = useTranslation();
+  const [heroPost, setHeroPost] = useState<BlogIndexPost>();
+  const [featuredPosts, setFeaturedPosts] = useState<BlogIndexPost[]>();
+
+  useEffect(() => {
+    setHeroPost(getRandomElementsImproved(posts)[0]);
+    setFeaturedPosts(getRandomElementsImproved(posts.filter(post => post.featured === true), 2));
+  }, [posts]);
 
   return (
     <AnimatedPage>
@@ -45,14 +52,14 @@ const Blog: NextPage<BlogProps> = ({ posts, heroPost, featuredPosts }) => {
           )}
         />
       </Head>
-      <Hero post={heroPost}/>
-      <Featured posts={featuredPosts} />
+      {heroPost && <Hero post={heroPost}/>}
+      {featuredPosts && <Featured posts={featuredPosts} />}
       <Feed posts={posts}/>
     </AnimatedPage>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale, locales }) => {
+export const getStaticProps: GetStaticProps<BlogProps> = async ({ locale, locales }) => {
   const { posts }: { posts: BlogIndexPost[] } = getJSONFileData(
     path.join(
       process.cwd(),
@@ -65,11 +72,11 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async ({ locale
   return {
     props: {
       posts,
-      heroPost: getRandomElementsImproved(posts)[0],
-      featuredPosts: getRandomElementsImproved(
-        posts.filter(post => post.featured === true),
-        2
-      ),
+      // heroPost: getRandomElementsImproved(posts)[0],
+      // featuredPosts: getRandomElementsImproved(
+      //   posts.filter(post => post.featured === true),
+      //   2
+      // ),
       ...(await serverSideTranslations(locale!, ["common", "blog"], null, locales))
     }
   };
