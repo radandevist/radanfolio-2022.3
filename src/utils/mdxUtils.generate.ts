@@ -1,7 +1,7 @@
 import matter from "gray-matter";
 import { join } from "path";
 import readingTime from "reading-time";
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import { v4 } from "uuid";
 import { getDirectories } from "./fsUtils";
 
@@ -16,7 +16,11 @@ export async function getAllFilesFrontMatterV3(dir: string, locale: string) {
 
   return slugs.map((slug) => {
     // returns the parsed data for all the files within the posts directory
-    const source = readFileSync(join(CWD, dir, slug, `${locale}.mdx`), "utf8");
+    const mdxPost = join(CWD, dir, slug, `${locale}.mdx`);
+
+    if (!existsSync(mdxPost)) return;
+
+    const source = readFileSync(mdxPost, "utf8");
     const { data } = matter(source);
 
     return {

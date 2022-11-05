@@ -25,7 +25,8 @@ const generatePostsFrontMatterFiles = async (): Promise<void> => {
   Promise.all(nextI18nConfig.i18n.locales.map(async (locale) => {
     const posts: BlogIndexPost[] = ZBlogIndexPost.array().parse(
       (await getAllFilesFrontMatterV3(POSTS_FOLDER, locale))
-        .map(frontMatter => formatPostFrontmatter(frontMatter))
+        .filter(Boolean)
+        .map(frontMatter => formatPostFrontmatter(frontMatter!))
     ).sort((x, y) => +new Date(y.date) - +new Date(x.date));
 
     await writeFile(
