@@ -1,0 +1,45 @@
+---
+title: NExt.js 13 est sorti! Alors, quoi de neuf nous apporte-til? 
+cover: https://res.cloudinary.com/dhwkzyl32/image/upload/v1667637198/radanfolio/posts/next-13-is-out-what-news-it-brings/cover_mnbajl.jpg
+date: 2022-10-28
+topic: Next.js
+
+excerpt: Next.js, le framework javascript le plus populaire en ce moment vient de reçevoir un lifting conséquent avec son lot de nouveautés. Une nouvelle version annoncée il y à quelques jours (le 25 Octobre 2022) qui apporte sans l'ombre des doutes des changements majeurs qui cassent la manière dont vous et mois avons perçu ce Framework depuis toujours.
+featured: true
+---
+
+Au moment ou j'écris cet article, Next.js, le framework javascript le plus populaire en ce moment vient de reçevoir un lifting conséquent avec son lot de nouveautés. Une nouvelle version annoncée il y à quelques jours (le 25 Octobre 2022) qui apporte sans l'ombre des doutes des changements majeurs qui cassent la manière dont vous et mois avons perçu ce Framework depuis toujours.
+
+## Un tout nouveau bundler
+
+Adieu Webpack et souhaitons la bienvenue au nouvel arrivé Turbopack. Il se trouve que Vercel, la compagie derrière Next.js, emploie Tobias Koppers, le créateur de Webpack et qui s'y connaît bien en parlant de module bundling. Et Turbopack à été écrit from scracth à l'aide du language Rust. TurboRepo est intégré dans celui-ci afin de mettre dans le Cache les opérations redondantes.
+Ensemble ces facteurs, font de lui un outil extrêmement rapide: Turbopack est annoncé 10 fois plus rapide que Vite.js et 700 fois plus que Webpack!!
+Toutefois, même si ça sonne incroyable, ce nouveau joujou est encore en alpha et l'écosystème de plugins tout autour est encore à construire qui non comme celui de Webpack, est bien établi.
+
+![Comparaison de Turbopack](https://res.cloudinary.com/dhwkzyl32/image/upload/v1667637198/radanfolio/posts/next-13-is-out-what-news-it-brings/turbopack-compare_pcjw34.png)
+
+## Le système de routing plus comme avant
+
+Dans Next.js 13, un nouveau dossier nommé app apparaît dans lequel les routes de l'application sont tous stockées. Le routing reste basé sur le système de fichier mais en revanche, il est plutôt question de dossiers pour définir les routes. Et en plus, un tas de nouvelles conventions s'ajoutent pour les différents cas d'utilisation.
+
+Pour créer une page, créez un sous-dossier dans le dossier app et donnez à ce dossier le nom de la route, puis ajoutez-y un fichier page.js qui exporte le composant que vous souhaitez y afficher.
+Comme il s'agit d'un répertoire, nous pouvons également co-localiser des composants supplémentaires dans ce même dossier sans avoir besoin de créer un répertoire de composants séparé.
+Un autre convention bien importante, bien qu'il ouvre la porte aux mises en page et au routage imbriqué lorsque vous donnez à un fichier le nom de layout.js, il crée une interface utilisateur qui peut être héritée par les routes enfants et lorsque vous naviguez vers un itinéraire à l'intérieur d'un layout, seule l'interface utilisateur interne est rendue par opposition à la page entière.
+
+Et celà ne s'arrête pas là!! Nous avons aussi des conventions de nommage pour le loading et les erreurs, de manière à ce que différentes UI soint rendues au niveau du composant. Par éxemple si le composant à un disfonctionnement, Next.js va faire le rendu de erro.js au lieu de page.js tandis que le reste de l'UI (le layout) reste intact.
+
+## Le data fetching re-visité
+
+Le data-fetching sous la version 13 qui je pense, est de loin la fonctionnalité la plus incroyable.
+On serait même tenté d'appeler Next.js: le framework officiel de React. Tout simplement parce que la solution de récupération de données qu tout le monde attendait est là.
+
+Sachez à partir de maintenant, c'est  que tous ces composants sont des React server components par défaut. Les composants serveur sont une primitive de bas niveau de React qui permet le rendu côté serveur, mais jusqu'à présent, ils ont toujours été assez difficiles à utiliser pour le développeur commun. Maintenant nous pouvons totalement nous débarrasser des fonctions `getSaticProps` et `getServerSideProps`. À la place, nous pouvons simplement écrire une fonction JavaScript commne toutes les autres qui utilise Fetch, puis attendre le résultat de cette fonction directement dans un composant, pas besoin de passer des props entre le client et le serveur, tout est naturel, comme si vous utilisiez juste du vanilla JavaScript et vous n'avez même pas besoin de sérialiser les données: vous pouvez prendre des concepts comme ISR SSR et SSG et les supprimer de votre cerveau.
+De plus vous pouvez définir un fichier loading.js pour définir l'interface utilisateur si un composant attend encore des données du'un fetch. Il les affichera automatiquement au niveau du composant tout en affichant tout le reste dans l'application.
+
+## Cerises sur le gâteau
+
+Je n'ai fait que mentionner la crème de la crème des fonctionnalités de Next.js dans les sections ci-dessus. Mais soyez conscients que d'autres changements mais un peu moins retentissants aussi ont vu le jour avec cette nouvelle version de Next.js. Comme par éxemple un component Image revisité avec de meilleures optimisations mais aussi le component Font nouvellement introduit pour optimiser le polices de votre application.
+
+Sur ce je vous dit çiao, et happy hacking avec cette nouvelle version de Next.js.
+
+
