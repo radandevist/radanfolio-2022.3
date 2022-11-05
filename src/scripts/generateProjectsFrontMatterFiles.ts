@@ -24,7 +24,8 @@ const generateProjectsFrontMatterFiles = async (): Promise<void> => {
 
   Promise.all(nextI18nConfig.i18n.locales.map(async (locale) => {
     const projects: ProjectIndex[] = (await getAllFilesFrontMatterV3(PROJECTS_FOLDER, locale))
-      .map(frontMatter => ZProjectIndex.parse(formatProjectFrontMatter(frontMatter)));
+      .filter(Boolean)
+      .map(frontMatter => ZProjectIndex.parse(formatProjectFrontMatter(frontMatter!)));
 
     await writeFile(
       path.join(frontMattersFolderPath, `${locale}.json`),
