@@ -34,11 +34,6 @@ const Home: NextPage = () => {
             "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg"
           )}
         />
-        <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" />
-        <meta
-          name="hilltopads-site-verification"
-          content="142a819d6b263c2c3356d64b3029010172519b05"
-        />
       </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">

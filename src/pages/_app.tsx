@@ -1,23 +1,33 @@
+import "animate.css";
+import "../styles/globals.css";
+import "../styles/prism-a11y-dark.css";
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
 import { Navbar } from "../components/Navbar";
-import { PropellerAds } from "../components/ads/PropellerAds";
+import { PropellerAdVerify, PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
 import { Footer } from "../components/Footer";
 import { motion } from "framer-motion";
-import "animate.css";
-import "../styles/globals.css";
-import "../styles/prism-a11y-dark.css";
 import { ThemeProvider } from "../contexts/theme";
 import { Analytics } from "@vercel/analytics/react";
-import { AdSense } from "../components/ads/AdSense";
+import Head from "next/head";
+import { AdSenseVerify } from "../components/ads/AdSense";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <PropellerAds />
-      <AdSense />
+      <Head>
+        <PropellerAdVerify />
+        <AdSenseVerify />
+        <script
+          async
+          // eslint-disable-next-line max-len
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646094358021753"
+          crossOrigin="anonymous"
+        />
+      </Head>
+      <PropellerAdVignetteBanner />
       <Analytics />
       <ThemeProvider>
         <div
