@@ -26,7 +26,7 @@
 
 html,
 body {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */ /* Ohtherwise position sticky won't work on child elements */
   padding: 0;
   margin: 0;
   font-family: 'Merriweather', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -95,4 +95,16 @@ of codes inside of any blog post
 }
 .switch-toggler:hover > .text-label {
   @apply hover:text-brand1-500 border-b-brand1-500 duration-300 text-brand1-500;
+}
+
+/* =================================================
+  Adjusting the first line of our code block component
+================================================== */
+.code-block-pre>code:first-child {
+  @apply -ml-2;
+}
+
+/* Adds a little spacing at the end of a code block line */
+.code-block-pre .code-line {
+  @apply pr-4;
 }

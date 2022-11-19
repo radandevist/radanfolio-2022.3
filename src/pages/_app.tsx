@@ -11,17 +11,16 @@ import { Analytics } from "@vercel/analytics/react";
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
 import { Navbar } from "../components/Navbar";
-import { PropellerAdVerify, PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
+import { PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
 import { Footer } from "../components/Footer";
 import { ThemeProvider } from "../contexts/theme";
-import { AdSenseVerify } from "../components/ads/AdSense";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <PropellerAdVerify />
-        <AdSenseVerify />
+        {/* Ads Verification */}
+        <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" />
         <script
           async
           // eslint-disable-next-line max-len

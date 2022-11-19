@@ -1,3 +1,14 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  // "tailwindCSS.includeLanguages": {
+  //   "html": "html",
+  //   "typescript": "typescript",
+  //   "css": "css"
+  // },
+  // "editor.quickSuggestions": {
+  //   "strings": true
+  // },
+  "tailwindCSS.includeLanguages": {
+    "typescriptreact": "html"
+  }
 }

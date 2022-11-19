@@ -1,12 +1,10 @@
 import path from "path";
 import fs from "fs";
 
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { getMDXComponent } from "mdx-bundler/client";
-import { useMemo } from "react";
 import { z } from "zod";
 import Image from "next/image";
 import Head from "next/head";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { about } from "../../data/about";
@@ -17,6 +15,7 @@ import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpe
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { POSTS_FOLDER } from "../../constants";
 import { AnimatedPage } from "../../components/AnimatedPage";
+import { PostContent } from "../../components/PostContent";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -35,7 +34,6 @@ export type PostViewProps = {
 };
 
 const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
-  const Component = useMemo(() => getMDXComponent(code), [code]);
   const isLarge = useMediaQuery("(min-width: 1024px)");
 
   return (
@@ -54,16 +52,15 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
         <meta property="og:type" content="" />
         <meta
           property="og:image"
-          
           content={getCloudinaryOpenGraphImage(post.cover)}
         />
       </Head>
-      <div 
+      <div
         // initial={{ opacity: 0}}
         // animate={{ opacity: 1}}
         // exit={{ opacity: 0}}
         className="w-full min-h-screen my-12">
-        <div
+        <header
           className="mxw-sm w-full flex items-center flex-col
             justify-center space-y-6 text-center my-12"
         >
@@ -96,37 +93,34 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
               <p className="italic">{post.date}</p>
             </div>
           </div>
-        </div>
+        </header>
         {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
         {/* cover image */}
-        <section className="">
-          <div>
-            <Image
-              className="h-[70vh] w-full object-cover object-center"
-              src={post.cover}
-              alt="cover_image"
-              // height={1688}
-              height={isLarge ? 924 : 1688}
-              width={3000}
-              placeholder="blur"
-              blurDataURL={getCloudinaryThumbnail(post.cover)}
-            />
-          </div>
-        </section>
+        <figure>
+          <Image
+            className="h-[70vh] w-full object-cover object-center"
+            src={post.cover}
+            alt="cover_image"
+            // height={1688}
+            height={isLarge ? 924 : 1688}
+            width={3000}
+            placeholder="blur"
+            blurDataURL={getCloudinaryThumbnail(post.cover)}
+          />
+        </figure>
         {/* content */}
-        <section className="mxw-sm my-12">
-          {/* <div className="flex justify-start my-12">
-            <h2 className="text-4xl md:text-6xl">Project Overview</h2>
-          </div> */}
-          <article
-            className="text-2xl md:text-3xl font-light
-              first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold
-              space-y-10 prose"
-          >
-            {/* {post.code} */}
-            {/* {code} */}
-            <Component components={mdxComponents} />
-          </article>
+        <section className="mxw-sm my-12 grid grid-cols-12 gap-4 max-w-[68rem]">
+          {/* TODO: Replace with this line when AdSense is ready */}
+          {/* <div className="col-span-12 md:col-span-9 pr-4"> */}
+          <div className="col-span-12 pr-4">
+            {/* <div className="flex justify-start my-12">
+              <h2 className="text-4xl md:text-6xl">Project Overview</h2>
+            </div> */}
+            <PostContent components={mdxComponents} code={code} />
+          </div>
+          <div className="col-span-3 sticky top-28 self-start hidden md:block">
+            {/* <div className="bg-red-500 h-96">AD HERE</div> */}
+          </div>
         </section>
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
       </div>

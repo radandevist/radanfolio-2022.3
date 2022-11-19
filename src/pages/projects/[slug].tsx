@@ -1,14 +1,12 @@
 import path from "path";
 import fs from "fs";
 
-import { getMDXComponent } from "mdx-bundler/client";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Image from "next/image";
-import { useMemo } from "react";
 import { z } from "zod";
+import Image from "next/image";
 import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { mdxComponents } from "../../components/mdx";
 import { formatProjectFileResult } from "../../functions/projects.functions";
@@ -17,6 +15,7 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { getFileV3, getPostsSlugs } from "../../utils/mdxUtils";
 import { PROJECTS_FOLDER } from "../../constants";
 import { AnimatedPage } from "../../components/AnimatedPage";
+import { PostContent } from "../../components/PostContent";
 
 
 const ZProject = z.object({
@@ -43,7 +42,6 @@ export type ProjectViewProps = {
 };
 
 const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project } }) => {
-  const Component = useMemo(() => getMDXComponent(code), [code]);
   const isLarge = useMediaQuery("(min-width: 1024px)");
   const { t } = useTranslation();
 
@@ -72,7 +70,7 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
         // animate={{ width: "100%"}}
         // exit={{ x: window.innerWidth}}
         className="w-full min-h-screen my-12">
-        <div
+        <header
           className="mxw-sm w-full flex items-center flex-col justify-center
             space-y-6 text-left sm:text-center my-12"
         >
@@ -113,36 +111,35 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
               Github
             </a>
           </div>
-        </div>
+        </header>
         {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
         {/* cover image */}
-        <section>
-          <div>
-            <Image
-              className="w-full object-cover object-center"
-              src={project.cover}
-              alt="cover_image"
-              width={1640}
-              // height={924}
-              height={isLarge ? 528 : 924}
-              placeholder="blur"
-              blurDataURL={getCloudinaryThumbnail(project.cover)}
-              // layout="fill"
-            />
-          </div>
-        </section>
+        <figure>
+          <Image
+            className="w-full object-cover object-center"
+            src={project.cover}
+            alt="cover_image"
+            width={1640}
+            // height={924}
+            height={isLarge ? 528 : 924}
+            placeholder="blur"
+            blurDataURL={getCloudinaryThumbnail(project.cover)}
+            // layout="fill"
+          />
+        </figure>
         {/* content */}
-        <section className="mxw-sm my-12">
-          {/* <div className="flex justify-start my-12">
-            <h2 className="text-4xl md:text-6xl">Overview</h2>
-          </div> */}
-          <p
-            className="text-2xl md:text-3xl font-light
-              first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold
-              space-y-10 prose"
-          >
-            <Component components={mdxComponents} />
-          </p>
+        <section className="mxw-sm my-12 grid grid-cols-12 gap-4 max-w-[68rem]">
+          {/* TODO: Replace with this line when AdSense is ready */}
+          {/* <div className="col-span-12 md:col-span-9 pr-4"> */}
+          <div className="col-span-12 pr-4">
+            {/* <div className="flex justify-start my-12">
+              <h2 className="text-4xl md:text-6xl">Project Overview</h2>
+            </div> */}
+            <PostContent components={mdxComponents} code={code} />
+          </div>
+          <div className="col-span-3 sticky top-28 self-start hidden md:block">
+            {/* <div className="bg-red-500 h-96">AD HERE</div> */}
+          </div>
         </section>
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
       </div>
