@@ -1,8 +1,10 @@
 import { FC } from "react";
-import { BlogIndexPost } from "../types/post";
-import { Link } from "./Link";
 import Image from "next/image";
+
+import { BlogIndexPost } from "../types/post";
 import { getCloudinaryThumbnail } from "../helpers/cloudinary";
+
+import { Link } from "./Link";
 
 export type PostComponentProps = {
   post: BlogIndexPost;

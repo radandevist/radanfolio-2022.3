@@ -1,10 +1,11 @@
 import fs from "fs";
-import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { mkdir, writeFile } from "fs/promises";
+
 import {
   GENERATED_FOLDER_PATH,
-  PROJECTS_FRONT_MATTERS_FOLDER_NAME,
-  PROJECTS_FOLDER
+  PROJECTS_FOLDER,
+  PROJECTS_FRONT_MATTERS_FOLDER_NAME
 } from "../constants";
 import { getAllFilesFrontMatterV3 } from "../utils/mdxUtils.generate";
 import nextI18nConfig from "../../next-i18next.config.js";

@@ -1,17 +1,19 @@
 import "animate.css";
 import "../styles/globals.css";
 import "../styles/prism-a11y-dark.css";
+
+import Head from "next/head";
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
+import { motion } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
+
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
 import { Navbar } from "../components/Navbar";
 import { PropellerAdVerify, PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
 import { Footer } from "../components/Footer";
-import { motion } from "framer-motion";
 import { ThemeProvider } from "../contexts/theme";
-import { Analytics } from "@vercel/analytics/react";
-import Head from "next/head";
 import { AdSenseVerify } from "../components/ads/AdSense";
 
 function MyApp({ Component, pageProps }: AppProps) {

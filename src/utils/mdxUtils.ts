@@ -1,16 +1,10 @@
-import { BlogIndexPost } from "./../types/post";
-import matter from "gray-matter";
 import { basename, join } from "path";
-import readingTime from "reading-time";
 import { readdirSync, readFileSync } from "fs";
+
+import readingTime from "reading-time";
+import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
 import { v4 } from "uuid";
-// import dynamic from "next/dynamic";
-import { getDirectories } from "./fsUtils";
-import { formatPostFrontmatter } from "../functions/blog.functions";
-import { objectFromArray } from "./arrayUtils";
-import nextI18nConfig from "../../next-i18next.config.js";
-
 // These plugins are completely dependent on the blog that you
 // are planning to build if you're just focused on building one without
 // any syntax highlighting of those sorts these all won't be necessary
@@ -18,6 +12,13 @@ import rehypeSlug from "rehype-slug";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
+
+import nextI18nConfig from "../../next-i18next.config.js";
+import { formatPostFrontmatter } from "../functions/blog.functions";
+import { BlogIndexPost } from "../types/post";
+
+import { objectFromArray } from "./arrayUtils";
+import { getDirectories } from "./fsUtils";
 
 export async function getFiles(mdxFilesDir: string) {
   return readdirSync(join(process.cwd(), mdxFilesDir));

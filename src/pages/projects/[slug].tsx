@@ -1,20 +1,23 @@
+import path from "path";
+import fs from "fs";
+
 import { getMDXComponent } from "mdx-bundler/client";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import { useMemo } from "react";
 import { z } from "zod";
+import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+
 import { mdxComponents } from "../../components/mdx";
 import { formatProjectFileResult } from "../../functions/projects.functions";
 import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { getFileV3, getPostsSlugs } from "../../utils/mdxUtils";
-import Head from "next/head";
 import { PROJECTS_FOLDER } from "../../constants";
-import path from "path";
-import fs from "fs";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { AnimatedPage } from "../../components/AnimatedPage";
-import { useTranslation } from "next-i18next";
+
 
 const ZProject = z.object({
   // id: z.string(),

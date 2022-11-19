@@ -1,13 +1,17 @@
 import { useRouter } from "next/router";
-import { Link } from "./Link";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
+import { useCallback, useEffect, useState } from "react";
+
 import { useTheme } from "../contexts/theme";
+import { useMediaQuery } from "../hooks/useMediaQuery";
+
+import { Link } from "./Link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { useTranslation } from "next-i18next";
 import { MobileNav } from "./MobileNav";
-import { useCallback, useEffect, useState } from "react";
-import { useMediaQuery } from "../hooks/useMediaQuery";
+
+
 
 export const Navbar = () => {
   const router = useRouter();

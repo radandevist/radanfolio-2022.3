@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import { AnimatedPage } from "../components/AnimatedPage";
 import { about } from "../data/about";
 import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../helpers/cloudinary";

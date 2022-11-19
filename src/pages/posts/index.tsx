@@ -1,7 +1,11 @@
+import path from "path";
+
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { /* GetServerSideProps, */ GetStaticProps, NextPage } from "next/types";
+import { useTranslation } from "next-i18next";
+
 import { Hero } from "../../components/Hero";
 import { Feed } from "../../components/Feed";
 import { Featured } from "../../components/Featured";
@@ -10,9 +14,8 @@ import { getRandomElementsImproved } from "../../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
 import { BlogIndexPost } from "../../types/post";
 import { getJSONFileData } from "../../utils/fsUtils";
-import path from "path";
 import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FOLDER_NAME } from "../../constants";
-import { useTranslation } from "next-i18next";
+
 
 export type BlogProps = {
   posts: BlogIndexPost[];

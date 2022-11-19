@@ -1,9 +1,11 @@
-import { Link } from "../components/Link";
 import { FC } from "react";
-import { BlogIndexPost } from "../types/post";
 import Image from "next/image";
-import { getCloudinaryThumbnail } from "../helpers/cloudinary";
 import { useTranslation } from "next-i18next";
+
+import { Link } from "../components/Link";
+import { BlogIndexPost } from "../types/post";
+import { getCloudinaryThumbnail } from "../helpers/cloudinary";
+
 
 export type HeropProps = {
   post: BlogIndexPost;

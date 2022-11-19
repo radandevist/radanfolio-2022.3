@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
+
 import { useTheme } from "../contexts/theme";
+
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Link } from "./Link";
 import { ThemeSwitcher } from "./ThemeSwitcher";

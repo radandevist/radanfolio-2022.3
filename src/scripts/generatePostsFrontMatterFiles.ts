@@ -1,6 +1,7 @@
 import fs from "fs";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+
 import {
   GENERATED_FOLDER_PATH,
   POSTS_FRONT_MATTERS_FOLDER_NAME,

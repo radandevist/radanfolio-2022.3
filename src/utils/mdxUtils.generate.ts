@@ -1,8 +1,10 @@
-import matter from "gray-matter";
 import { join } from "path";
-import readingTime from "reading-time";
 import { existsSync, readFileSync } from "fs";
+
+import matter from "gray-matter";
+import readingTime from "reading-time";
 import { v4 } from "uuid";
+
 import { getDirectories } from "./fsUtils";
 
 export async function getPostsSlugs(postsDir: string) {

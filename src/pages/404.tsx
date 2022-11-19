@@ -2,9 +2,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { Trans, useTranslation } from "next-i18next";
+
 import { Link } from "../components/Link";
 import { AnimatedPage } from "../components/AnimatedPage";
-import { Trans, useTranslation } from "next-i18next";
 
 const Page404 = () => {
   const router = useRouter();

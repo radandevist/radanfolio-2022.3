@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+
 import { ProjectIndex } from "../types/project";
 import { Project } from "../pages/projects/[slug]";
 

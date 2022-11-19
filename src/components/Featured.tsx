@@ -1,6 +1,8 @@
 import { useTranslation } from "next-i18next";
 import React, { FC } from "react";
+
 import { BlogIndexPost } from "../types/post";
+
 import { PostComponent } from "./Post";
 
 export type FeaturedProps = {

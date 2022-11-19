@@ -1,16 +1,19 @@
+import path from "path";
+
 import { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
+
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { ProjectComponent } from "../../components/Project";
 import { getRandomElementsImproved } from "../../utils/arrayUtils";
-import Head from "next/head";
 import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
 import { ProjectIndex } from "../../types/project";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GENERATED_FOLDER_PATH, PROJECTS_FRONT_MATTERS_FOLDER_NAME } from "../../constants";
-import path from "path";
 import { getJSONFileData } from "../../utils/fsUtils";
-import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
+
 
 type ProjectsProps = {
   projects: ProjectIndex[];

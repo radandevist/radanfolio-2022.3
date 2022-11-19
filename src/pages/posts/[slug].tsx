@@ -1,19 +1,21 @@
+import path from "path";
+import fs from "fs";
+
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import { z } from "zod";
+import Image from "next/image";
+import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import { about } from "../../data/about";
 import { getFileV3, getPostsSlugs } from "../../utils/mdxUtils";
 import { formatPostFileResult } from "../../functions/blog.functions";
 import { mdxComponents } from "../../components/mdx";
-import Image from "next/image";
 import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { POSTS_FOLDER } from "../../constants";
-import path from "path";
-import fs from "fs";
 import { AnimatedPage } from "../../components/AnimatedPage";
 
 export type Post = z.infer<typeof ZPost>;
