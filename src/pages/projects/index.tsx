@@ -38,14 +38,10 @@ const Projects: NextPage<ProjectsProps> = ({ projects, /* featuredProjects */ })
         <title>{`RadanFolio | ${t("common:projects")}`}</title>
 
         {/* opengraph */}
-        <meta property="og:title" content={t("projects:openGraph.title")} />
-        <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
         <meta
           property="og:description"
           content={t("projects:openGraph.description")}
         />
-        <meta property="og:type" content="" />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
@@ -53,6 +49,10 @@ const Projects: NextPage<ProjectsProps> = ({ projects, /* featuredProjects */ })
             "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
           )}
         />
+        <meta property="og:title" content={t("projects:openGraph.title")} />
+        {/* <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta property="og:type" content="" /> */}
       </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">

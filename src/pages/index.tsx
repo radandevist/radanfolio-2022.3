@@ -22,12 +22,9 @@ const Home: NextPage = () => {
     <AnimatedPage>
       <Head>
         <title>Radanfolio | ANDRIANARISOA Daniel</title>
+
         {/* opengraph */}
-        <meta property="og:title" content={t("home:openGraph.title")} />
-        <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
         <meta property="og:description" content={t("home:openGraph.description")} />
-        <meta property="og:type" content="" />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
@@ -35,6 +32,10 @@ const Home: NextPage = () => {
             "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg"
           )}
         />
+        <meta property="og:title" content={t("home:openGraph.title")} />
+        {/* <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta property="og:type" content="" /> */}
       </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">

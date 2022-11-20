@@ -42,18 +42,18 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
         <title>{`Radanfolio | ${post.title}`}</title>
 
         {/* opengraph */}
-        <meta property="og:title" content={post.title} />
-        <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta
-          property="og:description"
-          content={post.excerpt || `A blog post by ${post.author}`}
-        />
-        <meta property="og:type" content="" />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(post.cover)}
         />
+        <meta
+          property="og:description"
+          content={post.excerpt || `A blog post by ${post.author}`}
+        />
+        <meta property="og:title" content={post.title} />
+        {/* <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta property="og:type" content="" /> */}
       </Head>
       <div
         // initial={{ opacity: 0}}

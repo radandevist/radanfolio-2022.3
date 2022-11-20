@@ -6,6 +6,7 @@ import { Trans, useTranslation } from "next-i18next";
 
 import { Link } from "../components/Link";
 import { AnimatedPage } from "../components/AnimatedPage";
+import { getCloudinaryOpenGraphImage } from "../helpers/cloudinary";
 
 const Page404 = () => {
   const router = useRouter();
@@ -15,6 +16,23 @@ const Page404 = () => {
     <AnimatedPage>
       <Head>
         <title>{`Radanfolio | ${t("common:pageNotFound")}`}</title>
+
+        {/* opengraph */}
+        <meta
+          property="og:image"
+          content={getCloudinaryOpenGraphImage(
+            // eslint-disable-next-line max-len
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/v1668907870/radanfolio/404_pal5zw.jpg"
+          )}
+        />
+        <meta
+          property="og:description"
+          content={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
+        />
+        <meta property="og:title" content={`${t("common:pageNotFound")}`} />
+        {/* <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta property="og:type" content="" /> */}
       </Head>
       <div className="relative h-[26rem]">
         <div

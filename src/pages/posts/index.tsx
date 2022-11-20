@@ -39,14 +39,10 @@ const Blog: NextPage<BlogProps> = ({ posts,/*  heroPost, featuredPosts */ }) => 
         <title>{`Radanfolio | ${t("common:posts")}`}</title>
 
         {/* opengraph */}
-        <meta property="og:title" content={t("blog:openGraph.title")} />
-        <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
         <meta
           property="og:description"
           content={t("blog:openGraph.description")}
         />
-        <meta property="og:type" content="" />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
@@ -54,6 +50,10 @@ const Blog: NextPage<BlogProps> = ({ posts,/*  heroPost, featuredPosts */ }) => 
             "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
           )}
         />
+        <meta property="og:title" content={t("blog:openGraph.title")} />
+        {/* <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta property="og:type" content="" /> */}
       </Head>
       {heroPost && <Hero post={heroPost}/>}
       {featuredPosts && <Featured posts={featuredPosts} />}

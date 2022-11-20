@@ -20,13 +20,18 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         {/* Ads Verification */}
-        <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" />
         <script
           async
           // eslint-disable-next-line max-len
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646094358021753"
           crossOrigin="anonymous"
         />
+        <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" />
+
+        {/* Common opengraphs meta tags */}
+        <meta property="og:site_name" content="radanfolio" />
+        <meta property="og:url" content="radanfolio.vercel.app" />
+        <meta property="og:type" content="" />
       </Head>
       <PropellerAdVignetteBanner />
       <Analytics />
