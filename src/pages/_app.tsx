@@ -30,8 +30,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         {/* Common opengraphs meta tags */}
         <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:type" content="" />
+        <meta property="og:url" content="https://radanfolio.vercel.app" />
+        <meta property="og:type" content="website" />
       </Head>
       <PropellerAdVignetteBanner />
       <Analytics />
