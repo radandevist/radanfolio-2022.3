@@ -15,4 +15,4 @@ export const setFilter = (url: string, filter: string) => {
 
 export const getCloudinaryThumbnail = (url: string) => setFilter(url, "c_thumb,w_200");
 
-export const getCloudinaryOpenGraphImage = (url: string) => setFilter(url, "c_limit,h_630,w_1200");
+export const getCloudinaryOpenGraphImage = (url: string) => setFilter(url, "c_limit,h_680,w_1300");
