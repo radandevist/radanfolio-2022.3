@@ -7,6 +7,7 @@ import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
+import { useRouter } from "next/router";
 
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
@@ -16,6 +17,8 @@ import { Footer } from "../components/Footer";
 import { ThemeProvider } from "../contexts/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  
   return (
     <>
       <Head>
@@ -29,9 +32,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" />
 
         {/* Common opengraphs meta tags */}
+        <meta property="og:url" content={`https://radanfolio.vercel.app${router.asPath}`} />
         <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="https://radanfolio.vercel.app" />
-        <meta property="og:type" content="website" />
+        <meta property="og:locale" content={router.locale || router.defaultLocale || "en"} />
+        {router.pathname === "/posts" || router.pathname ===  "/projects"
+          ? <meta property="og:type" content="blog" />
+          : router.pathname.includes("[slug]")
+            ? <meta property="og:type" content="article" />
+            : <meta property="og:type" content="website" />}
+        {/* <meta property="og:type" content="website" /> */}
       </Head>
       <PropellerAdVignetteBanner />
       <Analytics />
