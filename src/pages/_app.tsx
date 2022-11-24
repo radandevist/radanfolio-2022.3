@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
 import { Navbar } from "../components/Navbar";
-import { PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
+// import { PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
 import { Footer } from "../components/Footer";
 import { ThemeProvider } from "../contexts/theme";
 
@@ -29,7 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646094358021753"
           crossOrigin="anonymous"
         />
-        <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" />
+        {/* ? Disabling propeller ads due to fb community standards */}
+        {/* <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" /> */}
 
         {/* Common opengraphs meta tags */}
         <meta property="og:url" content={`https://radanfolio.vercel.app${router.asPath}`} />
@@ -42,7 +43,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             : <meta property="og:type" content="website" />}
         {/* <meta property="og:type" content="website" /> */}
       </Head>
-      <PropellerAdVignetteBanner />
+      {/* ? Disabling propeller ads due to fb community standards */}
+      {/* <PropellerAdVignetteBanner /> */}
       <Analytics />
       <ThemeProvider>
         <div
