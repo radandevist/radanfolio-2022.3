@@ -1,7 +1,7 @@
-// import Link from "next/link";
+import Link from "next/link";
 import { FC, PropsWithChildren } from "react";
 
-import { Link } from "../Link";
+// import { Link } from "../Link";
 
 export type CustomLinkProps = PropsWithChildren<{
   href?: string;

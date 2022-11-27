@@ -1,10 +1,11 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Trans, useTranslation } from "next-i18next";
 
-import { Link } from "../components/Link";
+// import { Link } from "../components/Link";
 import { AnimatedPage } from "../components/AnimatedPage";
 import { getCloudinaryOpenGraphImage } from "../helpers/cloudinary";
 

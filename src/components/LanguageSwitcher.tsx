@@ -29,7 +29,6 @@ export const LanguageSwitcher = () => {
   }, [isOpen]);
 
   return (
-    
     <div ref={node} className="relative inline-block text-left text-sm md:text-md lg:text-lg">
       <button
         type="button"
@@ -84,13 +83,10 @@ export const LanguageSwitcher = () => {
               as={asPath}
               locale={language}
               role="menuitem"
+              className="text-gray-700 block px-4 py-2"
+              onClick={toggleDropdown}
             >
-              <a
-                className="text-gray-700 block px-4 py-2"
-                onClick={toggleDropdown}
-              >
-                {properties.label}
-              </a>
+              {properties.label}
             </Link>
           ))}
         </div>

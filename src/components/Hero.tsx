@@ -1,8 +1,9 @@
 import { FC } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import Link from "next/link";
 
-import { Link } from "../components/Link";
+// import { Link } from "../components/Link";
 import { BlogIndexPost } from "../types/post";
 import { getCloudinaryThumbnail } from "../helpers/cloudinary";
 

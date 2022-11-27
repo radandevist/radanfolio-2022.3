@@ -1,10 +1,11 @@
 import React, { FC } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { ProjectIndex } from "../types/project";
 import { getCloudinaryThumbnail } from "../helpers/cloudinary";
 
-import { Link } from "./Link";
+// import { Link } from "./Link";
 
 export type ProjectComponentProps = {
   project: ProjectIndex;

@@ -1,0 +1,217 @@
+---
+title: "Setup SWC with Typescript on a Node.js backend project: from CommonJS to ES Modules"
+cover: https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1664121075/radanfolio/posts/full-width-next-image/full-width-next-image-cover_buwphd.jpg
+date: 2022-11-27
+topic: Typescript
+
+excerpt: Combining the Next.js Image component with a Blog that uses mdx. How did I do to harmonize them? 
+---
+
+## What is SWC and Why chose it?
+
+SWC is Javascript transpiler as the same as Babel and it supports compiling Typescript too as an alternative to the official Typescript compiler. Written entirely in Rust in contrast to Babel and TSC, which are in plain Javascript.
+
+People are used to Webpack and babel to transpile their code. Babel is known for transforming, your javascript code written with all the shiny latest features to a code that older browsers could run. Hence your app is targetting more potential prospects.
+
+But in some cases, such in a backend environment, there is no need to support older browsers. Your backend code just runs in a server, which serves the resources to the clients.
+
+And besides that, the performance gain is just awesome: SWC compiles our code as fast as our eyes are blinking.
+
+Now some of you might say: "Esbuild too is as performant as SWC". But It lacks the ability to compile some features of Typescript such decoratros. And decorators are just essential for frameworks like TypeORM or NestJs.
+
+## Init the project & Install the deps
+
+Churn into your terminal then initialize a node project with the necessary packages with the following set of commands:
+
+```bash: terminal
+mkdir my-project \
+&& cd my-project \
+&& yarn init -y \
+&& yarn add -D typescript @swc/core @swc/cli
+```
+
+And that's all!!?
+
+Yep, that's all we're gonna use to demonstrate SWC configuration with Typescript: we're not doing an express or something else's tutorial in this post so let's keep it minimal.
+
+## Typescript and SWC basic configuration
+
+Okay, typescript and SWC are installed but they are not of much use if we don't configure them. So let's set the minimal config needed for both of them.
+
+Starting with Typescript, in the terminal and at the root of your project run:
+
+```bash
+yarn tsc --init
+```
+
+A new file `tsconfig.json` will be created with some options enabled and pre-configured which are fine for us for now.
+
+Now about SWC, create a file `.swcrc` at the project's root and fill it with the following content:
+
+```json: .swcrc
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript"
+    }
+  },
+  "module": {
+    "type": "commonjs"
+  },
+  "sourcemaps": true
+}
+```
+
+We've basically told SWC that we want to compile Typescript (`jsc.parser.syntax`) and our node project type is CommonJs (`module.type`). A plus at the bottom, we want it to generate sourcemaps too, so errors will show the paths to the typescript files in the stack trace instead of javascript ones to ease troubleshooting and debungging process.
+
+Next define a `build` run-script into the `package.json` file like this:
+
+```json: package.json
+{
+  // ...
+  "scripts": {
+    // ...
+    "build": "swc src -d dist"
+  }
+  // ...
+}
+```
+
+In short, this build script says to SWC to take all Js and Ts files in the **src** directory compile them and put the compiled files in a **dist** directory. 
+
+The **src** is where we are going to put all our application's code, so don't forget to create it. And for the scope of this post, we will create only a single file `index.ts` with a simple `console.log()` inside it:
+
+```typescript: src/index.ts
+console.log("Hello Radan!")
+```
+
+Now if we run `yarn build` in our terminal, we should see that a dist directory has been created with an `index.js` file inside at its top level proof that our `index.ts` from **src** has been compiled.  The dist directory always reflects the folder structure of our source directory, you can fact-check that once the project grows larger.
+
+Once the code built, we can run it with:
+
+```bash: terminal
+node --enable-source-maps dist/index.js # Hello Radan!
+```
+
+## Extended Typescript and SWC configuration
+
+Sure thing, our stuff is working fine, until you bring in some advanced features in your code. I was surprised the first time I Brought TypeORM, which make use of decorators as hard, in my project and it threw me an error when I built the project with that SWC config.
+
+### Enabling decorators with SWC
+
+As I said before, one reason why I chose SWC in first place is its ability to compile decorators unlike esbuild. And for that we need to expand the precedent basic setup, so add these few lines in `.swcrc`:
+
+```json: .swcrc
+{
+  "jsc": {
+    "parser": {
+      // ...
+      "decorators": true
+    }
+  },
+  "transform": {
+    "legacyDecorator": true,
+    "decoratorMetadata": true
+  },
+  // ...
+}
+```
+
+We're now, good to go with decorators in our code.
+
+### And much more than decorators
+
+Good to mention that there are more features as options you could enable with SWC. If we wanted to do dynamic imports for example, we have to set the value of `jsc.parser.dynamicImport` to `true`. For a full hint about these options head on the SWC configuration documentaion [here](https://swc.rs/docs/configuration/swcrc).
+
+## A word on TypeScript type checking
+
+It is important to note that SWC does not replace the Typescript compiler (TSC) for checking our type validity. Type checking is essential to make sure our code is valid and less prone to errors, that's why we install both of them in our project.
+
+Basically the workflow consist of fast building with SWC, Typescript errors are reported in-code by the editor with underlines while we're developping then, before making a commit or pushing changes we perform a manual typecheck with the command: `yarn tsc` .
+
+But before executing type check, let's adjust our `tsconfig.json` file, uncoment and set this option as following: `"noEmit": true`. That option prevent TSC from emitting compiled files, but it will still do check our Typescript code as intended:
+
+```json: tsconfig.json
+{
+  //...
+  "noEmit": true,
+  //...
+}
+```
+
+## Moving to ES Modules
+
+The actual configuration we've set is okay for running our Node.js app without problems so far. But I want to push this post further and show how you can take advantages the most of no Node.js, featuring the ES Modules.
+
+By default, a node project accepts only CommonJS style syntax to be run on it. And if we want to run code written in ES Modules syntax, we need to set `"type": "module"` in `package.json`:
+
+```json: package.json
+{
+  //...
+  "type": "module"
+  //...
+}
+```
+
+According to that change, we have to configure SWC and tell him to emit code in ESM too instead of the default CommonJs. For that, just replace the value of the option `module.type` in `.swcrc` to `"es6"` (or `"nodenext"` since we are on a node server environment) and the `jsc.target` key to the latest available value: `"es2022"`:
+
+```json: .swcrc
+{
+  "jsc": {
+    //...
+    "target": "es2022"
+  },
+  //...
+  "module": {
+    "type": "es6" // or "nodenext"
+  },
+  //...
+}
+```
+
+Okay, once we've built our project thanks to this brand new config, we must run the generated code with node by specyfing the  flag `--es-module-specifier-resolution` and set it's value to node:
+
+```bash: terminal
+node --enable-source-maps --es-module-specifier-resolution=node dist/index.js
+```
+
+Because sooner or later, you'll need to import modules in almost all files of your codebase and the default resolver for ES Modules in Node.JS is not able to automatically guess the file extension type as it does with CommonJs. On top of that, there is no way as far as I know to append file extensions on import statements with SWC. That flag allow us to omit specyfing filenames extensions on every import statements when running ES Modules code on Node.js.
+
+And of course, we need to adjust `tsconfig.json` to reflect the most our SWC compilation config:
+
+```json: tsconfig.json
+{
+  //...
+  "target": "es2022"
+  //...
+  "module": "esnext"
+  //...
+}
+```
+
+We have set the module option to `"esnext"` because since we are using ES Modules in a node environment, we probably want to be able to use amazing new features offered by node these late days too. By this config in `tsconfig.json` we are telling the Typescript compiler to chill whenever we have a shiny feature invoked in our code 😂.
+
+## Enabling the shiny features
+
+I've already said some words higher in this post that there are so much options to enable those features to be parsed by SWC. But a little of Do Repeat Yourself (DRY) is not that bad so once again: for a full hint about these options head on the SWC configuration documentaion [here](https://swc.rs/docs/configuration/swcrc). 
+
+The core fundation you need to run them is already done. All you have to do now is just enable them. For example if we want top level await poured in our code without problems then append in our current `.swcrc`:
+
+```json: .swcrc
+{
+  "jsc": {
+    "parser": {
+      //...
+      "topLevelAwait": true
+    },
+    //...
+  },
+  //...
+}
+```
+
+## Bottom words
+
+There is how we do to configure SWC alongside Typescript. Wether the project type is in CommonJs or ES Modules, you are now ready to take by the horns. 😉
+
+I hope you found this post helpful, and I wish you a happy hacking.

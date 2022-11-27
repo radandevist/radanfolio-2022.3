@@ -1,11 +1,13 @@
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
+import Link from "next/link";
+
 
 import { useTheme } from "../contexts/theme";
 
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Link } from "./Link";
+// import { Link } from "./Link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 type Props = {
   visible: boolean;
