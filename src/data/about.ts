@@ -6,7 +6,7 @@ const preAbout = {
   name: "Daniel Adrianarisoa",
   email: "radandevist@gmail.com",
   github: "https://www.github.com/radandevist",
-  resumeUrl: "https://drive.google.com/uc?id=1IueI05j7CJ5HXjzfQd1r44C5mOoEwToa&export=download",
+  resumeUrl: "https://drive.google.com/uc?id=1U2PQfyobZtN4zCmQMumeNqewp97Nphke&export=download",
   socials: [
     { 
       name: "Linkedin",
