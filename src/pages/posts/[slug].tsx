@@ -116,7 +116,10 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
             <PostContent components={mdxComponents} code={code} />
           </div>
           <div
-            className="col-span-3 sticky top-28 self-start hidden md:block"
+            className="
+            col-span-3 sticky top-28 self-start hidden md:block
+            temporary-for-exoclick-ad pl-6
+            "
             dangerouslySetInnerHTML={{
               /* eslint-disable max-len */
               // ExoClick verical ad unit
