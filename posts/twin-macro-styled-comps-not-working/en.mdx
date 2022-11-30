@@ -1,0 +1,89 @@
+---
+title: "Why twin.macro's Styled Components is not working with Typescript and Vite? These things are not being told in the docs"
+cover: https://res.cloudinary.com/dhwkzyl32/image/upload/v1669810695/radanfolio/posts/twin-macro-not-working-properly/cover_rpwrqd.jpg
+date: 2022-11-30
+topic: Next.js Image
+
+excerpt: "I just started playing with twin.macro and I can tell you I've passed relatively a bad time figuring out how the hell get it working."
+---
+
+I just started playing with twin.macro and I can tell you I've passed relatively a bad time figuring out how the hell get it working.
+
+My project was initially packed with Typescript React and Tailwind.CSS, then I cam accross twin.macro which I found very interseting since it permit us to leverage CSS in JS combined with Tailwind ustilities classes.
+
+So I gave it a try, rolled on the documentation and followed the instructions steps by step but at the end ...
+
+## Quick intro to twin.macro
+
+Thanks to `twin.macro`, developers are able to combine the paradigms from `@emotion/styled` and/or `styled-components` with TailwindCSS. But for this post we are mainly interested in `styled-components`.
+
+Fresh reminder, styled components are custom components styled with their own set of styles directly ensuring that it applies only to that specific component so no conflicts could be encountered in contrast to using global css stylessheet. It is CSS in JS solution but with a broadly differrent approach and syntax, see by yourself below:
+
+```typescript:SuperDiv.tsx
+import styled from "styled-components";
+
+const SuperDiv = styled.div`
+  // CSS Styles are placed inside the backticks e.g.:
+  width: 6rem;
+  height: 2rem;
+  background-color: red;
+`;
+```
+
+That's awesome right? But It becomes even more awesome when we brings in `twin.macro` because instead of placing junky css rules we can use Tailwind utility classes. The above compnent could be written like this with `twin.macro`:
+
+```typescript:SuperDiv.tsx
+import tw "twin.macro";
+
+const SuperDiv = tw.div`w-24 h-8 bg-red-700`;
+```
+
+Wow! That's incredible!
+
+But, let's get back to the point of this post:
+
+I tried `twin.macro` with Vite and Typescript, but despite following the instructions it seems to be not working. The styles of my `SuperDiv` component are not applyed at all!!
+
+Asuming that, as I did, you completed the guide in the docs, I will directly tell you the missing points.
+
+## You should install both styling libraries
+
+Twin give you the choice out of the box either you wish to work with styled components or emotion and it makes clear in their guide the separation of configuration for both of these styling libraries. And that's what I actually did, since I initially thought that if I wanted to go with styled components installing only the relevant package will do it. However, when you get to the task, the Vite toolchain spitted out an error stating that it couldn't  find the emotion styled. So the solution is just simple, install what it want like this:
+
+```bash:terminal
+yarn add @emotion/styled @emotion/react
+```
+
+This point is pretty easy to solve because we are assisted through the terminal output telling us what is going wrong.
+
+## You should always import twin.macro
+
+This point in the other hand, is not easy to overcome by yourself without a bit of cleverness. But thankthully I got you covered in this post. 😎
+
+Twin introduces an additional prop: the `tw` prop to all the components in React. It is basically as the same as the className prop but with supperpowers. For exemple our previous `SuperDiv` component could be written with the `tw` props like this:
+
+```typescript:SuperDiv.tsx
+import { FC, PropsWithChildren } from "react";
+
+const SuperDiv: FC<PropsWithChildren<{}>> = ({ children }) => {
+  return (
+    <div tw="w-24 h-8 bg-red-700">{children}</div>
+  );
+};
+```
+
+The tw prop accept Tailwind classes and has also some advanced features like  grouping classes with the same modifier to mention the least (e.g `tw='bg-red-500 text-green-500 md:(bg-blue-500 text-white)'`).
+
+The point is since it is a prop on our components we don't feel the obligation to import twin in our file for being able to use it. But if you run our app you might be surprised the the component does not have the styles you have feed it. The solution is whener we use the `tw` prop we should import twin like this in our file:
+
+```typescript:SuperDiv.tsx
+import 'twin.macro'; // at the top or your file
+
+// now the tw prop is gonna work
+```
+
+## Here you Go!!
+
+As you can see, these were the points lacking in twin's documentation that I've experienced. It was an interesting brainstorming session to solve them.
+
+I hope you found this post helpful and I wish you get your hands dirty too with your project out here! 👌

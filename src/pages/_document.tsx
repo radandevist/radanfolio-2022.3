@@ -10,7 +10,7 @@ export default function Document() {
 
         {/* eslint-disable @next/next/no-sync-scripts */}
 
-        {/* Infolinks Ads */}
+        {/* Infolinks Ads */}{/* TODO : Got rejected */}
         <script type="text/javascript" src="/infolinks-account-vars.js" />
         <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js" />
 
