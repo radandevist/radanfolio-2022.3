@@ -115,21 +115,20 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
           <div className="col-span-12 md:col-span-9 pr-4">
             <PostContent components={mdxComponents} code={code} />
           </div>
-          <div
-            className="
-            col-span-3 sticky top-28 self-start hidden md:block
-            temporary-for-exoclick-ad pl-6
-            "
-            dangerouslySetInnerHTML={{
-              /* eslint-disable max-len */
-              // ExoClick verical ad unit
-              __html: `<script async type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js"></script> 
-              <ins class="adsbyexoclick" data-zoneid="4854630"></ins> 
-              <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>`
-              /* eslint-enable max-len */
-            }}
-          >
-            {/* <div className="bg-red-500 h-96">AD HERE</div> */}
+          <div className="col-span-3 sticky top-28 self-start hidden md:flex justify-center">
+            {/* ExoClick skyScraper banner ad 1 */}
+            <div
+              dangerouslySetInnerHTML={{
+                /* eslint-disable max-len */
+                // ExoClick verical ad unit
+                // ? Instead of async use defer to improve FCP and LCP ?
+                __html: `<script defer type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js"></script> 
+                <ins class="adsbyexoclick" data-zoneid="4854630"></ins> 
+                <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>`
+                /* eslint-enable max-len */
+              }}
+            />
+            {/* <div className="bg-red-500 h-96 w-64">AD HERE</div> */}
           </div>
         </section>
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />

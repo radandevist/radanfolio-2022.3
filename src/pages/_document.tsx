@@ -8,19 +8,17 @@ export default function Document() {
         <Main />
         <NextScript />
 
-        {/* eslint-disable @next/next/no-sync-scripts */}
+        {/* eslint-disable @next/next/no-sync-scripts, max-len */}
 
-        {/* Infolinks Ads */}{/* TODO : Got rejected */}
-        <script type="text/javascript" src="/infolinks-account-vars.js" />
-        <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js" />
+        {/* Infolinks Ads */}{/* TODO: Got rejected */}
+        {/* <script type="text/javascript" src="/infolinks-account-vars.js" /> */}
+        {/* <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js" /> */}
 
-        {/* AdCash Ads */}
-        {/* eslint-disable max-len */}
+        {/* AdCash AutoTag Ads */}{/* TODO: Prefer banner ads instead */}
         {/* @ts-ignore */}
-        <script data-cfasync="false" type="text/javascript" data-adel="atag" src="//acacdn.com/script/atg.js" czid="envpzwvahu" />
-        {/* eslint-enable max-len */}
+        {/* <script data-cfasync="false" type="text/javascript" data-adel="atag" src="//acacdn.com/script/atg.js" czid="envpzwvahu" /> */}
 
-        {/* eslint-enable @next/next/no-sync-scripts */}
+        {/* eslint-enable @next/next/no-sync-scripts, max-len  */}
       </body>
     </Html>
   );
