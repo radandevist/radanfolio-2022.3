@@ -29,6 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646094358021753"
           crossOrigin="anonymous"
         />
+        {/* Exoclick ad network */}
+        <meta name="exoclick-site-verification" content="c5d186782940e084db1b21835224993e" />
         {/* ? Disabling propeller ads due to fb community standards */}
         {/* <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" /> */}
 
