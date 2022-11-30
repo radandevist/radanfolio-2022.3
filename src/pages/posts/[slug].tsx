@@ -113,17 +113,19 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
           {/* TODO: Replace with this line when AdSense is ready */}
           {/* <div className="col-span-12 pr-4"> */}
           <div className="col-span-12 md:col-span-9 pr-4">
-            {/* eslint-disable-next-line max-len */}
-            <script async type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js" />
-            <ins className="adsbyexoclick" data-zoneid="4854630" />
-            {/* @ts-ignore */}
-            <script>{(AdProvider = window.AdProvider || []).push({serve: {}})}</script>
-            {/* <div className="flex justify-start my-12">
-              <h2 className="text-4xl md:text-6xl">Project Overview</h2>
-            </div> */}
             <PostContent components={mdxComponents} code={code} />
           </div>
-          <div className="col-span-3 sticky top-28 self-start hidden md:block">
+          <div
+            className="col-span-3 sticky top-28 self-start hidden md:block"
+            dangerouslySetInnerHTML={{
+              /* eslint-disable max-len */
+              // ExoClick verical ad unit
+              __html: `<script async type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js"></script> 
+              <ins class="adsbyexoclick" data-zoneid="4854630"></ins> 
+              <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>`
+              /* eslint-enable max-len */
+            }}
+          >
             {/* <div className="bg-red-500 h-96">AD HERE</div> */}
           </div>
         </section>
