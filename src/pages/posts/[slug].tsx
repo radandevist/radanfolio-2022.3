@@ -111,8 +111,13 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
         {/* content */}
         <section className="mxw-sm my-12 grid grid-cols-12 gap-4 max-w-[68rem]">
           {/* TODO: Replace with this line when AdSense is ready */}
-          {/* <div className="col-span-12 md:col-span-9 pr-4"> */}
-          <div className="col-span-12 pr-4">
+          {/* <div className="col-span-12 pr-4"> */}
+          <div className="col-span-12 md:col-span-9 pr-4">
+            {/* eslint-disable-next-line max-len */}
+            <script async type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js" />
+            <ins className="adsbyexoclick" data-zoneid="4854630" />
+            {/* @ts-ignore */}
+            <script>{(AdProvider = window.AdProvider || []).push({serve: {}})}</script>
             {/* <div className="flex justify-start my-12">
               <h2 className="text-4xl md:text-6xl">Project Overview</h2>
             </div> */}
