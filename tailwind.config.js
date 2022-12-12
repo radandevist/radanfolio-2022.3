@@ -3,13 +3,13 @@ module.exports = {
   darkMode: "class",
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./posts/*.mdx",
-    "./projects/*.mdx"
+    "./posts/**/*.mdx",
+    "./projects/**/*.mdx"
   ],
   theme: {
     extend: {
       fontFamily: {
-        future : ["Rubik Glitch"]
+        future : ["var(--font-rubik)"]
       },
       colors: {
         brand1: {
@@ -23,7 +23,8 @@ module.exports = {
           600: "#006d45",
           700: "#003522",
           800: "#000000",
-          900: "#000000"
+          900: "#000000",
+          contrasted: "#017F51"
         },
         brand2: {
           DEFAULT: "#111d25",
@@ -41,29 +42,8 @@ module.exports = {
       },
       animation: {
         "spin-slow": "spin 4s linear infinite",
-        showMenu: "menuIn 0.3s ease-in-out",
-        hideMenu: "menuOut 0.3s ease-in-out",
-        fadeIn: "twFadeIn 0.3s ease-in-out",
-        fadeOut: "twFadeOut 0.3s ease-in-out",
       },
-      keyframes: {
-        menuIn: {
-          from: { right: "-130%" },
-          to: { right: "0%" },
-        },
-        menuOut: {
-          from: { right: "0%" },
-          to: { right: "-130%" },
-        },
-        twFadeIn: {
-          from: { opacity: 0 },
-          to: { opacity: 0.5 },
-        },
-        twFadeOut: {
-          from: { opacity: 0.5 },
-          to: { opacity: 0 },
-        },
-      },
+      keyframes: {},
     },
   },
 };

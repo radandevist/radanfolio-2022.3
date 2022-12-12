@@ -8,6 +8,7 @@ import { appWithTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import { useRouter } from "next/router";
+import { Albert_Sans, Merriweather, Rubik_Glitch } from "@next/font/google";
 
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
@@ -16,27 +17,28 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { ThemeProvider } from "../contexts/theme";
 
+const rubikGlitch = Rubik_Glitch({
+  variable: "--font-rubik",
+  display: "swap",
+  weight: "400"
+});
+
+const albertSans = Albert_Sans({
+  weight: ["100", "200", "300", "400", "500"],
+});
+
+const merriweather = Merriweather({
+  weight: ["300", "400", "700", "900"],
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   
   return (
     <>
       <Head>
-        {/* Ads Verification */}
-        <script
-          async
-          // eslint-disable-next-line max-len
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646094358021753"
-          crossOrigin="anonymous"
-        />
-        {/* Exoclick ad network */}
-        <meta name="exoclick-site-verification" content="c5d186782940e084db1b21835224993e" />
-        {/* Adcash ad network */}
-        <meta name="a.validate.02" content="dwxL4bYESZT7g-RAW2TiC-nd98zsq8BzkYqb" />
-        {/* ? Disabling propeller ads due to fb community standards */}
-        {/* <meta name="propeller" content="fbe51795147890a81f1ef847d42ac99a" /> */}
-
         {/* Common opengraphs meta tags */}
+        {/* The og:url meta tag is important for sharing on linkedin */}
         <meta property="og:url" content={`https://radanfolio.vercel.app${router.asPath}`} />
         <meta property="og:site_name" content="radanfolio" />
         <meta property="og:locale" content={router.locale || router.defaultLocale || "en"} />
@@ -45,14 +47,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           : router.pathname.includes("[slug]")
             ? <meta property="og:type" content="article" />
             : <meta property="og:type" content="website" />}
-        {/* <meta property="og:type" content="website" /> */}
       </Head>
-      {/* ? Disabling propeller ads due to fb community standards */}
-      {/* <PropellerAdVignetteBanner /> */}
       <Analytics />
       <ThemeProvider>
         <div
-          className="min-h-screen w-full pt-36"
+          className={`min-h-screen w-full pt-36
+          ${rubikGlitch.variable} ${albertSans.className} ${merriweather.className}`}
           // className="min-h-screen w-full"
         >
           <ScrollTopWidget />

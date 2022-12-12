@@ -22,6 +22,7 @@ const Home: NextPage = () => {
     <AnimatedPage>
       <Head>
         <title>Radanfolio | ANDRIANARISOA Daniel</title>
+        <meta name="description" content={t("home:openGraph.description")} />
 
         {/* opengraph */}
         <meta property="og:description" content={t("home:openGraph.description")} />
@@ -45,13 +46,14 @@ const Home: NextPage = () => {
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-6">
             <div className="sm:col-span-2">
               <Image
-                height={1032}
-                width={774}
+                width={255}
+                height={340}
                 src={info.avatar}
                 alt="radan's profile pic"
                 className="h-full w-full object-cover rounded-lg shrink-0"
                 placeholder="blur"
                 blurDataURL={getCloudinaryThumbnail(info.avatar)}
+                loading="eager"
               />
             </div>
             <div className="sm:col-span-4 flex flex-col items-start justify-center space-y-3">
@@ -64,7 +66,7 @@ const Home: NextPage = () => {
                     target="_blank"
                     rel="noreferrer"
                     href={social.url}
-                    className="inline-block my-1 bg-brand1-500 text-white
+                    className="inline-block my-1 bg-brand1-contrasted text-white
                       font-semibold py-2 px-3 mr-4">
                     {social?.name}
                   </a>
@@ -73,8 +75,8 @@ const Home: NextPage = () => {
               <a
                 rel="noreferrer"
                 href={info.resumeUrl}
-                className="block border border-brand1-500
-                text-brand1-500 font-semibold py-2 px-3"
+                className="block border border-brand1-contrasted dark:border-white
+                text-brand1-contrasted dark:text-white font-semibold py-2 px-3"
               >
                 {t("home:downloadMyResume")}
               </a>
@@ -92,7 +94,7 @@ const Home: NextPage = () => {
               <span
                 key={skill?.id}
                 className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 dark:shadow-brand2-400
-                bg-brand1-500 text-white font-semibold"
+                bg-brand1-contrasted text-white font-semibold"
               >
                 {skill?.name}
               </span>

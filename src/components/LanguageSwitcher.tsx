@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -16,7 +16,8 @@ const languagesProperties: Record<string, any> = {
   }
 };
 
-export const LanguageSwitcher = () => {
+
+export const LanguageSwitcher: FC = () => {
   const router = useRouter();
   const { pathname, query, asPath, locale } = router;
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -35,14 +36,14 @@ export const LanguageSwitcher = () => {
         onClick={toggleDropdown}
         className="inline-flex w-full justify-center rounded-md p-2
           focus:outline-none focus:ring-2 focus:ring-brand1"
-        id="menu-button"
+        id="lang-menu-button"
         aria-expanded="true"
         aria-haspopup="true"
       >
         {languagesProperties[locale!].label}
         {/* Heroicon name: mini/chevron-down */}
         <svg
-          className="-mr-1 ml-2 h-5 w-5 mt-1"
+          className="-mr-1 ml-2 h-5 w-5 mt-[1px] lg:mt-1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20" fill="currentColor"
           aria-hidden="true"

@@ -49,13 +49,14 @@ const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project }
     <AnimatedPage>
       <Head>
         <title>{`Radanfolio | ${project.name}`}</title>
+        <meta name="description" content={project.summary} />
 
         {/* opengraph */}
+        <meta property="og:description" content={project.summary} />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(project.cover)}
         />
-        <meta property="og:description" content={project.summary} />
         <meta property="og:title" content={project.name} />
         {/* <meta property="og:site_name" content="radanfolio" />
         <meta property="og:url" content="radanfolio.vercel.app" />

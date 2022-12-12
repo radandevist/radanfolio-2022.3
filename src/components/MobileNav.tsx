@@ -44,28 +44,35 @@ export const MobileNav: FC<Props> = ({ links, toggle, visible }) => {
     <>
       <div className="absolute top-0 left-0 bottom-0">
         <nav
-          className={`fixed w-full h-full z-50
-            transition-all duration-300 ${visible ? "visible" : "invisible"}`}
+          className={`fixed w-full h-full z-50 transition-[visibility] duration-300
+            ${visible
+              ? "visible" // eslint-disable-line @typescript-eslint/indent
+              : "invisible"}`} // eslint-disable-line @typescript-eslint/indent
         >
           {/* Overlay */}
           <div
             onClick={toggle}
-            className={`fixed bg-black opacity-50 w-full h-full
-              ${visible ? "animate-fadeIn" : "animate-fadeOut"}`}
+            className={`fixed bg-black w-full h-full transition-[opacity] duration-300
+              ${visible
+                ? "opacity-70" // eslint-disable-line @typescript-eslint/indent
+                : "opacity-0"}`} // eslint-disable-line @typescript-eslint/indent
           />
 
           {/* Menu container */}
           <div
-            className={`pt-2 px-4 fixed right-0 w-[90%] max-w-[70%] h-full
+            className={`pt-2 px-4 fixed w-[90%] max-w-[70%] h-full left-full
             bg-slate-100 dark:bg-brand2 overflow-y-scroll flex flex-col overscroll-y-contain
-              ${visible ? "animate-showMenu" : "animate-hideMenu"}`}
+            transition-[transform] duration-300
+            ${visible
+              ? "-translate-x-full" // eslint-disable-line @typescript-eslint/indent
+              : ""}`} // eslint-disable-line @typescript-eslint/indent
           >
             {links.map((link) => (
               <Link
                 key={link.name}
                 href={link.route}
                 className={`text-center py-2
-                  ${router.pathname === link.route ? "text-brand1-500" : ""}`}
+                  ${router.pathname === link.route ? "text-brand1-contrasted" : ""}`}
               >
                 {link.name}
               </Link>
@@ -73,7 +80,7 @@ export const MobileNav: FC<Props> = ({ links, toggle, visible }) => {
 
             <ThemeSwitcher
               onToggle={toggleTheme}
-              className="relative py-2 mx-auto lg:top-2"
+              className="relative py-2 mx-auto md:top-[0.375rem] lg:top-2"
             />
             <LanguageSwitcher />
           </div>

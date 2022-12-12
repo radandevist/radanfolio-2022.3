@@ -36,6 +36,10 @@ const Projects: NextPage<ProjectsProps> = ({ projects, /* featuredProjects */ })
     <AnimatedPage>
       <Head>
         <title>{`RadanFolio | ${t("common:projects")}`}</title>
+        <meta
+          property="og:description"
+          content={t("projects:openGraph.description")}
+        />
 
         {/* opengraph */}
         <meta

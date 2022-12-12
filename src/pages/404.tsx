@@ -17,18 +17,22 @@ const Page404 = () => {
     <AnimatedPage>
       <Head>
         <title>{`Radanfolio | ${t("common:pageNotFound")}`}</title>
+        <meta
+          name="description"
+          content={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
+        />
 
         {/* opengraph */}
+        <meta
+          property="og:description"
+          content={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
+        />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
             // eslint-disable-next-line max-len
             "https://res.cloudinary.com/dhwkzyl32/image/upload/v1668907870/radanfolio/404_pal5zw.jpg"
           )}
-        />
-        <meta
-          property="og:description"
-          content={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
         />
         <meta property="og:title" content={`${t("common:pageNotFound")}`} />
         {/* <meta property="og:site_name" content="radanfolio" />

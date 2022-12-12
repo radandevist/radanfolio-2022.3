@@ -40,15 +40,14 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
     <AnimatedPage>
       <Head>
         <title>{`Radanfolio | ${post.title}`}</title>
+        <meta name="description" content={post.excerpt || `A blog post by ${post.author}`} />
+
 
         {/* opengraph */}
+        <meta property="og:description" content={post.excerpt || `A blog post by ${post.author}`} />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(post.cover)}
-        />
-        <meta
-          property="og:description"
-          content={post.excerpt || `A blog post by ${post.author}`}
         />
         <meta property="og:title" content={post.title} />
         {/* <meta property="og:site_name" content="radanfolio" />

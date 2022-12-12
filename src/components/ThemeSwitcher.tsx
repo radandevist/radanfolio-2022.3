@@ -6,7 +6,13 @@ type Props = {
 };
 
 export const ThemeSwitcher: FC<Props> = ({ onToggle, className }) => (
-  <button className={className} onClick={onToggle}>
+  <button
+    className={className}
+    onClick={onToggle}
+    id="theme-switcher"
+    role="button"
+    aria-label="theme-switcher"
+  >
     <span className="dark:hidden">
       <svg
         viewBox="0 0 24 24"
@@ -14,7 +20,7 @@ export const ThemeSwitcher: FC<Props> = ({ onToggle, className }) => (
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-7 h-7"
+        className="w-6 h-6 lg:w-7 lg:h-7"
       >
         <path
           d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
@@ -32,7 +38,7 @@ export const ThemeSwitcher: FC<Props> = ({ onToggle, className }) => (
       <svg
         viewBox="0 0 24 24"
         fill="none"
-        className="w-7 h-7"
+        className="w-6 h-6 lg:w-7 lg:h-7"
       >
         <path
           fillRule="evenodd"
@@ -62,6 +68,5 @@ export const ThemeSwitcher: FC<Props> = ({ onToggle, className }) => (
         ></path>
       </svg>
     </span>
-      
   </button>
 );

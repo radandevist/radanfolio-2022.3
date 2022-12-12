@@ -37,12 +37,10 @@ const Blog: NextPage<BlogProps> = ({ posts,/*  heroPost, featuredPosts */ }) => 
     <AnimatedPage>
       <Head>
         <title>{`Radanfolio | ${t("common:posts")}`}</title>
+        <meta name="description" content={t("blog:openGraph.description")} />
 
         {/* opengraph */}
-        <meta
-          property="og:description"
-          content={t("blog:openGraph.description")}
-        />
+        <meta property="og:description" content={t("blog:openGraph.description")} />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(

@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import { Trans } from "next-i18next";
+import { Trans, useTranslation } from "next-i18next";
 
 const HeartIcon = () => (
   <span className="mx-1">
@@ -35,24 +35,28 @@ const Link2: FC<PropsWithChildren> = ({ children }) => (
   </a>
 );
 
-export const Footer = () => (
-  <div className="w-full">
-    <div
-      className="mxw-lg grid gap-6 grid-cols-1
-        text-center border-t-slate-200 dark:border-t-brand2-400 border-t-2
-        py-12"
-    >
-      <p><Trans i18nKey="builtFrom" components={{ 1: <Link1 />, 2: <Link2 /> }} /></p>
+export const Footer = () => {
+  const { t }= useTranslation();
 
-      <p>Customization and addition of new features done by Radan Devist ( Me )</p>
-
-      <p className="flex justify-center items-center space-x-4">
-        <Trans
-          i18nKey="craftedWithLove"
-          components={{ heartIcon: <HeartIcon /> }}
-        />
-      </p>
-
+  return (
+    <div className="w-full">
+      <div
+        className="mxw-lg grid gap-6 grid-cols-1
+          text-center border-t-slate-200 dark:border-t-brand2-400 border-t-2
+          py-12"
+      >
+        <p><Trans i18nKey="builtFrom" components={{ 1: <Link1 />, 2: <Link2 /> }} /></p>
+  
+        <p>{t("common:customizedBy")}</p>
+  
+        <p className="flex justify-center items-center space-x-4">
+          <Trans
+            i18nKey="craftedWithLove"
+            components={{ heartIcon: <HeartIcon /> }}
+          />
+        </p>
+  
+      </div>
     </div>
-  </div>
-);
+  );
+};
