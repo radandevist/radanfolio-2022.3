@@ -16,6 +16,8 @@ import { Navbar } from "../components/Navbar";
 // import { PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
 import { Footer } from "../components/Footer";
 import { ThemeProvider } from "../contexts/theme";
+import { StickyBanner } from "../components/ads/ExoClick";
+import { GoogleAnalytics } from "../components/GoogleAnalytics";
 
 const rubikGlitch = Rubik_Glitch({
   variable: "--font-rubik",
@@ -49,6 +51,15 @@ function MyApp({ Component, pageProps }: AppProps) {
             : <meta property="og:type" content="website" />}
       </Head>
       <Analytics />
+
+      {/* Google Analytics */}
+      <GoogleAnalytics />
+
+      {/* Enable ExoClick Banner Ads */}
+      <script defer type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js" />
+      {/* Sticky Banner from ExoClick */}
+      <StickyBanner />
+
       <ThemeProvider>
         <div
           className={`min-h-screen w-full pt-36
