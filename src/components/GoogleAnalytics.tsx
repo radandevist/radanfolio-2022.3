@@ -1,7 +1,22 @@
+import router from "next/router";
 import Script from "next/script";
+import { useEffect } from "react";
 
 // eslint-disable-next-line arrow-body-style
 export const GoogleAnalytics = () => {
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      window.gtag("set", "page_path", url);
+      window.gtag("event", "page_view");
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, []);
+
   return (
     // <!-- Global site tag (gtag.js) - Google Analytics -->
     <>
