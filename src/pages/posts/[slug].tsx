@@ -16,6 +16,7 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { POSTS_FOLDER } from "../../constants";
 import { AnimatedPage } from "../../components/AnimatedPage";
 import { PostContent } from "../../components/PostContent";
+import { BannerAd } from "../../components/ads/ExoClick";
 
 export type Post = z.infer<typeof ZPost>;
 
@@ -41,7 +42,6 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
       <Head>
         <title>{`Radanfolio | ${post.title}`}</title>
         <meta name="description" content={post.excerpt || `A blog post by ${post.author}`} />
-
 
         {/* opengraph */}
         <meta property="og:description" content={post.excerpt || `A blog post by ${post.author}`} />
@@ -115,19 +115,7 @@ const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
             <PostContent components={mdxComponents} code={code} />
           </div>
           <div className="col-span-3 sticky top-28 self-start hidden md:flex justify-center">
-            {/* ExoClick skyScraper banner ad 1 */}
-            <div
-              dangerouslySetInnerHTML={{
-                /* eslint-disable max-len */
-                // ExoClick verical ad unit
-                // ? Instead of async use defer to improve FCP and LCP ?
-                __html: `<script defer type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js"></script> 
-                <ins class="adsbyexoclick" data-zoneid="4854630"></ins> 
-                <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>`
-                /* eslint-enable max-len */
-              }}
-            />
-            {/* <div className="bg-red-500 h-96 w-64">AD HERE</div> */}
+            <BannerAd dataZoneId={4865004} />
           </div>
         </section>
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 import { Trans, useTranslation } from "next-i18next";
 
 const HeartIcon = () => (

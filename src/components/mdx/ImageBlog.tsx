@@ -1,4 +1,4 @@
-import React, { FC, ImgHTMLAttributes } from "react";
+import { FC, ImgHTMLAttributes } from "react";
 import Image from "next/image";
 
 import { getCloudinaryThumbnail } from "../../helpers/cloudinary";
@@ -11,7 +11,7 @@ export const ImageBlog: FC<ImgHTMLAttributes<HTMLImageElement>>
       <Image
         alt={alt || "blog image"}
         src={src as string}
-        layout="fill"
+        fill
         className={`custom-img ${className}`}
         width={width === undefined ? undefined : Number(width)}
         height={height === undefined ? undefined: Number(width)}

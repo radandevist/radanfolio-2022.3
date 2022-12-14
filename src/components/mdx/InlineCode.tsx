@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 
 export const InlineCode: FC<PropsWithChildren> = ({ children }) => (
   <code className="bg-brand2-500 dark:bg-brand2-400 text-white

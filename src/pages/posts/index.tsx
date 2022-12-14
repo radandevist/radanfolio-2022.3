@@ -1,6 +1,6 @@
 import path from "path";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { /* GetServerSideProps, */ GetStaticProps, NextPage } from "next/types";
