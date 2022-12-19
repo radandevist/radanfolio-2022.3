@@ -16,7 +16,7 @@ import { Navbar } from "../components/Navbar";
 // import { PropellerAdVignetteBanner } from "../components/ads/PropellerAds";
 import { Footer } from "../components/Footer";
 import { ThemeProvider } from "../contexts/theme";
-import { StickyBanner } from "../components/ads/ExoClick";
+// import { StickyBanner } from "../components/ads/ExoClick";
 import { GoogleAnalytics } from "../components/GoogleAnalytics";
 
 const rubikGlitch = Rubik_Glitch({
@@ -58,7 +58,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {/* Enable ExoClick Banner Ads */}
       <script defer type="application/javascript" src="https://a.exdynsrv.com/ad-provider.js" />
       {/* Sticky Banner from ExoClick */}
-      <StickyBanner />
+      {/* <StickyBanner /> */}
 
       <ThemeProvider>
         <div
