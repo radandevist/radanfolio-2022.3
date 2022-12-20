@@ -10,6 +10,9 @@ const nextConfig = {
       "res.cloudinary.com",
       "media.giphy.com"
     ],
+  },
+  experimental: {
+    appDir: true
   }
 };
 

@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
@@ -9,7 +11,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        future : ["var(--font-rubik)"]
+        future : ["var(--font-rubik)"],
+        // ADMIN
+        inter: ["var(--font-inter)", "sans-serif"],
       },
       colors: {
         brand1: {
@@ -46,4 +50,15 @@ module.exports = {
       keyframes: {},
     },
   },
+  plugins: [
+    // ADMIN
+    // add custom variant for expanding sidebar
+    plugin(({ addVariant, e }) => {
+      addVariant("sidebar-expanded", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => (
+          `.sidebar-expanded .${e(`sidebar-expanded${separator}${className}`)}`
+        ));
+      });
+    }),
+  ]
 };

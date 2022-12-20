@@ -10,5 +10,6 @@
   // },
   "tailwindCSS.includeLanguages": {
     "typescriptreact": "html"
-  }
+  },
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

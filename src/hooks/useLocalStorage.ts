@@ -1,46 +1,28 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 
-export const useLocalStorage = (
+export const useLocalStorage = <S>(
   key: string,
-  initialValue: string,
-): [string, Dispatch<SetStateAction<string>>] => {
-  const isBrowser = ((): boolean => typeof window !== "undefined")();
+  initialState?: S | (() => S)
+): [S, React.Dispatch<React.SetStateAction<S>>] => {
+  const [state, setState] = useState<S>(initialState as S);
+  useDebugValue(state);
 
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      // Get from local storage by key
-      const item = isBrowser ? window.localStorage.getItem(key) : null;
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      // If error also return initialValue
-      // in next.js on the server, window  is not defined I'll make the error silent
-      // if (error instanceof ReferenceError && error.message === "window is not defined") {
-      //   return initialValue;
-      // }
-      console.log(error);// eslint-disable-line no-console
-      return initialValue;
-    }
-  });
+  useEffect(() => {
+    const item = localStorage.getItem(key);
+    if (item) setState(parse(item));
+  }, [key]);
 
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value: any) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);// eslint-disable-line no-console
-    }
-  };
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
 
-  return [storedValue, setValue];
+  return [state, setState];
+};
+
+const parse = (value: string) => {
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
 };
