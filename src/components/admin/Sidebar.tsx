@@ -16,17 +16,17 @@ function BoxIcon({ className }: {
       viewBox="0 0 24 24"
     >
       <path
-        className="fill-current text-gray-400"
+        className="fill-current text-bo-gray-400"
         // :class="page.startsWith('ecommerce-') && 'text-indigo-300'"
         d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z"
       />
       <path
-        className="fill-current text-gray-700"
+        className="fill-current text-bo-gray-700"
         // :class="page.startsWith('ecommerce-') && '!text-indigo-600'"
         d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z"
       />
       <path
-        className="fill-current text-gray-600"
+        className="fill-current text-bo-gray-600"
         // :class="page.startsWith('ecommerce-') && 'text-indigo-500'"
         d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z"
       />
@@ -65,7 +65,7 @@ function SidebarBackdrop({ sidebarOpen }: SidebarBackdropProps) {
   return (
     <div
       // eslint-disable-next-line max-len
-      className={`fixed inset-0 bg-gray-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200
+      className={`fixed inset-0 bg-bo-gray-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200
       ${sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       // :className="sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'"
       // aria-hidden="true"
@@ -79,7 +79,7 @@ function SidebarHeader() {
     <div className="flex justify-between mb-10 pr-3 sm:px-2">
       {/* <!-- Close button --> */}
       <button
-        className="lg:hidden text-gray-500 hover:text-gray-400"
+        className="lg:hidden text-bo-gray-500 hover:text-bo-gray-400"
       // @click.stop="sidebarOpen = !sidebarOpen"
       // aria-controls="sidebar"
       // :aria-expanded="sidebarOpen"
@@ -139,14 +139,14 @@ type SidebarItemLinkProps = {
 function SidebarItemLink ({ label, href, icon: Icon, active }: SidebarItemLinkProps) {
   return (
     <li
-      className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${active && "bg-gray-900"}`}
-      // :class="page === 'dashboard' && 'bg-gray-900'"
+      className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${active && "bg-bo-gray-900"}`}
+      // :class="page === 'dashboard' && 'bg-bo-gray-900'"
     >
       <Link
         href={href}
         className={`block truncate transition duration-150
-        ${active ? "text-white hover:text-gray-300" : "text-gray-300 hover:text-white"}`}
-        // :class="page === 'dashboard' && 'hover:text-gray-200'"
+        ${active ? "text-white hover:text-bo-gray-300" : "text-bo-gray-300 hover:text-white"}`}
+        // :class="page === 'dashboard' && 'hover:text-bo-gray-200'"
         // href="index.html"
       >
         <div className="flex items-center">
@@ -188,7 +188,7 @@ export function Sidebar() {
       <div
         id="sidebar"
         // eslint-disable-next-line max-len
-        className={`flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-gray-800 p-4 transition-all duration-200 ease-in-out
+        className={`flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-bo-gray-800 p-4 transition-all duration-200 ease-in-out
         ${sidebarOpen ? "translate-x-0" : "-translate-x-64"}`}
         // :className="sidebarOpen ? 'translate-x-0' : '-translate-x-64'"
         // @click.outside="sidebarOpen = false"
@@ -200,7 +200,7 @@ export function Sidebar() {
         {/* Links */}
         <div className="space-y-8">
           <div>
-            <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3">
+            <h3 className="text-bo-xs uppercase text-bo-gray-500 font-semibold pl-3">
               <span
                 className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6"
               // aria-hidden="true"
@@ -236,10 +236,10 @@ export function Sidebar() {
               <span className="sr-only">Expand / collapse sidebar</span>
               <svg className="w-6 h-6 fill-current sidebar-expanded:rotate-180" viewBox="0 0 24 24">
                 <path
-                  className="text-gray-400"
+                  className="text-bo-gray-400"
                   d="M19.586 11l-5-5L16 4.586 23.414 12 16 19.414 14.586 18l5-5H7v-2z"
                 />
-                <path className="text-gray-600" d="M3 23H1V1h2z" />
+                <path className="text-bo-gray-600" d="M3 23H1V1h2z" />
               </svg>
             </button>
           </div>

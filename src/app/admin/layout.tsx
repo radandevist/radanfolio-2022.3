@@ -19,7 +19,7 @@ export default function AdminRootLayout({
     <html lang="en">
       <head />
       <body
-        className={`${inter.variable} antialiased bg-gray-100 text-gray-600`}
+        className={`${inter.variable} antialiased bg-bo-gray-100 text-bo-gray-600`}
         // :class="{ 'sidebar-expanded': sidebarExpanded }"
         // eslint-disable-next-line max-len
         // x-data="{ page: 'dashboard', sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
