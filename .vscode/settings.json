@@ -11,5 +11,8 @@
   "tailwindCSS.includeLanguages": {
     "typescriptreact": "html"
   },
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cSpell.words": [
+    "tailwindcss"
+  ]
 }

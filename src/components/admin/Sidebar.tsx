@@ -172,7 +172,7 @@ export function Sidebar() {
     document.querySelector("body")!.classList.toggle("sidebar-expanded");
   }, [sidebarExpanded]);
 
-  function toggleSideBarOpen() {
+  function toggleSideBarOpen() { // eslint-disable-line @typescript-eslint/no-unused-vars
     setSidebarOpen(!sidebarOpen);
   }
 

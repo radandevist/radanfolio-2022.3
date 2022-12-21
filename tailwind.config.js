@@ -1,3 +1,4 @@
+const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
 
 /** @type {import('tailwindcss').Config} */
@@ -42,6 +43,12 @@ module.exports = {
           700: "#000000",
           800: "#000000",
           900: "#000000"
+        },
+        // ADMIN
+        admin: {
+          gray: colors.slate,
+          "light-blue": colors.sky,
+          red: colors.rose,
         },
       },
       animation: {
