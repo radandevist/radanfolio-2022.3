@@ -75,7 +75,10 @@ const adminConfig = {
 };
 
 /** @type {import('tailwindcss').Config} */
-const customConfig = {
+const userConfig = {
+  // * In case of you want to use bootstrap or any other framework
+  // * give tailwind classes prefix so avoid class names conflicts
+  // prefix: "tw-",
   darkMode: "class",
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -120,4 +123,4 @@ const customConfig = {
   },
 };
 
-module.exports = merge(customConfig, adminConfig);
+module.exports = merge(userConfig, adminConfig);
