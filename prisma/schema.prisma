@@ -10,10 +10,12 @@ datasource db {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  firstName     String?
+  lastName      String
+  userName      String    @unique
+  email         String    @unique
   emailVerified DateTime?
-  progileImage  String?
+  profileImage  String?
   role          Role
   posts         Post[]
   comments      Comment[]
@@ -30,7 +32,7 @@ model Post {
   id          String    @id @unique @default(cuid())
   coverImage  String
   title       String
-  content     String
+  content     String    @db.LongText
   userId      String
   author      User      @relation(fields: [userId], references: [id])
   comments    Comment[]

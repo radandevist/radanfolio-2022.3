@@ -22,7 +22,7 @@ import { GoogleAnalytics } from "../components/GoogleAnalytics";
 const rubikGlitch = Rubik_Glitch({
   variable: "--font-rubik",
   display: "swap",
-  weight: "400"
+  weight: "400",
 });
 
 const albertSans = Albert_Sans({

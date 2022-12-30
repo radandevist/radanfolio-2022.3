@@ -1,6 +1,6 @@
 import React, { MouseEvent } from "react";
 
-import HamburgerIcon from "./icons/HamburgerIcon";
+import HamburgerIcon from "../../components/admin/icons/HamburgerIcon";
 
 type Props = {
   sidebarOpen: boolean;
@@ -45,5 +45,3 @@ export function Header({
     </header>
   );
 }
-
-export default Header;

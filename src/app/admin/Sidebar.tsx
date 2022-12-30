@@ -8,32 +8,31 @@ import { v4 } from "uuid";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { PATH_NAMES } from "../../constants/pathNames";
-
-import { ExitIcon } from "./icons/ExitIcon";
-import { BoxIcon } from "./icons/BoxIcon";
-import { MosaicLogo } from "./icons/MosaicLogo";
-import ArrowLeftIcon from "./icons/ArrowLeftIcon";
+import { BoxIcon } from "../../components/admin/icons/BoxIcon";
+import { ArrowLeftIcon } from "../../components/admin/icons/ArrowLeftIcon";
+import { MosaicLogo } from "../../components/admin/icons/MosaicLogo";
+import { ExitIcon } from "../../components/admin/icons/ExitIcon";
 
 const sidebarMenuItems = [
   {
     label: "Dashboard",
     href: PATH_NAMES.admin.home,
-    icon: BoxIcon
+    icon: BoxIcon,
   },
   {
     label: "Posts",
     href: PATH_NAMES.admin.posts,
-    icon: BoxIcon
+    icon: BoxIcon,
   },
   {
     label: "Projects",
     href: PATH_NAMES.admin.projects,
-    icon: BoxIcon
+    icon: BoxIcon,
   },
   {
     label: "Memes",
     href: PATH_NAMES.admin.memes,
-    icon: BoxIcon
+    icon: BoxIcon,
   },
 ];
 

@@ -4,7 +4,7 @@ type Props = {
   className?: string;
 };
 
-function ArrowLeftIcon({ className }: Props) {
+export function ArrowLeftIcon({ className }: Props) {
   return (
     <svg
       className={`w-6 h-6 fill-current ${className}`}
@@ -15,5 +15,3 @@ function ArrowLeftIcon({ className }: Props) {
     </svg>
   );
 }
-
-export default ArrowLeftIcon;

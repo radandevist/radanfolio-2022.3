@@ -1,11 +1,11 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   plugins: [
-    "@typescript-eslint/eslint-plugin"
+    "@typescript-eslint/eslint-plugin",
   ],
   extends: [
     "next/core-web-vitals",
-    "plugin:import/recommended"
+    "plugin:import/recommended",
   ],
   rules: {
     "@typescript-eslint/indent": ["error", 2],
@@ -25,6 +25,14 @@ module.exports = {
     "import/order": ["error", {
       "newlines-between": "always",
     }],
-    "quote-props": ["error", "as-needed"]
-  }
+    "quote-props": ["error", "as-needed"],
+    "comma-dangle": ["error", "always-multiline"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {
+      args: "all",
+      argsIgnorePattern: "^_",
+      varsIgnorePattern: "^_",
+      caughtErrorsIgnorePattern: "^_",
+    }],
+  },
 };

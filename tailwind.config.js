@@ -63,6 +63,8 @@ const adminConfig = {
     },
   },
   plugins: [
+    // eslint-disable-next-line global-require
+    require("@tailwindcss/forms"),
     // add custom variant for expanding sidebar
     plugin(({ addVariant, e }) => {
       addVariant("sidebar-expanded", ({ modifySelectors, separator }) => {
@@ -71,7 +73,7 @@ const adminConfig = {
         ));
       });
     }),
-  ]
+  ],
 };
 
 /** @type {import('tailwindcss').Config} */
@@ -83,7 +85,7 @@ const userConfig = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
     "./posts/**/*.mdx",
-    "./projects/**/*.mdx"
+    "./projects/**/*.mdx",
   ],
   theme: {
     extend: {
@@ -103,7 +105,7 @@ const userConfig = {
           700: "#003522",
           800: "#000000",
           900: "#000000",
-          contrasted: "#017F51"
+          contrasted: "#017F51",
         },
         brand2: {
           DEFAULT: "#111d25",
@@ -116,7 +118,7 @@ const userConfig = {
           600: "#000000",
           700: "#000000",
           800: "#000000",
-          900: "#000000"
+          900: "#000000",
         },
       },
     },
