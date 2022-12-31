@@ -1,21 +1,78 @@
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 import { useTable, Column } from "react-table";
 import { v4 } from "uuid";
 
-type Props<D extends object> = {
+import { getTableColumns } from "./getTableColumns";
+
+type Props<D extends ObjectWithId> = {
   data: D[];
-  // selectedItems: D[];
   columns: Column<D>[];
+  onSelectAll: () => void;
+  onSelect: (id: string) => void;
+  onPreview?: (id: string) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
   header?: ReactNode;
+  // initialSelectedIds?: string[];
 };
 
-export function Table<D extends object>({
+export function Table<D extends ObjectWithId>({
   data: iData,
   columns: iColumns,
   header,
+  onSelectAll,
+  onSelect,
+  onPreview,
+  onEdit,
+  onDelete,
+  // initialSelectedIds,
 }: Props<D>) {
   const data = useMemo(() => iData, [iData]);
-  const columns = useMemo(() => iColumns, [iColumns]);
+  const dataIds = useMemo(() => data.map(({ id }) => id), [data]);
+  const [selectedIds, setSelectedIds] = useState<string[]>(
+    [],
+    // initialSelectedIds ?? [], 
+  );
+
+  const handleSelectAll = useCallback(
+    () => {
+      onSelectAll();
+      if (selectedIds.length >= dataIds.length) {
+        setSelectedIds([]);
+      } else {
+        setSelectedIds(dataIds);
+      }
+    },
+    [dataIds, onSelectAll, selectedIds.length],
+  );
+
+  const handleSelect = useCallback(
+    (id: string) => {
+      onSelect(id);
+      if (selectedIds.includes(id)) {
+        const newState = selectedIds.filter((selectedId) => selectedId !==  id);
+        setSelectedIds(newState);
+      } else {
+        const newState = [...selectedIds, id];
+        setSelectedIds(newState);
+      }
+    },
+    [onSelect, selectedIds],
+  );
+
+  const columns = useMemo(
+    () => getTableColumns<D>({
+      columns: iColumns,
+      items: dataIds,
+      selectedItems: selectedIds,
+      onSelectAll: handleSelectAll,
+      onSelect: handleSelect,
+      onPreview,
+      onEdit,
+      onDelete,
+    }),
+    [dataIds, handleSelect, handleSelectAll, iColumns, onDelete, onEdit, onPreview, selectedIds],
+  );
 
   const {
     getTableProps,

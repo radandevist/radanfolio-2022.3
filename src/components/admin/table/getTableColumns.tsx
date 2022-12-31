@@ -10,23 +10,22 @@ type Params<D extends ObjectWithId> = {
   items: string[];
   selectedItems: string[];
   // setSelectedItems: (items: string[]) => void;
-  onToggleSelectOne: (id: string) => void;
-  onToggleSelectAll: () => void;
-  handlePreview?: (id: string) => void;
-  handleEdit?: (id: string) => void;
-  handleDelete?: (id: string) => void; 
+  onSelect: (id: string) => void;
+  onSelectAll: () => void;
+  onPreview?: (id: string) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void; 
   columns: Column<D>[];
 };
 
 export function getTableColumns<D extends ObjectWithId>({
   items,
   selectedItems,
-  // setSelectedItems,
-  onToggleSelectOne,
-  onToggleSelectAll,
-  handlePreview,
-  handleEdit,
-  handleDelete,
+  onSelect,
+  onSelectAll,
+  onPreview,
+  onEdit,
+  onDelete,
   columns,
 }: Params<D>): Column<D>[] {
   return [
@@ -37,7 +36,7 @@ export function getTableColumns<D extends ObjectWithId>({
         const allSelected = selectedItems.length >= items.length;
   
         const handleSelectAll = () => {
-          onToggleSelectAll();
+          onSelectAll();
         };
   
         return (
@@ -59,7 +58,7 @@ export function getTableColumns<D extends ObjectWithId>({
         const isSelected = selectedItems.includes(id);
 
         const handleSelect = () => {
-          onToggleSelectOne(id);
+          onSelect(id);
         };
   
         return (
@@ -79,7 +78,7 @@ export function getTableColumns<D extends ObjectWithId>({
       },
     },
     ...columns,
-    ...((!!handlePreview || !!handleEdit || !!handleDelete)
+    ...((!!onPreview || !!onEdit || !!onDelete)
       ? [
         {
           id: "actions-menu-column",
@@ -87,22 +86,22 @@ export function getTableColumns<D extends ObjectWithId>({
           Header: () => <span className="sr-only">Actions menu</span>,
           Cell: ({ value: id }: { value: string }) => (
             <CellWrapper className="justify-end">
-              {handlePreview && (
+              {onPreview && (
                 <FiEye
                   className="h-5 w-5 ml-2 text-bo-gray-500 hover:text-bo-gray-700 cursor-pointer"
-                  onClick={() => handlePreview(id)}
+                  onClick={() => onPreview(id)}
                 />
               )}
-              {handleEdit && (
+              {onEdit && (
                 <FiEdit
                   className="h-5 w-5 ml-2 text-bo-gray-500 hover:text-bo-gray-700 cursor-pointer"
-                  onClick={() => handleEdit(id)}
+                  onClick={() => onEdit(id)}
                 />
               )}
-              {handleDelete && (
+              {onDelete && (
                 <MdDelete
                   className="h-5 w-5 ml-2 text-bo-gray-500 cursor-pointer hover:text-rose-400"
-                  onClick={() => handleDelete(id)}
+                  onClick={() => onDelete(id)}
                 />
               )}
             </CellWrapper>
