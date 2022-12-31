@@ -1,7 +1,7 @@
 "use client";
 
 import { Post } from "@prisma/client";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import truncate from "lodash/truncate";
 
 import { CellWrapper } from "../../../components/admin/table/CellWrapper";
@@ -13,14 +13,12 @@ type Props = {
 };
 
 export function PostsTable({
-  posts: iPosts,
+  posts,
 }: Props) {
-  const posts = useMemo(() => iPosts, [iPosts]);
-
   const [postsIds, _] = useState<string[]>(posts.map((post) => post.id));
   const [selectedPostsIds, setSelectedPostsIds] = useState<string[]>([]);
 
-  const columns = useMemo(() => getTableColumns<Post>({
+  const columns = getTableColumns<Post>({
     items: postsIds,
     selectedItems: selectedPostsIds,
     onToggleSelectOne(id: string) {
@@ -80,7 +78,7 @@ export function PostsTable({
         ),
       },
     ],
-  }), [postsIds, selectedPostsIds]);
+  });
 
   return (
     <Table columns={columns} data={posts}/>

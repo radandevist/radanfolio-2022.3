@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import { useTable, Column } from "react-table";
 import { v4 } from "uuid";
 
@@ -10,10 +10,13 @@ type Props<D extends object> = {
 };
 
 export function Table<D extends object>({
-  data,
-  columns,
+  data: iData,
+  columns: iColumns,
   header,
 }: Props<D>) {
+  const data = useMemo(() => iData, [iData]);
+  const columns = useMemo(() => iColumns, [iColumns]);
+
   const {
     getTableProps,
     getTableBodyProps,
