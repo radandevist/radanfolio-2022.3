@@ -1,4 +1,5 @@
 import { inter } from "../../fonts";
+import Providers from "../Providers";
 
 import { AdminLayout } from "./AdminLayout";
 
@@ -17,9 +18,11 @@ export default function AdminRootLayout({
       <body
         className={`${inter.variable} antialiased bg-slate-100 text-slate-600`}
       >
-        <AdminLayout>
-          {children}
-        </AdminLayout>
+        <Providers>
+          <AdminLayout>
+            {children}
+          </AdminLayout>
+        </Providers>
       </body>
     </html>
   );

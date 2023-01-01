@@ -58,7 +58,7 @@ export function Sidebar({
   }
 
   const trigger = useRef(null);
-  const { node: sidebar } = useClickOutside<HTMLDivElement>({// close on click outside
+  const { node: sidebar } = useClickOutside<HTMLDivElement>({ // close on click outside
     onClickOutside() {
       if (sidebarOpen) {
         toggleSidebarOpen();
@@ -126,7 +126,12 @@ export function Sidebar({
                 icon: Icon,
               // eslint-disable-next-line arrow-body-style
               }) => {
-                const active = !!pathName?.includes(href) && pathName === href;
+                // const active = !!pathName?.includes(href) && pathName.startsWith(href);
+                // const active = pathName?.startsWith(href);
+                // const active = pathName?.slice(1).include(href.slice(1));
+                const active = (href === PATH_NAMES.admin.home)
+                  ? pathName === PATH_NAMES.admin.home
+                  : pathName?.startsWith(href);
 
                 return (
                   <li

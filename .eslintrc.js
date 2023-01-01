@@ -34,5 +34,6 @@ module.exports = {
       varsIgnorePattern: "^_",
       caughtErrorsIgnorePattern: "^_",
     }],
+    "object-curly-spacing": ["error", "always"],
   },
 };

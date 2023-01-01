@@ -67,15 +67,22 @@ export function PostsTable({
   ];
 
   return (
-    <Table
-      data={posts}
-      columns={columns}
-      // selectedItems={selectedPostsIds}
-      onSelectAll={handleSelectAll}
-      onSelect={handleSelect}
-      onPreview={handlePreview}
-      onEdit={handleEdit}
-      onDelete={handleDelete}
-    />
+    <>
+      <Table
+        data={posts}
+        columns={columns}
+        // selectedItems={selectedPostsIds}
+        onSelectAll={handleSelectAll}
+        onSelect={handleSelect}
+        onPreview={handlePreview}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+
+      {/* Pagination */}
+      {/* <div className="mt-8">
+        <PaginationClassic />
+      </div> */}
+    </>
   );
 }

@@ -13,6 +13,7 @@
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
+    "reduxjs",
     "tailwindcss"
   ]
 }
