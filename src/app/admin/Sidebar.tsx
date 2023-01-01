@@ -124,11 +124,7 @@ export function Sidebar({
                 label,
                 href,
                 icon: Icon,
-              // eslint-disable-next-line arrow-body-style
               }) => {
-                // const active = !!pathName?.includes(href) && pathName.startsWith(href);
-                // const active = pathName?.startsWith(href);
-                // const active = pathName?.slice(1).include(href.slice(1));
                 const active = (href === PATH_NAMES.admin.home)
                   ? pathName === PATH_NAMES.admin.home
                   : pathName?.startsWith(href);

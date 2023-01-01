@@ -13,3 +13,4 @@
 @import 'tailwindcss/utilities';
 
 /* We should add import to custom styles here */
+@import 'added-by-us/ck-editor.css';

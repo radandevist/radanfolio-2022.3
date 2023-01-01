@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 type Props = {
   title: string;
-  actions: ReactNode;
+  actions?: ReactNode;
 };
 
 export function PageHeader({ title, actions }: Props) {
@@ -11,7 +11,7 @@ export function PageHeader({ title, actions }: Props) {
 
       {/* Left: Title */}
       <div className="mb-4 sm:mb-0">
-        <h1 className="text-bo-2xl md:text-bo-3xl text-slate-800 font-bold">{title} ✨</h1>
+        <h1 className="text-bo-2xl md:text-bo-3xl text-slate-800 font-bold">{title}</h1>
       </div>
 
       {/* Right: Actions */}

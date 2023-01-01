@@ -4,6 +4,8 @@
  * @author ericwbailey
  */
 
+/* purgecss start ignore */
+
  code[class*="language-"],
  pre[class*="language-"] {
    color: #f8f8f2;
@@ -159,3 +161,5 @@
      font-weight: normal;
    }
  }
+
+/* purgecss end ignore */

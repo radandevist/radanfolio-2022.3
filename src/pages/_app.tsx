@@ -1,5 +1,5 @@
 import "animate.css";
-import "../styles/globals.css";
+import "../styles/my-globals.css";
 import "../styles/prism-a11y-dark.css";
 
 import Head from "next/head";
@@ -8,7 +8,6 @@ import { appWithTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 import { useRouter } from "next/router";
-import { Albert_Sans, Merriweather, Rubik_Glitch } from "@next/font/google";
 
 import { ScrollTopWidget } from "../components/ScrollTopWidget";
 import { ScrollRestore } from "../components/ScrollRestore";
@@ -18,20 +17,7 @@ import { Footer } from "../components/Footer";
 import { ThemeProvider } from "../contexts/theme";
 // import { StickyBanner } from "../components/ads/ExoClick";
 import { GoogleAnalytics } from "../components/GoogleAnalytics";
-
-const rubikGlitch = Rubik_Glitch({
-  variable: "--font-rubik",
-  display: "swap",
-  weight: "400",
-});
-
-const albertSans = Albert_Sans({
-  weight: ["100", "200", "300", "400", "500"],
-});
-
-const merriweather = Merriweather({
-  weight: ["300", "400", "700", "900"],
-});
+import { albertSans, merriweather, rubikGlitch } from "../fonts";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

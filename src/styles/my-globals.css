@@ -52,7 +52,7 @@ Styling code block title generated
 the mdx rehype plugin
 ============================== */
 .rehype-code-title {
-  @apply italic text-center !mb-2 text-lg md:text-xl;
+  @apply italic text-center mb-2 text-xl md:text-2xl;
 }
 
 /* ==============================
@@ -76,39 +76,39 @@ posts fill entire available width
 Scrollbar styling for our block
 of codes inside of any blog post
 ============================== */
-.code-block.pre-scrollbar::-webkit-scrollbar {
+.post-content-pre::-webkit-scrollbar {
   @apply bg-transparent h-3;
 }
-.code-block.pre-scrollbar::-webkit-scrollbar-track {
+.post-content-pre::-webkit-scrollbar-track {
   @apply rounded-lg bg-transparent;
 }
-.code-block.pre-scrollbar::-webkit-scrollbar-thumb {
+.post-content-pre::-webkit-scrollbar-thumb {
   @apply rounded-lg bg-brand1;
 }
-.code-block.pre-scrollbar::-webkit-scrollbar-button {
+.post-content-pre::-webkit-scrollbar-button {
   @apply bg-transparent rounded-lg;
   display: none;
-}
-
-/* for the theme switch text hover effect */
-.text-label {
-  @apply border-2 border-transparent;
-}
-.switch-toggler:hover > .text-label {
-  @apply hover:text-brand1-500 border-b-brand1-500 duration-300 text-brand1-500;
 }
 
 /* =================================================
   Adjusting the first line of our code block component
 ================================================== */
-.code-block-pre>code:first-child {
+/* .code-block-pre>code:first-child {
   @apply -ml-2;
-}
+} */
 
 /* Adds a little spacing at the end of a code block line */
-.code-block-pre .code-line {
+/* .code-block-pre .code-line {
   @apply pr-4;
+} */
+
+/* for the theme switch text hover effect */
+/* .text-label {
+  @apply border-2 border-transparent;
 }
+.switch-toggler:hover > .text-label {
+  @apply hover:text-brand1-500 border-b-brand1-500 duration-300 text-brand1-500;
+} */
 
 /* overriding animate css for resolving LCS web vital */
 .radan_animate__slideInLeft {

@@ -31,7 +31,7 @@ const Page404 = () => {
           property="og:image"
           content={getCloudinaryOpenGraphImage(
             // eslint-disable-next-line max-len
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/v1668907870/radanfolio/404_pal5zw.jpg"
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/v1668907870/radanfolio/404_pal5zw.jpg",
           )}
         />
         <meta property="og:title" content={`${t("common:pageNotFound")}`} />

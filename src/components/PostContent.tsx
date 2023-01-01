@@ -10,9 +10,16 @@ export const PostContent: FC<Props> = ({ components, code }) => {
 
   return (
     <article
-      className="text-2xl md:text-3xl font-light
+      className="
         first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold
-        space-y-10 prose"
+          dark:!text-slate-100
+        prose lg:prose-xl
+        prose-p:text-2xl md:prose-p:text-3xl prose-p:font-light
+          dark:prose-p:text-slate-200
+        prose-code:font-light dark:prose-code:text-slate-400
+        prose-pre:!bg-brand2-500 dark:prose-pre:!bg-brand2-400
+          prose-pre:!text-xl md:prose-pre:!text-2xl prose-pre:!mt-0
+        "
     >
       {/* {post.code} */}
       {/* {code} */}

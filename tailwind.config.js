@@ -73,6 +73,8 @@ const adminConfig = {
         ));
       });
     }),
+    // Necessary for both admin & user
+    require("@tailwindcss/typography"),
   ],
 };
 

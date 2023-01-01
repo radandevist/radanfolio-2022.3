@@ -34,7 +34,7 @@ export type PostViewProps = {
   post: Post;
 };
 
-const PostView: NextPage<PostViewProps> = ({ post: { code, ...post} }) => {
+const PostView: NextPage<PostViewProps> = ({ post: { code, ...post } }) => {
   const isLarge = useMediaQuery("(min-width: 1024px)");
 
   return (
@@ -140,7 +140,7 @@ export const getStaticPaths: GetStaticPaths<PostViewParams> = async ({ locales }
         process.cwd(),
         POSTS_FOLDER,
         slug,
-        `${locale}.mdx`
+        `${locale}.mdx`,
       );
       if (fs.existsSync(fullPath)) {
         paths.push({ params: { slug }, locale });
@@ -150,12 +150,12 @@ export const getStaticPaths: GetStaticPaths<PostViewParams> = async ({ locales }
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = async ({
-  params,locale, locales
+  params,locale, locales,
 }) => {
   const post = ZPost
     .parse(formatPostFileResult(await getFileV3(POSTS_FOLDER, params?.slug!, locale!)));
@@ -164,7 +164,7 @@ export const getStaticProps: GetStaticProps<PostViewProps, PostViewParams> = asy
     props: {
       post,
       ...(await serverSideTranslations(locale!, ["common", "blog"], null, locales)),
-    }
+    },
   };
 };
 

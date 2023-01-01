@@ -18,7 +18,7 @@ export default async function PostsAdminPage() {
     <>
       {/* Header */}
       <PageHeader
-        title="Posts"
+        title="Posts ✨"
         actions={(
           <>
             {/* Add customer button */}

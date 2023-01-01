@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 
-export const CodeBlock: FC<PropsWithChildren> = ({ children }) => (
+export const OldCodeBlock: FC<PropsWithChildren> = ({ children }) => (
   <div className="
     bg-brand2-500 dark:bg-brand2-400 rounded-lg
     mx-auto my-5 !mt-0
@@ -17,11 +17,13 @@ export const CodeBlock: FC<PropsWithChildren> = ({ children }) => (
       font-mono text-lg md:text-xl
       code-block pre-scrollbar
       ">
-      <div>
-        <pre className="code-block-pre">
-          {children}
-        </pre>
-      </div>
+      <pre className="code-block-pre">
+        {children}
+      </pre>
     </div>
   </div>
+);
+
+export const CodeBlock: FC<PropsWithChildren> = ({ children }) => (
+  <pre className="post-content-pre">{children}</pre>
 );

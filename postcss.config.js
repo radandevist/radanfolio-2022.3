@@ -8,12 +8,12 @@ const defaultNextConfig = {
   "postcss-flexbugs-fixes": {},
   "postcss-preset-env": {
     autoprefixer: {
-      flexbox: "no-2009"
+      flexbox: "no-2009",
     },
     stage: 3,
     features: {
-      "custom-properties": false
-    }
+      "custom-properties": false,
+    },
   },
 };
 
@@ -38,7 +38,7 @@ const purgeCssConfig = {
     // ? The following is the correct one to get it working with tailwindcss
     // * @see https://stackoverflow.com/a/60552953/15003148
     defaultExtractor: content => content.match(/[\w\-:.\/\[#%\]!]+(?<!:)/g) || [],
-    safelist: ["html", "body"]
+    safelist: ["html", "body", "rehype-code-title", "ck-content"],
   },
 };
 
@@ -50,5 +50,5 @@ module.exports = {
     ...(isProd ? { cssnano: {} } : {}),
     ...defaultNextConfig,
     ...purgeCssConfig,
-  }
+  },
 };

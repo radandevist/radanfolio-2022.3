@@ -15,7 +15,7 @@ const Home: NextPage = () => {
     ...about,
     bioIntro: t("home:about.bioIntro"),
     bioPreface: t("home:about.bioPreface"),
-    bioSub: t("home:about.bioSub")
+    bioSub: t("home:about.bioSub"),
   };
 
   return (
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
           property="og:image"
           content={getCloudinaryOpenGraphImage(
             // eslint-disable-next-line max-len
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg"
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg",
           )}
         />
         <meta property="og:title" content={t("home:openGraph.title")} />
