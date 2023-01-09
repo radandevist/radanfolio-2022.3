@@ -37,3 +37,5 @@ yarn-error.log*
 # Additional from me
 /generated
 /public/generated
+
+.env.*
