@@ -2,7 +2,11 @@ const path = require("path");
 
 const nextI18n = {
   defaultLocale: "en",
-  locales: ["en", "fr", "mg"],
+  locales: [
+    "en",
+    "fr",
+    "mg",
+  ],
 };
 
 const i18n = {
