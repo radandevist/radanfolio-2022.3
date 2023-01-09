@@ -6,13 +6,12 @@ import Link from "next/link";
 
 import { useTheme } from "../contexts/theme";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import { PATH_NAMES } from "../constants";
 
 // import { Link } from "./Link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileNav } from "./MobileNav";
-
-
 
 export const Navbar = () => {
   const router = useRouter();
@@ -23,16 +22,21 @@ export const Navbar = () => {
 
   const links = [
     {
-      name: t("common:home"),
-      route: "/",
+      // name: t("common:home"),
+      name: t("common:blog"),
+      route: PATH_NAMES.home,
+    },
+    {
+      name: t("common:about"),
+      route: PATH_NAMES.about,
     },
     {
       name: t("common:projects"),
-      route: "/projects",
+      route: PATH_NAMES.projects,
     },
     {
-      name: t("common:posts"),
-      route: "/posts",
+      name: t("common:contact"),
+      route: PATH_NAMES.contact,
     },
   ];
 
@@ -71,12 +75,14 @@ export const Navbar = () => {
             className="h-10 w-10 md:h-14 md:w-14 rounded-full shadow-lg
               grid place-items-center text-lg text-white font-bold"
           >
-            <div className="block dark:hidden">
-              <Image width={256} height={256} src="/devist-logo-dark.png" alt="devist logo" />
-            </div>
-            <div className="hidden dark:block">
-              <Image width={256} height={256} src="/devist-logo-light.png" alt="devist logo" />
-            </div>
+            <Link href={PATH_NAMES.home}>
+              <div className="block dark:hidden">
+                <Image width={256} height={256} src="/devist-logo-dark.png" alt="devist logo" />
+              </div>
+              <div className="hidden dark:block">
+                <Image width={256} height={256} src="/devist-logo-light.png" alt="devist logo" />
+              </div>
+            </Link>
           </div>
 
           {/* Nav */}

@@ -9,3 +9,11 @@ export const POSTS_FRONT_MATTERS_FILENAME = "posts-front-matters.json";
 export const POSTS_FRONT_MATTERS_FOLDER_NAME = "posts-front-matters";
 
 export const PROJECTS_FRONT_MATTERS_FOLDER_NAME = "projects-front-matters";
+
+export const PATH_NAMES = {
+  home: "/", // also the blog
+  about: "/about",
+  projects: "/projects",
+  contact: "/contact",
+  // blog: "/blog",
+};
