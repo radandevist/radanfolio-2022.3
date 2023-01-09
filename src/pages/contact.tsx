@@ -1,107 +1,89 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+// import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { AnimatedPage } from "../components/AnimatedPage";
-import { about } from "../data/about";
-import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../helpers/cloudinary";
+import { MaterialInput } from "../components/form/MaterialInput";
+import { MaterialTextArea } from "../components/form/MaterialTextArea";
+// import { about } from "../data/about";
+// import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../helpers/cloudinary";
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
   
-  const info = {
-    ...about,
-    bioIntro: t("home:about.bioIntro"),
-    bioPreface: t("home:about.bioPreface"),
-    bioSub: t("home:about.bioSub")
-  };
+  // const info = {
+  //   ...about,
+  //   bioIntro: t("home:about.bioIntro"),
+  //   bioPreface: t("home:about.bioPreface"),
+  //   bioSub: t("home:about.bioSub")
+  // };
 
   return (
     <AnimatedPage>
       <Head>
-        <title>Radanfolio | ANDRIANARISOA Daniel</title>
-        <meta name="description" content={t("home:openGraph.description")} />
+        {/* <title>Radanfolio | ANDRIANARISOA Daniel</title>
+        <meta name="description" content={t("home:openGraph.description")} /> */}
 
         {/* opengraph */}
-        <meta property="og:description" content={t("home:openGraph.description")} />
+        {/* <meta property="og:description" content={t("home:openGraph.description")} />
         <meta
           property="og:image"
           content={getCloudinaryOpenGraphImage(
             // eslint-disable-next-line max-len
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg"
+            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/
+              radanfolio/home_opengraph_xhclzs.jpg"
           )}
-        />
-        <meta property="og:title" content={t("home:openGraph.title")} />
+        /> */}
+        {/* <meta property="og:title" content={t("home:openGraph.title")} /> */}
         {/* <meta property="og:site_name" content="radanfolio" />
         <meta property="og:url" content="radanfolio.vercel.app" />
         <meta property="og:type" content="" /> */}
       </Head>
       <div className="w-full min-h-screen">
-        <div className="mxw-sm w-full my-12 relative">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">{t("home:theBio")}</h2>
+        <div className="mxw-sm w-full my-12">
+          <div className="max-w-xl mx-auto">
+            <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">{t("common:contact")}</h2>
+          </div>
         </div>
         <section className="animate animate__animated animate__fadeIn mxw-sm">
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-6">
-            <div className="sm:col-span-2">
-              <Image
-                width={255}
-                height={340}
-                src={info.avatar}
-                alt="radan's profile pic"
-                className="h-full w-full object-cover rounded-lg shrink-0"
-                placeholder="blur"
-                blurDataURL={getCloudinaryThumbnail(info.avatar)}
-                loading="eager"
-              />
-            </div>
-            <div className="sm:col-span-4 flex flex-col items-start justify-center space-y-3">
-              <h2 className="text-4xl">{info.bioIntro}</h2>
-              <p className="text-2xl font-light">{info.bioPreface}</p>
-              <div className="flex items-center flex-wrap justify-start">
-                {info.socials && info.socials.map((social) => (
-                  <a
-                    key={social.name}
-                    target="_blank"
-                    rel="noreferrer"
-                    href={social.url}
-                    className="inline-block my-1 bg-brand1-contrasted text-white
-                      font-semibold py-2 px-3 mr-4">
-                    {social?.name}
-                  </a>
-                ))}
-              </div>
-              <a
-                rel="noreferrer"
-                href={info.resumeUrl}
-                className="block border border-brand1-contrasted dark:border-white
-                text-brand1-contrasted dark:text-white font-semibold py-2 px-3"
-              >
-                {t("home:downloadMyResume")}
-              </a>
-            </div>
-          </div>
+          <form className="space-y-10 max-w-xl mx-auto">
+            <MaterialInput
+              id="devist_contact_name"
+              label="Full Name"
+              required
+              type="text"
+            />
+
+            <MaterialInput
+              id="devist_contact_email"
+              label="Email Address"
+              required
+              type="text"
+            />
+
+            <MaterialTextArea
+              id="devist_contact_message"
+              label="Your Message"
+              required
+              rows={2}
+            />
+
+            <button
+              type="submit"
+              onClick={(event) => {
+                event.preventDefault();
+              }}
+              className="bg-brand1-contrasted w-full pb-4 pt-5 text-slate-50 text-2xl font-future"
+            >
+              Submit
+            </button>
+          </form>
         </section>  
-        <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
-        <section className="mxw-sm my-12">
-          <p className="text-2xl md:text-3xl py-6">{info.bioSub}</p>
-          {/* <p className="text-2xl md:text-3xl font-light">{info.bioSub}</p> */}
-          {/* skills  */}
-          <p className="text-2xl md:text-3xl my-12">{t("home:skillsInclude")}:</p>
-          <div className="flex items-center flex-wrap">
-            {about?.skills?.map((skill) => (
-              <span
-                key={skill?.id}
-                className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 dark:shadow-brand2-400
-                bg-brand1-contrasted text-white font-semibold"
-              >
-                {skill?.name}
-              </span>
-            ))}
-          </div>
-          {/* <p className="text-2xl md:text-3xl py-6">{info.bioMain}</p> */}
-        </section>
+        {/* <section className="mxw-sm my-12">
+          
+        </section> */}
       </div>
     </AnimatedPage>
   );
@@ -111,6 +93,6 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async ({ locale, locales }) => ({
   props: {
-    ...(await serverSideTranslations(locale!, ["common", "home"], null, locales)),
+    ...(await serverSideTranslations(locale!, ["common"], null, locales)),
   },
 });
