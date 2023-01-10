@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import React, { PropsWithChildren } from "react";
 
-import { Footer } from "../Footer";
-import { Navbar } from "../Navbar";
+
 import { ScrollRestore } from "../ScrollRestore";
 import { ScrollTopWidget } from "../ScrollTopWidget";
 import { albertSans, merriweather, rubikGlitch } from "../../fonts";
+
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 
 type Props = PropsWithChildren<{}>;
 

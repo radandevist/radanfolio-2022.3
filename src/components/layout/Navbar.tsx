@@ -4,13 +4,12 @@ import { useTranslation } from "next-i18next";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 
-import { useTheme } from "../contexts/theme";
-import { useMediaQuery } from "../hooks/useMediaQuery";
-import { PATH_NAMES } from "../constants";
+import { useTheme } from "../../contexts/theme";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { PATH_NAMES } from "../../constants";
+import { ThemeSwitcher } from "../ThemeSwitcher";
+import { LanguageSwitcher } from "../LanguageSwitcher";
 
-// import { Link } from "./Link";
-import { ThemeSwitcher } from "./ThemeSwitcher";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileNav } from "./MobileNav";
 
 export const Navbar = () => {
