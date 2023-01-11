@@ -25,6 +25,7 @@ module.exports = {
     "import/order": ["error", {
       "newlines-between": "always",
     }],
-    "quote-props": ["error", "as-needed"]
+    "quote-props": ["error", "as-needed"],
+    "arrow-body-style": "off",
   }
 };

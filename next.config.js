@@ -8,7 +8,8 @@ const nextConfig = {
     domains: [
       "images.pexels.com",
       "res.cloudinary.com",
-      "media.giphy.com"
+      "media.giphy.com",
+      "localhost"
     ],
   }
 };

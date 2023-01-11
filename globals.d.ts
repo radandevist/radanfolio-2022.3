@@ -4,3 +4,5 @@ interface Window {
 }
 
 declare var AdProvider: any;
+
+type AnyObj = Record<string, any>;
