@@ -26,6 +26,7 @@ import { fullUrl } from "../../utils/strapiUtils";
 import { STRAPI_BLUR_PLACEHOLDER_IMAGE } from "../../constants";
 import { StrapiPostContent } from "../../components/StrapiPostContent";
 import { StrapiFullSeo } from "../../types/seo.types";
+import { bundleStrapiContent } from "../../utils/mdxUtils";
 
 // export type Post = z.infer<typeof ZPost>;
 
@@ -253,6 +254,8 @@ export const getServerSideProps: GetServerSideProps<SinglePostPageProps, PostPag
   // find posts by slug (slug is unique in our db model)
   const { data: { 0: post } } = await client
     .get<StraPiResponse<ISinglePost[]>>(`/posts?${singlePostQuery}`);
+
+  post.attributes.content = await bundleStrapiContent(post.attributes.content);
 
   // find comments by slug (slug is unique in our db model)
   // const idk = await client

@@ -190,3 +190,31 @@ export async function getAllFilesFrontMatterV2(mdxFilesDir: string) {
 
   return postLocales;
 };
+
+export async function bundleStrapiContent(content: string) {
+  const { code } = await bundleMDX({
+    source: content,
+    mdxOptions(options) {
+      // you can add your plugins right here if you'd rather use
+      // remark plugins then you can add them similary just replace
+      // the occurances of rehype with remark.
+      options.rehypePlugins = [
+        ...(options?.rehypePlugins ?? []),
+        rehypeSlug,
+        rehypeCodeTitles,
+        rehypePrism,
+        [
+          rehypeAutolinkHeadings,
+          {
+            properties: {
+              className: ["anchor"],
+            },
+          },
+        ],
+      ];
+      return options;
+    },
+  });
+
+  return code;
+};
