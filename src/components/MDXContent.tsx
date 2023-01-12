@@ -2,14 +2,14 @@ import { getMDXComponent, MDXContentProps } from "mdx-bundler/client";
 import { FC, useMemo } from "react";
 
 type Props = MDXContentProps & {
-  content: string; // The content from strapi
+  code: string; // The content from strapi
 };
 
-export const StrapiPostContent: FC<Props> = ({
-  content,
+export const MDXContent: FC<Props> = ({
+  code,
   components,
 }) => {
-  const Component = useMemo(() => getMDXComponent(content), [content]);
+  const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
     <article

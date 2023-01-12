@@ -6,9 +6,9 @@ import Image from "next/image";
 import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
 import qs from "qs";
-// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { about } from "../../data/about";
+// import { about } from "../../data/about";
 import { mdxComponents } from "../../components/mdx";
 // import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
 // import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -24,9 +24,10 @@ import { StrapiMedia } from "../../types/media.types";
 import { StrapiTag } from "../../types/tag.types";
 import { fullUrl } from "../../utils/strapiUtils";
 import { STRAPI_BLUR_PLACEHOLDER_IMAGE } from "../../constants";
-import { StrapiPostContent } from "../../components/StrapiPostContent";
 import { StrapiFullSeo } from "../../types/seo.types";
 import { bundleStrapiContent } from "../../utils/mdxUtils";
+import { SinglePostHeader } from "../../components/partials/blog/SinglePostHeader";
+import { MDXContent } from "../../components/MDXContent";
 
 // export type Post = z.infer<typeof ZPost>;
 
@@ -42,7 +43,11 @@ import { bundleStrapiContent } from "../../utils/mdxUtils";
 
 type ISinglePost = StrapiPopulate<StrapiPost, {
   author: {
-    data: StrapiUser;
+    data: StrapiPopulate<StrapiUser, {
+      profilePic: {
+        data: StrapiMedia;
+      };
+    }>;
   };
   cover: {
     data: StrapiMedia;
@@ -63,29 +68,25 @@ type SinglePostPageProps = {
 const SinglePostPage: NextPage<SinglePostPageProps> = ({
   post
 }) => {
-  // const isLarge = useMediaQuery("(min-width: 1024px)");
-
   return (
     <AnimatedPage>
       <Head>
         <title>{`${post.attributes.title} | Radanfolio`}</title>
         <meta
           name="description"
-          content={post.attributes.summary || `A blog post by ${post.attributes.author}`}
+          content={post.attributes.summary
+            || `A blog post by ${post.attributes.author?.data.attributes.fullName}`}
         />
 
         {/* opengraph */}
         <meta
           property="og:description"
-          content={post.attributes.summary || `A blog post by ${post.attributes.author}`}
+          content={post.attributes.summary
+            || `A blog post by ${post.attributes.author?.data.attributes.fullName}`}
         />
         <meta
           property="og:image"
-          // content={getCloudinaryOpenGraphImage(post.cover)}
-          content={fullUrl(
-            post.attributes.cover?.data.attributes.formats.medium.url
-            || ""
-          )}
+          content={fullUrl(post.attributes.cover?.data.attributes.formats.medium.url || "")}
         />
         <meta property="og:title" content={post.attributes.title} />
         {/* <meta property="og:site_name" content="radanfolio" />
@@ -97,47 +98,29 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({
         // animate={{ opacity: 1}}
         // exit={{ opacity: 0}}
         className="w-full min-h-screen my-12">
-        <header
-          className="mxw-sm w-full flex items-center flex-col
-            justify-center space-y-6 text-center my-12"
-        >
-          <div>
-            {post.attributes.tags?.data.map((tag, index) => {
-              return (
-                <p
-                  key={index}
-                  className="animate animate__animated animate__fadeInDown animate__fast
-                  font-semibold capitalize"
-                >
-                  {tag.attributes.name}
-                </p>
-              );
-            })}
-          </div>
-          <h2
-            className="animate animate__animated animate__fadeInDown animate__fast
-              text-4xl md:text-6xl font-bold capitalize"
-          >{post.attributes.title}</h2>
-          <p
-            className="animate animate__animated animate__fadeIn animate__slow
-              text-xl font-light">
-            {post.attributes.summary}
-          </p>
-          <div
-            className="animate animate__animated animate__fadeIn animate__slow
-              flex items-center space-x-3"
-          >
-            <img
-              className="h-16 w-16 rounded-full object-cover shadow-lg"
-              alt="avatar_pic"
-              src={about.avatar}
-            />
-            <div className="text-left">
-              <p>{post.attributes.author?.data.attributes.fullName}</p>
-              <p className="italic">{new Date(post.attributes.publishedAt).toDateString()}</p>
-            </div>
-          </div>
-        </header>
+        <SinglePostHeader
+          title={post.attributes.title}
+          summary={post.attributes.summary}
+          tags={post.attributes.tags?.data.map((tagObject) => {
+            return tagObject.attributes.name;
+          }) || []}
+          publishDate={post.attributes.publishedAt as unknown as string}
+          author={{
+            fullName: post.attributes.author?.data.attributes.fullName || "",
+            profilePic: {
+              url: fullUrl(
+                post.attributes.author?.data.attributes.profilePic?.data.attributes.url || ""
+              ),
+              width:
+                post.attributes.author?.data.attributes.profilePic?.data.attributes.width || 100,
+              height:
+                post.attributes.author?.data.attributes.profilePic?.data.attributes.height || 100,
+              alt:
+                post.attributes.author?.data.attributes.profilePic?.data.attributes.alternativeText
+                || "User's profile picture", 
+            },
+          }}
+        />
         {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
         {/* cover image */}
         <figure
@@ -160,9 +143,9 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({
           {/* <div className="col-span-12 pr-4"> */}
           <div className="col-span-12 md:col-span-9 pr-4">
             {/* <PostContent components={mdxComponents} code={code} /> */}
-            <StrapiPostContent
+            <MDXContent
               components={mdxComponents}
-              content={post.attributes.content}
+              code={post.attributes.content}
             />
           </div>
           <div className="col-span-3 sticky top-28 self-start hidden md:flex justify-center">
@@ -221,8 +204,8 @@ type PostPageParams = {
 
 export const getServerSideProps: GetServerSideProps<SinglePostPageProps, PostPageParams> = async ({
   params,
-  // locale,
-  // locales,
+  locale,
+  locales,
 }) => {
   const singlePostQuery = qs.stringify({
     filters: {
@@ -230,11 +213,12 @@ export const getServerSideProps: GetServerSideProps<SinglePostPageProps, PostPag
         $eq: params?.slug,
       }
     },
-    populate: ["author", "cover", "tags", "seo.sharedImage.media"],
+    populate: ["author.profilePic", "cover", "tags", "seo.sharedImage.media"],
   }, {
     encode: false,
   });
 
+  // ! Important do not eraser 
   // const paginatedPostCommentsQuery = qs.stringify({
   //   filters: {
   //     post: {
@@ -257,6 +241,9 @@ export const getServerSideProps: GetServerSideProps<SinglePostPageProps, PostPag
 
   post.attributes.content = await bundleStrapiContent(post.attributes.content);
 
+  const translations = await serverSideTranslations(locale!, ["common", "blog"], null, locales);
+
+  // ! Important do not erase
   // find comments by slug (slug is unique in our db model)
   // const idk = await client
   //   .get<StraPiResponse>(`/comments?${paginatedPostCommentsQuery}`)
@@ -266,8 +253,9 @@ export const getServerSideProps: GetServerSideProps<SinglePostPageProps, PostPag
   return {
     props: {
       post,
+      ...translations,
     },
   };
-};  
+};
 
 export default SinglePostPage;
