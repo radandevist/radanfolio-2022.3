@@ -45,6 +45,7 @@ export async function getCommentsOnSinglePostPagePost() {
 
 export async function getFeaturedPosts<T>() {
   const query = qs.stringify({
+    sort: ["updatedAt:desc"],
     filters: {
       featured: {
         $eq: true,
@@ -62,6 +63,7 @@ export async function getFeaturedPosts<T>() {
 
 export async function getInitialPosts<T>() {
   const query = qs.stringify({
+    sort: ["updatedAt:desc"],
     populate: ["cover"],
     pagination: {
       page: 1,

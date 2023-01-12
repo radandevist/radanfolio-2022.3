@@ -9,8 +9,7 @@
     "lint": "next lint",
     "prebuild": "yarn generate",
     "predev": "yarn generate",
-    "generate": "yarn generate:posts-front-matters && yarn generate:projects-front-matters",
-    "generate:posts-front-matters": "node -r @swc-node/register src/scripts/generatePostsFrontMatterFiles.ts",
+    "generate": "yarn generate:projects-front-matters",
     "generate:projects-front-matters": "node -r @swc-node/register src/scripts/generateProjectsFrontMatterFiles.ts"
   },
   "dependencies": {

@@ -47,7 +47,7 @@ const BlogPage: NextPage<BlogPageProps> = ({
     return posts.map((post) => {
       return {
         title: post.attributes.title,
-        summary: post.attributes.title,
+        summary: post.attributes.summary,
         url: getPostUrl(post.attributes.slug),
         date: new Date(post.attributes.publishedAt).toDateString(),
         featured: post.attributes.featured,
