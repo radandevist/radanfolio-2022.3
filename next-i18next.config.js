@@ -4,8 +4,8 @@ const nextI18n = {
   defaultLocale: "en",
   locales: [
     "en",
-    "fr",
-    "mg",
+    // "fr",
+    // "mg",
   ],
 };
 

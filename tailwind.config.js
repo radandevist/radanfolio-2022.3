@@ -46,4 +46,7 @@ module.exports = {
       keyframes: {},
     },
   },
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+  ]
 };

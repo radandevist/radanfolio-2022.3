@@ -5,7 +5,6 @@
 import Image from "next/image";
 import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
-import qs from "qs";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // import { about } from "../../data/about";
@@ -16,18 +15,20 @@ import { mdxComponents } from "../../components/mdx";
 import { AnimatedPage } from "../../components/AnimatedPage";
 // import { PostContent } from "../../components/PostContent";
 import { BannerAd } from "../../components/ads/ExoClick";
-import { client } from "../../axios/client";
 import { StrapiPopulate, StraPiResponse } from "../../types/strapi.types";
 import { StrapiPost } from "../../types/post.types";
 import { StrapiUser } from "../../types/user.types";
 import { StrapiMedia } from "../../types/media.types";
 import { StrapiTag } from "../../types/tag.types";
 import { fullUrl } from "../../utils/strapiUtils";
-import { STRAPI_BLUR_PLACEHOLDER_IMAGE } from "../../constants";
+import { LOCAL_BLUR_PLACEHOLDER_IMAGE } from "../../constants";
 import { StrapiFullSeo } from "../../types/seo.types";
 import { bundleStrapiContent } from "../../utils/mdxUtils";
-import { SinglePostHeader } from "../../components/partials/blog/SinglePostHeader";
 import { MDXContent } from "../../components/MDXContent";
+import {
+  getSinglePost,
+} from "../../axios/services/post.services";
+import { SinglePostHeader } from "../../components/partials/singlePost/SinglePostHeader";
 
 // export type Post = z.infer<typeof ZPost>;
 
@@ -134,7 +135,7 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({
             width={post.attributes.cover?.data.attributes.width || 1200}
             height={post.attributes.cover?.data.attributes.height || 630}
             placeholder="blur"
-            blurDataURL={STRAPI_BLUR_PLACEHOLDER_IMAGE}
+            blurDataURL={LOCAL_BLUR_PLACEHOLDER_IMAGE}
           />
         </figure>
         {/* content */}
@@ -207,48 +208,15 @@ export const getServerSideProps: GetServerSideProps<SinglePostPageProps, PostPag
   locale,
   locales,
 }) => {
-  const singlePostQuery = qs.stringify({
-    filters: {
-      slug: {
-        $eq: params?.slug,
-      }
-    },
-    populate: ["author.profilePic", "cover", "tags", "seo.sharedImage.media"],
-  }, {
-    encode: false,
-  });
-
-  // ! Important do not eraser 
-  // const paginatedPostCommentsQuery = qs.stringify({
-  //   filters: {
-  //     post: {
-  //       slug: {
-  //         $eq: params?.slug,
-  //       }
-  //     }
-  //   },
-  //   pagination: {
-  //     page: 1,
-  //     pageSize: 2,
-  //     withCount: true,
-  //   },
-  //   populate: ["user"],
-  // });
-
   // find posts by slug (slug is unique in our db model)
-  const { data: { 0: post } } = await client
-    .get<StraPiResponse<ISinglePost[]>>(`/posts?${singlePostQuery}`);
+  const { data: { 0: post } } =
+    await getSinglePost<StraPiResponse<ISinglePost[]>>(params?.slug || "");
 
+  // bundle the post content with mdx
   post.attributes.content = await bundleStrapiContent(post.attributes.content);
 
+  // get the translations
   const translations = await serverSideTranslations(locale!, ["common", "blog"], null, locales);
-
-  // ! Important do not erase
-  // find comments by slug (slug is unique in our db model)
-  // const idk = await client
-  //   .get<StraPiResponse>(`/comments?${paginatedPostCommentsQuery}`)
-
-  // console.log(post);
 
   return {
     props: {

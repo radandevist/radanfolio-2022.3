@@ -15,12 +15,15 @@ export const PATH_NAMES = {
   about: "/about",
   projects: "/projects",
   contact: "/contact",
+  posts: "/posts",
   // blog: "/blog",
 };
 
 export const STRAPI_BASE_URL = process.env.STRAPI_BASE_URL
   || "http://localhost:1337";
 
-// TODO: dynamise this image
-export const STRAPI_BLUR_PLACEHOLDER_IMAGE =
-  `${STRAPI_BASE_URL}/uploads/blur_image_cbc7fb05ec.jpg?updated_at=2023-01-11T05:04:35.635Z`;
+// // dynamise this image
+// export const STRAPI_BLUR_PLACEHOLDER_IMAGE =
+//   `${STRAPI_BASE_URL}/uploads/blur_image_cbc7fb05ec.jpg?updated_at=2023-01-11T05:04:35.635Z`;
+
+export const LOCAL_BLUR_PLACEHOLDER_IMAGE = "/images/blur_image.jpg";

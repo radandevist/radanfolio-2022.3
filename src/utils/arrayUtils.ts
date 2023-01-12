@@ -7,7 +7,7 @@ export const getRandomElements = <T>(array: T[], num: number = 1) => {
   return shuffled.slice(0, Math.round(num));
 };
 
-export function getRandomElementsImproved<T>(arr: T[], n: number = 1) {
+export function getRandomElementsImproved<T>(arr: T[], n: number = 1): T[] {
   var result = new Array(n),
     len = arr.length,
     taken = new Array(len);

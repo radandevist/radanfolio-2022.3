@@ -4,15 +4,31 @@ import { useTranslation } from "next-i18next";
 import Link from "next/link";
 
 // import { Link } from "../components/Link";
-import { BlogIndexPost } from "../types/post";
-import { getCloudinaryThumbnail } from "../helpers/cloudinary";
+// import { BlogIndexPost } from "../../../types/post";
+// import { getCloudinaryThumbnail } from "../../../helpers/cloudinary";
+import { LOCAL_BLUR_PLACEHOLDER_IMAGE } from "../../../constants";
 
-
-export type HeropProps = {
-  post: BlogIndexPost;
+export type HeroProps = {
+  // post: BlogIndexPost;
+  title: string;
+  summary: string;
+  url: string;
+  date: string;
+  cover: { // or thumbnail
+    url: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
 };
 
-export const Hero: FC<HeropProps> = ({ post }) => {
+export const Hero: FC<HeroProps> = ({
+  title,
+  summary,
+  url,
+  date,
+  cover,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -22,15 +38,15 @@ export const Hero: FC<HeropProps> = ({ post }) => {
       </div>
       <div className="mxw-sm grid gap-6 grid-cols-1 md:grid-cols-6">
         <div className="animate animate__animated animate__fadeIn md:col-span-4">
-          <Link href={`/posts/${post.slug}`}>
+          <Link href={url}>
             <Image
               className="h-full w-full object-cover rounded-lg shadow-lg"
-              alt="cover_pic"
-              height={1688}
-              width={3000}
-              src={post.cover}
+              alt={cover.alt}
+              width={cover.width}
+              height={cover.height}
+              src={cover.url}
               placeholder="blur"
-              blurDataURL={getCloudinaryThumbnail(post.cover)}
+              blurDataURL={LOCAL_BLUR_PLACEHOLDER_IMAGE}
             />
           </Link>
         </div>
@@ -38,11 +54,11 @@ export const Hero: FC<HeropProps> = ({ post }) => {
           className="animate animate__animated animate__fadeIn
             md:col-span-2 h-full flex flex-col justify-center space-y-3"
         >
-          <p>{post.date}</p>
-          <Link href={`/posts/${post.slug}`}>
-            <h2 className="text-2xl md:text-4xl capitalize">{post.title}</h2>
+          <p>{date}</p>
+          <Link href={url}>
+            <h2 className="text-2xl md:text-4xl capitalize line-clamp-6">{title}</h2>
           </Link>
-          {post.excerpt && <p className="text-xl font-light">{post.excerpt.slice(0,100)}...</p>}
+          <p className="text-xl font-light line-clamp-5">{summary}</p>
         </div>
       </div>
     </div>

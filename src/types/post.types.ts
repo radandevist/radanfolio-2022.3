@@ -8,6 +8,7 @@ export interface PostAttributes {
   updatedAt:   Date;
   publishedAt: Date;
   slug:        string;
+  featured: boolean;
 }
 
 export type StrapiPost = StrapiEntity<PostAttributes>;
