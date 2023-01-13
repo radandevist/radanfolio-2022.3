@@ -65,7 +65,8 @@ const AboutPage: NextPage = () => {
                     rel="noreferrer"
                     href={social.url}
                     className="inline-block my-1 bg-brand1-contrasted text-white
-                      font-semibold py-2 px-3 mr-4">
+                      font-semibold py-2 px-3 mr-4"
+                  >
                     {social?.name}
                   </a>
                 ))}

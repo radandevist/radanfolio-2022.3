@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/named
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 
-import { STRAPI_BASE_URL } from "../constants";
+import { READ_ONLY_TOKEN, STRAPI_BASE_URL } from "../constants";
 
 /**
  * ! Caution I plan on using axios only for data fetching on the server
@@ -11,7 +11,7 @@ const instance = axios.create({
 });
 
 instance.defaults.headers.common["Authorization"] =
-  `Bearer ${(process.env.STRAPI_READ_ONLY_API_TOKEN || "undefined-token").trim()}`;
+  `Bearer ${READ_ONLY_TOKEN}`;
 
 const responseBody = <O>(response: AxiosResponse<O>) => response.data;
 

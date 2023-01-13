@@ -3,13 +3,15 @@ export type StraPiResponse<D = StrapiEntity | StrapiEntity[]> = {
   meta: StrapiMeta;
 };
 
-type StrapiMeta = {
-  pagination?: {
-    page: number;
-    pageSize: number;
-    pageCount: number;
-    total: number; 
-  };
+export type StrapiPagination = {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number; 
+};
+
+export type StrapiMeta = {
+  pagination?: StrapiPagination;
 };
 
 export type StrapiEntity<A extends AnyObj = AnyObj> = {

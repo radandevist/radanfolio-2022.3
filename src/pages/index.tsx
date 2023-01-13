@@ -2,6 +2,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetServerSideProps, NextPage } from "next/types";
 import { useTranslation } from "next-i18next";
 import { ArticleJsonLd, NextSeo } from "next-seo";
+import { useEffect } from "react";
 
 import { Hero } from "../components/partials/blog/Hero";
 import { AnimatedPage } from "../components/AnimatedPage";
@@ -17,6 +18,9 @@ import { ContentGrid } from "../components/partials/ContentGrid";
 import { Featured } from "../components/partials/Featured";
 import { NEXT_APP_DOMAIN_URL } from "../constants";
 import { about } from "../data/about";
+import { mainApi } from "../redux/services/mainApi";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectPostPage, setPostPage } from "../redux/features/post/post.reducer";
 
 type IBlogPost = StrapiPopulate<StrapiPost, {
   cover: {
@@ -28,14 +32,26 @@ type BlogPageProps = {
   heroPost: IBlogPost;
   featuredPosts: IBlogPost[];
   initialPosts: IBlogPost[];
+  initialPage: number;
 };
 
 const BlogPage: NextPage<BlogPageProps> = ({
   heroPost,
   featuredPosts,
   initialPosts,
+  initialPage,
 }) => {
   const { t } = useTranslation();
+  const [
+    triggerFetchNextPage,
+    fetchNextPageResult,
+  ] = mainApi.endpoints.getPostsByPage.useLazyQuery();
+  const dispatch = useAppDispatch();
+  const page = useAppSelector(selectPostPage);
+
+  useEffect(() => {
+    dispatch(setPostPage(initialPage));
+  });
 
   function convertPosts(posts: IBlogPost[]): PostComponentProps[] {
     return posts.map((post) => {
@@ -54,6 +70,10 @@ const BlogPage: NextPage<BlogPageProps> = ({
         },
       };
     });
+  }
+
+  function handleLoadMorePosts() {
+    triggerFetchNextPage({ page });
   }
 
   return (
@@ -116,6 +136,17 @@ const BlogPage: NextPage<BlogPageProps> = ({
         Component={PostComponent}
         items={convertPosts(initialPosts)}
       />
+
+      {/* Load more button */}
+      <div className="mxw-sm">
+        <button
+          onClick={handleLoadMorePosts}
+          className="inline-block my-1 bg-brand1-contrasted text-white
+            font-semibold py-2 px-3 mr-4"
+        >
+          Load More
+        </button>
+      </div>
     </AnimatedPage>
   );
 };
@@ -136,6 +167,7 @@ export const getServerSideProps: GetServerSideProps<BlogPageProps> = async ({
 
   const featuredPosts = featuredPostsResult.data;
   const initialPosts = initialPostsResult.data;
+  const initialPage = initialPostsResult.meta.pagination?.page || 1;
 
   const heroPost = getRandomElements(initialPosts)[0];
 
@@ -144,6 +176,7 @@ export const getServerSideProps: GetServerSideProps<BlogPageProps> = async ({
       heroPost,
       featuredPosts,
       initialPosts,
+      initialPage,
       ...translations,
     }
   };

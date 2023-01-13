@@ -8,7 +8,7 @@ import { useTheme } from "../../contexts/theme";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { PATH_NAMES } from "../../constants";
 import { ThemeSwitcher } from "../ThemeSwitcher";
-import { LanguageSwitcher } from "../LanguageSwitcher";
+// import { LanguageSwitcher } from "../LanguageSwitcher";
 
 import { MobileNav } from "./MobileNav";
 
@@ -98,7 +98,7 @@ export const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
             <ThemeSwitcher
               onToggle={toggleTheme}
               className="relative top-2"

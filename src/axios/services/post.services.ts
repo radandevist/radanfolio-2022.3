@@ -1,5 +1,6 @@
 import qs from "qs";
 
+import { getPostsPageQuery } from "../../query/post.query";
 import { client } from "../client";
 
 export async function getSinglePost<T>(slug: string) {
@@ -60,14 +61,5 @@ export async function getFeaturedPosts<T>() {
 };
 
 export async function getInitialPosts<T>() {
-  const query = qs.stringify({
-    sort: ["updatedAt:desc"],
-    populate: ["cover"],
-    pagination: {
-      page: 1,
-      pageSize: 6,
-    },
-  });
-
-  return await client.get<T>(`/posts?${query}`);;
+  return await client.get<T>(`/posts?${getPostsPageQuery(1)}`);;
 };
