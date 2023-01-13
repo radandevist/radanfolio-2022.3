@@ -44,27 +44,22 @@ export const SinglePostHeader: FC<Props> = ({
           );
         })}
       </div>
+
       <h2
         className="animate animate__animated animate__fadeInDown animate__fast
           text-4xl md:text-6xl font-bold capitalize"
       >
         {title}
       </h2>
-      <p
-        className="animate animate__animated animate__fadeIn animate__slow
-          text-xl font-light"
-      >
+
+      <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">
         {summary}
       </p>
+
       <div
         className="animate animate__animated animate__fadeIn animate__slow
           flex items-center space-x-3"
       >
-        {/* <img
-          className="h-16 w-16 rounded-full object-cover shadow-lg"
-          alt="avatar_pic"
-          src={author.profilePic.url}
-        /> */}
         <Image
           className="h-16 w-16 rounded-full object-cover shadow-lg"
           alt={author.profilePic.alt}
@@ -74,7 +69,7 @@ export const SinglePostHeader: FC<Props> = ({
         />
         <div className="text-left">
           <p>{author.fullName}</p>
-          <p className="italic">{new Date(publishDate).toDateString()}</p>
+          <p className="italic">{publishDate}</p>
         </div>
       </div>
     </header>

@@ -32,3 +32,16 @@ export async function getFeaturedProjects<T>() {
 
   return await client.get<T>(`/projects?${query}`);
 }
+
+export async function getSingleProject<T>(slug: string) {
+  const query = qs.stringify({
+    filters: {
+      slug: {
+        $eq: slug,
+      }
+    },
+    populate: ["cover", "tech_stacks", "seo.sharedImage.media"],
+  });
+
+  return await client.get<T>(`/projects?${query}`);
+};

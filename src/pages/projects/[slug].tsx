@@ -1,183 +1,139 @@
-import path from "path";
-import fs from "fs";
-
-import { z } from "zod";
 import Image from "next/image";
 import Head from "next/head";
-import { useTranslation } from "next-i18next";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { mdxComponents } from "../../components/mdx";
-import { formatProjectFileResult } from "../../functions/projects.functions";
-import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../../helpers/cloudinary";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { getFileV3, getPostsSlugs } from "../../utils/mdxUtils";
-import { PROJECTS_FOLDER } from "../../constants";
+import { bundleStrapiContent } from "../../utils/mdxUtils";
 import { AnimatedPage } from "../../components/AnimatedPage";
-import { PostContent } from "../../components/PostContent";
+import { StrapiProject } from "../../types/project.types";
+import { StrapiMedia } from "../../types/media.types";
+import { StrapiFullSeo } from "../../types/seo.types";
+import { StrapiTechStack } from "../../types/techStack.types";
+import { StrapiPopulate, StraPiResponse } from "../../types/strapi.types";
+import { getSingleProject } from "../../axios/services/project.services";
+import { fullUrl } from "../../utils/strapiUtils";
+import { SingleProjectHeader } from "../../components/partials/singleProject/SingleProjectHeader";
+import { BannerAd } from "../../components/ads/ExoClick";
+import { LOCAL_BLUR_PLACEHOLDER_IMAGE } from "../../constants";
+import { MDXContent } from "../../components/MDXContent";
 
-
-const ZProject = z.object({
-  // id: z.string(),
-  name: z.string(),
-  cover: z.string(),
-  summary: z.string(),
-  stack: z
-    .object({ id: z.string(), name: z.string() })
-    .array(),
-  // slug: z.string(),
-  // featured: z.boolean(),
-  // * these fields make it different from ZProjectIndex
-  repoUrl: z.string(),
-  liveUrl: z.string().nullable(),
-  category: z.string(),
-  code: z.string(),
-});
-
-export type Project = z.infer<typeof ZProject>;
-
-export type ProjectViewProps = {
-  project: Project;
+type ISingleProject = StrapiPopulate<StrapiProject, {
+  cover: {
+    data: StrapiMedia;
+  };
+  tags: {
+    data: StrapiTechStack[];
+  };
+}> & {
+  attributes: {
+    seo: StrapiFullSeo;
+  };
 };
 
-const ProjectView: NextPage<ProjectViewProps> = ({ project: { code, ...project } }) => {
-  const isLarge = useMediaQuery("(min-width: 1024px)");
-  const { t } = useTranslation();
+type SingleProjectPageProps = {
+  project: ISingleProject;
+};
 
+const SingleProjectPage: NextPage<SingleProjectPageProps> = ({
+  project,
+}) => {
   return (
     <AnimatedPage>
       <Head>
-        <title>{`Radanfolio | ${project.name}`}</title>
-        <meta name="description" content={project.summary} />
+        <title>{`${project.attributes.title} | Radanfolio`}</title>
+        <meta name="description" content={project.attributes.summary} />
 
         {/* opengraph */}
-        <meta property="og:description" content={project.summary} />
+        <meta property="og:description" content={project.attributes.summary} />
         <meta
           property="og:image"
-          content={getCloudinaryOpenGraphImage(project.cover)}
+          content={fullUrl(project.attributes.cover?.data.attributes.url || "")}
         />
-        <meta property="og:title" content={project.name} />
+        <meta property="og:title" content={project.attributes.title} />
         {/* <meta property="og:site_name" content="radanfolio" />
         <meta property="og:url" content="radanfolio.vercel.app" />
         <meta property="og:type" content="" /> */}
       </Head>
+
       <div
         // initial={{ width: 0}}
         // animate={{ width: "100%"}}
         // exit={{ x: window.innerWidth}}
-        className="w-full min-h-screen my-12">
-        <header
-          className="mxw-sm w-full flex items-center flex-col justify-center
-            space-y-6 text-left sm:text-center my-12"
-        >
-          <p
-            className={project.category === "web3"
-              ? "animate animate__animated animate__fadeInDown animate__fast font-future uppercase"
-              : "animate animate__animated animate__fadeInDown animate__fast font-bold uppercase"}
-          >
-            {project.category}
-          </p>
-          <h2
-            className="animate animate__animated animate__fadeInDown animate__fast
-              text-4xl md:text-6xl font-bold capitalize">
-            {project.name}
-          </h2>
-          <p className="animate animate__animated animate__fadeIn animate__slow text-xl font-light">
-            {project.summary}
-          </p>
-          <div className="flex items-center space-x-2">
-            {project.liveUrl && (
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href={project.liveUrl}
-                className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1
-                  border-2 border-transparent hover:border-b-brand1-500 duration-200"
-              >
-                {t("projects:visitProject")}
-              </a>
-            )}
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={project.repoUrl}
-              className="first-letter:text-2xl text-sm md:text-md first-letter:font-bold p-1
-                border-2 border-transparent hover:border-b-brand1-500 duration-200"
-            >
-              Github
-            </a>
-          </div>
-        </header>
-        {/* <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200" /> */}
+        className="w-full min-h-screen my-12"
+      >
+        {/* header */}
+        <SingleProjectHeader
+          title={project.attributes.title}
+          summary={project.attributes.summary}
+          liveUrl={project.attributes.liveUrl}
+          repoUrl={project.attributes.repoUrl}
+        />
+
         {/* cover image */}
         <figure>
           <Image
             className="w-full object-cover object-center"
-            src={project.cover}
-            alt="cover_image"
-            width={1640}
-            // height={924}
-            height={isLarge ? 528 : 924}
+            src={fullUrl(project.attributes.cover?.data.attributes.url || "")}
+            alt={project.attributes.cover?.data.attributes.alternativeText || "project cover image"}
+            width={project.attributes.cover?.data.attributes.width}
+            height={project.attributes.cover?.data.attributes.height}
             placeholder="blur"
-            blurDataURL={getCloudinaryThumbnail(project.cover)}
-            // layout="fill"
+            blurDataURL={LOCAL_BLUR_PLACEHOLDER_IMAGE}
           />
         </figure>
+
         {/* content */}
         <section className="mxw-sm my-12 grid grid-cols-12 gap-4 max-w-[68rem]">
-          {/* TODO: Replace with this line when AdSense is ready */}
-          {/* <div className="col-span-12 md:col-span-9 pr-4"> */}
-          <div className="col-span-12 pr-4">
+          <div className="col-span-12 md:col-span-9 pr-4">
             {/* <div className="flex justify-start my-12">
               <h2 className="text-4xl md:text-6xl">Project Overview</h2>
             </div> */}
-            <PostContent components={mdxComponents} code={code} />
+            <MDXContent components={mdxComponents} code={project.attributes.content} />
           </div>
           <div className="col-span-3 sticky top-28 self-start hidden md:block">
-            {/* <div className="bg-red-500 h-96">AD HERE</div> */}
+            <BannerAd dataZoneId={4865004} />
           </div>
         </section>
+
+        {/* separator */}
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
       </div>
     </AnimatedPage>
   );
 };
 
-export type ProjectViewParams = {
+type SingleProjectPageParams = {
   slug: string;
 };
 
-export const getStaticPaths: GetStaticPaths<ProjectViewParams> = async ({ locales }) => {
-  const slugs = await getPostsSlugs(PROJECTS_FOLDER);
-
-  const paths: { params: ProjectViewParams; locale: string }[] = [];
-
-  slugs.forEach(slug => {
-    locales?.forEach(locale => {
-      const fullPath = path.join(process.cwd(), PROJECTS_FOLDER, slug, `${locale}.mdx`);
-      if (fs.existsSync(fullPath)) paths.push({ params: { slug }, locale });
-    });
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<ProjectViewProps, ProjectViewParams> = async ({
-  params, locale, locales
+// eslint-disable-next-line max-len
+export const getServerSideProps: GetServerSideProps<SingleProjectPageProps, SingleProjectPageParams> = async ({
+  params,
+  locale,
+  locales,
 }) => {
-  const project = ZProject
-    .parse(formatProjectFileResult(await getFileV3(PROJECTS_FOLDER, params?.slug!, locale!)));
+  const [
+    translations,
+    project,
+  ] = await Promise.all([
+    serverSideTranslations(locale!, ["common", "projects"], null, locales),
+    (async () => {
+      const { data: { 0: project }} = 
+        await getSingleProject<StraPiResponse<ISingleProject[]>>(params?.slug || "");
+
+      project.attributes.content = await bundleStrapiContent(project.attributes.content);
+
+      return project;
+    })()
+  ]);
 
   return {
     props: {
       project,
-      ...(await serverSideTranslations(locale!, ["common", "projects"], null, locales)),
+      ...translations,
     },
   };
 };
 
-export default ProjectView;
+export default SingleProjectPage;

@@ -2,7 +2,7 @@ import { getMDXComponent, MDXContentProps } from "mdx-bundler/client";
 import { FC, useMemo } from "react";
 
 type Props = MDXContentProps & {
-  code: string; // The content from strapi
+  code: string; // pre-bundled content with bundleMDX on server side 
 };
 
 export const MDXContent: FC<Props> = ({
@@ -16,12 +16,7 @@ export const MDXContent: FC<Props> = ({
       className="text-2xl md:text-3xl font-light
         first-letter:text-4xl first-letter:md:text-6xl first-letter:font-semibold
         space-y-10 prose"
-      // dangerouslySetInnerHTML={{
-      //   __html: content,
-      // }}
     >
-      {/* {post.content} */}
-      {/* {content} */}
       <Component components={components} />
     </article>
   );
