@@ -11,3 +11,10 @@ export const STRAPI_BASE_URL = process.env.STRAPI_BASE_URL
   || "http://localhost:1337";
 
 export const LOCAL_BLUR_PLACEHOLDER_IMAGE = "/images/blur_image.jpg";
+
+const defaultDomain = process.env.NODE_ENV === "production"
+  ? "https://devist.xyz"
+  : "http://localhost:3000";
+
+export const NEXT_APP_DOMAIN_URL =
+  process.env.NEXT_PUBLIC_NEXT_APP_DOMAIN_URL || defaultDomain;

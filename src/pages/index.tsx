@@ -1,22 +1,22 @@
-import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetServerSideProps, NextPage } from "next/types";
 import { useTranslation } from "next-i18next";
+import { ArticleJsonLd, NextSeo } from "next-seo";
 
 import { Hero } from "../components/partials/blog/Hero";
 import { AnimatedPage } from "../components/AnimatedPage";
-import { getRandomElementsImproved } from "../utils/arrayUtils";
-import { getCloudinaryOpenGraphImage } from "../helpers/cloudinary";
+import { getRandomElements } from "../utils/arrayUtils";
 import { getFeaturedPosts, getInitialPosts } from "../axios/services/post.services";
 import { StrapiPopulate, StraPiResponse } from "../types/strapi.types";
 import { StrapiPost } from "../types/post.types";
 import { StrapiMedia } from "../types/media.types";
 import { fullUrl } from "../utils/strapiUtils";
 import { getPostUrl } from "../utils/pathUtils";
-import { PostComponentProps } from "../components/partials/blog/PostComponent";
+import { PostComponent, PostComponentProps } from "../components/partials/blog/PostComponent";
 import { ContentGrid } from "../components/partials/ContentGrid";
-import { ProjectComponent } from "../components/partials/projects/ProjectComponent";
 import { Featured } from "../components/partials/Featured";
+import { NEXT_APP_DOMAIN_URL } from "../constants";
+import { about } from "../data/about";
 
 type IBlogPost = StrapiPopulate<StrapiPost, {
   cover: {
@@ -58,21 +58,33 @@ const BlogPage: NextPage<BlogPageProps> = ({
 
   return (
     <AnimatedPage>
-      <Head>
-        <title>{`Radanfolio | ${t("common:posts")}`}</title>
-        <meta name="description" content={t("blog:openGraph.description")} />
+      <NextSeo
+        title={`${t("blog:openGraph.title")}`}
+        description={t("blog:openGraph.description")}
+        openGraph={{
+          title: `${t("blog:openGraph.title")}`,
+          description: t("blog:openGraph.description"),
+          images: [
+            {
+              url: `${NEXT_APP_DOMAIN_URL}/images/meta/blog_og_image.jpg`,
+              alt: `${t("blog:openGraph.title")}`,
+            }
+          ]
+        }}
+      />
 
-        {/* opengraph */}
-        <meta property="og:description" content={t("blog:openGraph.description")} />
-        <meta
-          property="og:image"
-          content={getCloudinaryOpenGraphImage(
-            // eslint-disable-next-line max-len
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/blog_opengraph_zpxk7b.jpg"
-          )}
-        />
-        <meta property="og:title" content={t("blog:openGraph.title")} />
-      </Head>
+      <ArticleJsonLd
+        type="BlogPosting"
+        url={`${NEXT_APP_DOMAIN_URL}`}
+        title="Radan's Blog"
+        images={[
+          `${NEXT_APP_DOMAIN_URL}/images/meta/blog_og_image.jpg`
+        ]}
+        datePublished={new Date("06-26-2022").toString()}
+        dateModified={new Date("01-14-2022").toString()}
+        authorName={about.name}
+        description={t("blog:openGraph.description")}
+      />
 
       {heroPost && (
         <Hero
@@ -93,7 +105,7 @@ const BlogPage: NextPage<BlogPageProps> = ({
         && (
           <Featured
             title={t("common:featured")}
-            Component={ProjectComponent}
+            Component={PostComponent}
             items={convertPosts(featuredPosts)}
           />
         )}
@@ -101,7 +113,7 @@ const BlogPage: NextPage<BlogPageProps> = ({
       {/* <Feed posts={convertPosts(initialPosts)} /> */}
       <ContentGrid
         title={t("common:latestPosts")}
-        Component={ProjectComponent}
+        Component={PostComponent}
         items={convertPosts(initialPosts)}
       />
     </AnimatedPage>
@@ -125,7 +137,7 @@ export const getServerSideProps: GetServerSideProps<BlogPageProps> = async ({
   const featuredPosts = featuredPostsResult.data;
   const initialPosts = initialPostsResult.data;
 
-  const heroPost = getRandomElementsImproved(initialPosts)[0];
+  const heroPost = getRandomElements(initialPosts)[0];
 
   return {
     props: {
