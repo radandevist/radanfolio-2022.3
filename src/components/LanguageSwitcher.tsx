@@ -8,14 +8,13 @@ const languagesProperties: Record<string, any> = {
   en: {
     label: <>{"🇬🇧 English"}&nbsp;&nbsp;&nbsp;</>,
   },
-  fr: {
-    label: <>{"🇫🇷 Français"}&nbsp;</>,
-  },
-  mg: {
-    label: "🇲🇬 Malagasy",
-  }
+  // fr: {
+  //   label: <>{"🇫🇷 Français"}&nbsp;</>,
+  // },
+  // mg: {
+  //   label: "🇲🇬 Malagasy",
+  // }
 };
-
 
 export const LanguageSwitcher: FC = () => {
   const router = useRouter();

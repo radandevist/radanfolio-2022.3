@@ -2,6 +2,7 @@ import Image from "next/image";
 import { GetServerSideProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
+import Head from "next/head";
 
 import { mdxComponents } from "../../components/mdx";
 import { bundleStrapiContent } from "../../utils/mdxUtils";
@@ -40,6 +41,10 @@ const SingleProjectPage: NextPage<SingleProjectPageProps> = ({
 }) => {
   return (
     <AnimatedPage>
+      <Head>
+        <meta name="keywords" content={project.attributes.seo.keywords} />
+      </Head>
+
       <NextSeo
         title={project.attributes.seo.metaTitle}
         description={project.attributes.seo.metaDescription}
