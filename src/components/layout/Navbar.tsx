@@ -21,7 +21,6 @@ export const Navbar = () => {
 
   const links = [
     {
-      // name: t("common:home"),
       name: t("common:blog"),
       route: PATH_NAMES.home,
     },
@@ -33,10 +32,10 @@ export const Navbar = () => {
       name: t("common:projects"),
       route: PATH_NAMES.projects,
     },
-    {
-      name: t("common:contact"),
-      route: PATH_NAMES.contact,
-    },
+    // {
+    //   name: t("common:contact"),
+    //   route: PATH_NAMES.contact,
+    // },
   ];
 
   const toggleMobileNav = useCallback(() => {

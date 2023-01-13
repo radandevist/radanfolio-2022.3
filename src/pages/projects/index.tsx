@@ -1,14 +1,9 @@
 import { NextPage, GetServerSideProps } from "next";
-import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-// import { useEffect, useState } from "react";
+import { NextSeo } from "next-seo";
 
 import { AnimatedPage } from "../../components/AnimatedPage";
-// import { ProjectComponent } from "../../components/partials/projects/Project";
-// import { getRandomElementsImproved } from "../../utils/arrayUtils";
-import { getCloudinaryOpenGraphImage } from "../../helpers/cloudinary";
-// import { FeaturedProjects } from "../../components/partials/projects/FeaturedProjects";
 import { Featured } from "../../components/partials/Featured";
 import { ContentGrid } from "../../components/partials/ContentGrid";
 import { getFeaturedProjects, getInitialProjects } from "../../axios/services/project.services";
@@ -21,6 +16,7 @@ import {
 } from "../../components/partials/projects/ProjectComponent";
 import { fullUrl } from "../../utils/strapiUtils";
 import { getProjectUrl } from "../../utils/pathUtils";
+import { NEXT_APP_DOMAIN_URL } from "../../constants";
 
 type IProject =  StrapiPopulate<StrapiProject, {
   cover: {
@@ -37,15 +33,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
   initialProjects,
   featuredProjects,
 }) => {
-  // const allProjects = projects;
   const { t } = useTranslation();
-  // const [featuredProjects, setFeaturedProjects] = useState<ProjectIndex[]>();
-
-  // useEffect(() => {
-  //   setFeaturedProjects(
-  //     getRandomElementsImproved(projects.filter(project => project.featured === true), 2)
-  //   );
-  // }, [projects]);
 
   function convertProjects(projects: IProject[]): ProjectComponentProps[] {
     return projects.map((project) => {
@@ -65,30 +53,20 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
 
   return (
     <AnimatedPage>
-      <Head>
-        <title>{`RadanFolio | ${t("common:projects")}`}</title>
-        <meta
-          property="og:description"
-          content={t("projects:openGraph.description")}
-        />
-
-        {/* opengraph */}
-        <meta
-          property="og:description"
-          content={t("projects:openGraph.description")}
-        />
-        <meta
-          property="og:image"
-          content={getCloudinaryOpenGraphImage(
-            // eslint-disable-next-line max-len
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660293920/radanfolio/projects_opengraph_dti1no.jpg"
-          )}
-        />
-        <meta property="og:title" content={t("projects:openGraph.title")} />
-        {/* <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:type" content="" /> */}
-      </Head>
+      <NextSeo
+        title={t("projects:openGraph.title")}
+        description={t("projects:openGraph.description")}
+        openGraph={{
+          title: t("projects:openGraph.title"),
+          description: t("projects:openGraph.description"),
+          images: [
+            {
+              url: `${NEXT_APP_DOMAIN_URL}/images/meta/projects_og_image.jpg`,
+              alt: t("projects:openGraph.title"),
+            },
+          ],
+        }}
+      />
 
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">
@@ -96,11 +74,6 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
             {t("projects:theProjects")}
           </h2>
         </div>
-        {/* <section className="mxw-sm grid gap-6 grid-cols-1 sm:grid-cols-2 pb-12">
-          {featuredProjects && featuredProjects.slice(0,2).map((project) => (
-            <ProjectComponent key={project.id} project={project} />
-          ))}
-        </section> */}
         {featuredProjects.length > 0 && (
           <Featured
             // title={t("common:featured")}
@@ -113,40 +86,10 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
           Component={ProjectComponent}
           items={convertProjects(initialProjects)}
         />
-        {/* <section
-          className="mxw-sm grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3
-            pb-12"
-        >
-          {allProjects && allProjects.map((project) => (
-            <ProjectComponent key={project.id} project={project}/>
-          ))}
-        </section> */}
       </div>
     </AnimatedPage>
   );
 };
-
-// export const getStaticProps: GetStaticProps<ProjectsProps> = async ({ locale, locales }) => {
-//   const { projects }: { projects: ProjectIndex[] } = getJSONFileData(
-//     path.join(
-//       process.cwd(),
-//       GENERATED_FOLDER_PATH,
-//       PROJECTS_FRONT_MATTERS_FOLDER_NAME,
-//       `${locale}.json`
-//     )
-//   );
-
-//   return {
-//     props: {
-//       projects,
-//       // featuredProjects: getRandomElementsImproved(
-//       //   projects.filter(project => project.featured === true),
-//       //   2
-//       // ),
-//       ...(await serverSideTranslations(locale!, ["common", "projects"], null, locales))
-//     },
-//   };
-// };
 
 export const getServerSideProps: GetServerSideProps<ProjectsPageProps> = async ({
   locale,

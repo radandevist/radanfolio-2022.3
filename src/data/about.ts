@@ -1,24 +1,27 @@
-import { v4 } from "uuid";
+import { NEXT_APP_DOMAIN_URL } from "./../constants";
 
-const preAbout = {
-  // eslint-disable-next-line max-len
-  avatar: "https://res.cloudinary.com/dhwkzyl32/image/upload/v1670823131/radanfolio/resized_profile_pic_2_czzpg2.jpg",
+export const about = {
+  avatar: {
+    url: `${NEXT_APP_DOMAIN_URL}/images/radan_profile_pic.jpg`,
+    width: 255,
+    height: 340,
+  },
   name: "Daniel Adrianarisoa",
   email: "radandevist@gmail.com",
   github: "https://www.github.com/radandevist",
   resumeUrl: "https://drive.google.com/uc?id=1U2PQfyobZtN4zCmQMumeNqewp97Nphke&export=download",
   socials: [
-    { 
+    {
       name: "Linkedin",
       url: "https://www.linkedin.com/in/radandevist"
     },
     { 
       name: "Instagram",
-      url: "https://www.instagram.com/devist.english"
+      url: "https://www.instagram.com/devist.xyz"
     },
     { 
       name: "Facebook Page",
-      url: "https://www.facebook.com/devist.english"
+      url: "https://www.facebook.com/devist.xyz"
     },
     { 
       name: "Facebook Profile",
@@ -61,16 +64,4 @@ const preAbout = {
     "Sinon.js",
     "Jest"
   ],
-};
-
-const { skills: preSkills, ...destructuredAbout } = preAbout;
-
-const skillsWithId = preSkills.map(skill => ({
-  id: v4(),
-  name: skill,
-}));
-
-export const about = {
-  ...destructuredAbout,
-  skills: skillsWithId,
 };

@@ -2,7 +2,7 @@ import { StrapiMedia } from "./media.types";
 
 export type StrapiSeoComponent = {
   id: number;
-  metaTile: string;
+  metaTitle: string;
   metaDescription: string;
   keywords: string;
   preventIndexing: boolean;

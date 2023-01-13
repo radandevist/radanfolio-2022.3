@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { NextSeo } from "next-seo";
 
 import { mdxComponents } from "../../components/mdx";
 import { bundleStrapiContent } from "../../utils/mdxUtils";
@@ -40,21 +40,21 @@ const SingleProjectPage: NextPage<SingleProjectPageProps> = ({
 }) => {
   return (
     <AnimatedPage>
-      <Head>
-        <title>{`${project.attributes.title} | Radanfolio`}</title>
-        <meta name="description" content={project.attributes.summary} />
-
-        {/* opengraph */}
-        <meta property="og:description" content={project.attributes.summary} />
-        <meta
-          property="og:image"
-          content={fullUrl(project.attributes.cover?.data.attributes.url || "")}
-        />
-        <meta property="og:title" content={project.attributes.title} />
-        {/* <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:type" content="" /> */}
-      </Head>
+      <NextSeo
+        title={project.attributes.seo.metaTitle}
+        description={project.attributes.seo.metaDescription}
+        openGraph={{
+          type: "article",
+          title: project.attributes.seo.metaTitle,
+          description: project.attributes.seo.metaDescription,
+          images: [
+            {
+              url: fullUrl(project.attributes.seo.sharedImage.media.data.attributes.url),
+              alt: project.attributes.seo.sharedImage.alt,
+            },
+          ]
+        }}
+      />
 
       <div
         // initial={{ width: 0}}

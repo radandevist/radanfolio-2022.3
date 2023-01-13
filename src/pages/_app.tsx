@@ -40,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           url: `https://${NEXT_APP_DOMAIN_URL}${router.asPath}`,
           siteName: "RadanFolio",
           locale: router.locale || router.defaultLocale || "en",
+          type: "website",
         }}
       />
 

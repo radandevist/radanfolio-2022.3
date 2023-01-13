@@ -64,6 +64,7 @@ const BlogPage: NextPage<BlogPageProps> = ({
         openGraph={{
           title: `${t("blog:openGraph.title")}`,
           description: t("blog:openGraph.description"),
+          type: "blog",
           images: [
             {
               url: `${NEXT_APP_DOMAIN_URL}/images/meta/blog_og_image.jpg`,
@@ -110,7 +111,6 @@ const BlogPage: NextPage<BlogPageProps> = ({
           />
         )}
 
-      {/* <Feed posts={convertPosts(initialPosts)} /> */}
       <ContentGrid
         title={t("common:latestPosts")}
         Component={PostComponent}

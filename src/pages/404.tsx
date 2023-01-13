@@ -1,13 +1,12 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Trans, useTranslation } from "next-i18next";
+import { NextSeo } from "next-seo";
 
-// import { Link } from "../components/Link";
 import { AnimatedPage } from "../components/AnimatedPage";
-import { getCloudinaryOpenGraphImage } from "../helpers/cloudinary";
+import { NEXT_APP_DOMAIN_URL } from "../constants";
 
 const Page404 = () => {
   const router = useRouter();
@@ -15,30 +14,20 @@ const Page404 = () => {
 
   return (
     <AnimatedPage>
-      <Head>
-        <title>{`Radanfolio | ${t("common:pageNotFound")}`}</title>
-        <meta
-          name="description"
-          content={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
-        />
-
-        {/* opengraph */}
-        <meta
-          property="og:description"
-          content={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
-        />
-        <meta
-          property="og:image"
-          content={getCloudinaryOpenGraphImage(
-            // eslint-disable-next-line max-len
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/v1668907870/radanfolio/404_pal5zw.jpg"
-          )}
-        />
-        <meta property="og:title" content={`${t("common:pageNotFound")}`} />
-        {/* <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:type" content="" /> */}
-      </Head>
+      <NextSeo
+        title={t("common:pageNotFound")}
+        description={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
+        openGraph={{
+          title: t("common:pageNotFound"),
+          description: `${t("common:sorryPageNotFound").replace("<1/>", " ")}`,
+          images: [
+            {
+              url: `${NEXT_APP_DOMAIN_URL}/images/meta/not_found_og_image.jpg`,
+            },
+          ]
+        }}
+      />
+      
       <div className="relative h-[26rem]">
         <div
           className="notfound absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2

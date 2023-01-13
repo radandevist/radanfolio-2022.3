@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { NextSeo } from "next-seo";
 
 import { mdxComponents } from "../../components/mdx";
 import { AnimatedPage } from "../../components/AnimatedPage";
@@ -50,29 +50,21 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({
 }) => {
   return (
     <AnimatedPage>
-      <Head>
-        <title>{`${post.attributes.title} | Radanfolio`}</title>
-        <meta
-          name="description"
-          content={post.attributes.summary
-            || `A blog post by ${post.attributes.author?.data?.attributes.fullName}`}
-        />
-
-        {/* opengraph */}
-        <meta
-          property="og:description"
-          content={post.attributes.summary
-            || `A blog post by ${post.attributes.author?.data?.attributes.fullName}`}
-        />
-        <meta
-          property="og:image"
-          content={fullUrl(post.attributes.cover?.data.attributes.formats.medium.url || "")}
-        />
-        <meta property="og:title" content={post.attributes.title} />
-        {/* <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:type" content="" /> */}
-      </Head>
+      <NextSeo
+        title={post.attributes.seo.metaTitle}
+        description={post.attributes.seo.metaDescription}
+        openGraph={{
+          type: "article",
+          title: post.attributes.seo.metaTitle,
+          description: post.attributes.seo.metaDescription,
+          images: [
+            {
+              url: fullUrl(post.attributes.seo.sharedImage.media.data.attributes.url),
+              alt: post.attributes.seo.sharedImage.alt,
+            },
+          ]
+        }}
+      />
 
       <div
         // initial={{ opacity: 0}}

@@ -1,16 +1,16 @@
 import type { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { NextSeo } from "next-seo";
 
 import { AnimatedPage } from "../components/AnimatedPage";
 import { about } from "../data/about";
-import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../helpers/cloudinary";
+import { LOCAL_BLUR_PLACEHOLDER_IMAGE, NEXT_APP_DOMAIN_URL } from "../constants";
 
 const AboutPage: NextPage = () => {
   const { t } = useTranslation();
-  
+
   const info = {
     ...about,
     bioIntro: t("home:about.bioIntro"),
@@ -20,24 +20,22 @@ const AboutPage: NextPage = () => {
 
   return (
     <AnimatedPage>
-      <Head>
-        <title>Radanfolio | ANDRIANARISOA Daniel</title>
-        <meta name="description" content={t("home:openGraph.description")} />
+      <NextSeo
+        title={t("common:about")}
+        description={t("home:openGraph.description")}
+        openGraph={{
+          title: t("home:openGraph.title"),
+          description: t("home:openGraph.description"),
+          type: "profile",
+          images: [
+            {
+              url: `${NEXT_APP_DOMAIN_URL}/images/meta/about_og_image.jpg`,
+              alt: `${t("home:openGraph.title")}`,
+            }
+          ]
+        }}
+      />
 
-        {/* opengraph */}
-        <meta property="og:description" content={t("home:openGraph.description")} />
-        <meta
-          property="og:image"
-          content={getCloudinaryOpenGraphImage(
-            // eslint-disable-next-line max-len
-            "https://res.cloudinary.com/dhwkzyl32/image/upload/q_65/v1660292817/radanfolio/home_opengraph_xhclzs.jpg"
-          )}
-        />
-        <meta property="og:title" content={t("home:openGraph.title")} />
-        {/* <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:type" content="" /> */}
-      </Head>
       <div className="w-full min-h-screen">
         <div className="mxw-sm w-full my-12 relative">
           <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold">{t("home:theBio")}</h2>
@@ -46,13 +44,13 @@ const AboutPage: NextPage = () => {
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-6">
             <div className="sm:col-span-2">
               <Image
-                width={255}
-                height={340}
-                src={info.avatar}
+                width={info.avatar.width}
+                height={info.avatar.height}
+                src={info.avatar.url}
                 alt="radan's profile pic"
                 className="h-full w-full object-cover rounded-lg shrink-0"
                 placeholder="blur"
-                blurDataURL={getCloudinaryThumbnail(info.avatar)}
+                blurDataURL={LOCAL_BLUR_PLACEHOLDER_IMAGE}
                 loading="eager"
               />
             </div>
@@ -85,21 +83,24 @@ const AboutPage: NextPage = () => {
         </section>  
         <div className="w-full my-12 max-w-[200px] mx-auto h-3 bg-gray-200 dark:bg-brand2-400" />
         <section className="mxw-sm my-12">
+
           <p className="text-2xl md:text-3xl py-6">{info.bioSub}</p>
           {/* <p className="text-2xl md:text-3xl font-light">{info.bioSub}</p> */}
+
           {/* skills  */}
           <p className="text-2xl md:text-3xl my-12">{t("home:skillsInclude")}:</p>
           <div className="flex items-center flex-wrap">
-            {about?.skills?.map((skill) => (
+            {about?.skills?.map((skill, index) => (
               <span
-                key={skill?.id}
+                key={index}
                 className="py-2 px-3 my-1 mx-2 shadow-lg shadow-slate-300 dark:shadow-brand2-400
                 bg-brand1-contrasted text-white font-semibold"
               >
-                {skill?.name}
+                {skill}
               </span>
             ))}
           </div>
+
           {/* <p className="text-2xl md:text-3xl py-6">{info.bioMain}</p> */}
         </section>
       </div>
