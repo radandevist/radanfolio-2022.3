@@ -1,24 +1,14 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-// import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { AnimatedPage } from "../components/AnimatedPage";
 import { MaterialInput } from "../components/form/MaterialInput";
 import { MaterialTextArea } from "../components/form/MaterialTextArea";
-// import { about } from "../data/about";
-// import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../helpers/cloudinary";
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
-  
-  // const info = {
-  //   ...about,
-  //   bioIntro: t("home:about.bioIntro"),
-  //   bioPreface: t("home:about.bioPreface"),
-  //   bioSub: t("home:about.bioSub")
-  // };
 
   return (
     <AnimatedPage>
@@ -81,9 +71,6 @@ const Home: NextPage = () => {
             </button>
           </form>
         </section>  
-        {/* <section className="mxw-sm my-12">
-          
-        </section> */}
       </div>
     </AnimatedPage>
   );

@@ -8,7 +8,7 @@ import { AnimatedPage } from "../components/AnimatedPage";
 import { about } from "../data/about";
 import { getCloudinaryOpenGraphImage, getCloudinaryThumbnail } from "../helpers/cloudinary";
 
-const Home: NextPage = () => {
+const AboutPage: NextPage = () => {
   const { t } = useTranslation();
   
   const info = {
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default AboutPage;
 
 export const getStaticProps: GetStaticProps = async ({ locale, locales }) => ({
   props: {

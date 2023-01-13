@@ -1,20 +1,12 @@
-// import path from "path";
-
-// import { useEffect, useState } from "react";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { /* GetServerSideProps, */ GetServerSideProps, NextPage } from "next/types";
+import { GetServerSideProps, NextPage } from "next/types";
 import { useTranslation } from "next-i18next";
 
 import { Hero } from "../components/partials/blog/Hero";
-// import { Feed } from "../components/partials/blog/Feed";
-// import { Featured } from "../components/partials/blog/FeaturedPosts";
 import { AnimatedPage } from "../components/AnimatedPage";
 import { getRandomElementsImproved } from "../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../helpers/cloudinary";
-// import { BlogIndexPost } from "../types/post";
-// import { getJSONFileData } from "../utils/fsUtils";
-// import { GENERATED_FOLDER_PATH, POSTS_FRONT_MATTERS_FOLDER_NAME } from "../constants";
 import { getFeaturedPosts, getInitialPosts } from "../axios/services/post.services";
 import { StrapiPopulate, StraPiResponse } from "../types/strapi.types";
 import { StrapiPost } from "../types/post.types";
@@ -44,13 +36,6 @@ const BlogPage: NextPage<BlogPageProps> = ({
   initialPosts,
 }) => {
   const { t } = useTranslation();
-  // const [heroPost, setHeroPost] = useState<BlogIndexPost>();
-  // const [featuredPosts, setFeaturedPosts] = useState<BlogIndexPost[]>();
-
-  // useEffect(() => {
-  //   setHeroPost(getRandomElementsImproved(posts)[0]);
-  //   setFeaturedPosts(getRandomElementsImproved(posts.filter(post => post.featured === true), 2));
-  // }, [posts]);
 
   function convertPosts(posts: IBlogPost[]): PostComponentProps[] {
     return posts.map((post) => {
@@ -87,9 +72,6 @@ const BlogPage: NextPage<BlogPageProps> = ({
           )}
         />
         <meta property="og:title" content={t("blog:openGraph.title")} />
-        {/* <meta property="og:site_name" content="radanfolio" />
-        <meta property="og:url" content="radanfolio.vercel.app" />
-        <meta property="og:type" content="" /> */}
       </Head>
 
       {heroPost && (
@@ -154,27 +136,5 @@ export const getServerSideProps: GetServerSideProps<BlogPageProps> = async ({
     }
   };
 };
-// export const getStaticProps: GetStaticProps<BlogProps> = async ({ locale, locales }) => {
-//   const { posts }: { posts: BlogIndexPost[] } = getJSONFileData(
-//     path.join(
-//       process.cwd(),
-//       GENERATED_FOLDER_PATH,
-//       POSTS_FRONT_MATTERS_FOLDER_NAME,
-//       `${locale}.json`
-//     )
-//   );
-
-//   return {
-//     props: {
-//       posts,
-//       // heroPost: getRandomElementsImproved(posts)[0],
-//       // featuredPosts: getRandomElementsImproved(
-//       //   posts.filter(post => post.featured === true),
-//       //   2
-//       // ),
-//       ...(await serverSideTranslations(locale!, ["common", "blog"], null, locales))
-//     }
-//   };
-// };
 
 export default BlogPage;
