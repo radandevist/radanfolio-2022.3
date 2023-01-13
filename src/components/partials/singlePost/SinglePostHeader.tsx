@@ -27,7 +27,7 @@ export const SinglePostHeader: FC<Props> = ({
   return (
     <header
       className="mxw-sm w-full flex items-center flex-col
-            justify-center space-y-6 text-center my-12"
+        justify-center space-y-6 text-center my-12"
     >
       <div>
         {tags.map((tag, index, data) => {
@@ -46,16 +46,19 @@ export const SinglePostHeader: FC<Props> = ({
       </div>
       <h2
         className="animate animate__animated animate__fadeInDown animate__fast
-              text-4xl md:text-6xl font-bold capitalize"
-      >{title}</h2>
+          text-4xl md:text-6xl font-bold capitalize"
+      >
+        {title}
+      </h2>
       <p
         className="animate animate__animated animate__fadeIn animate__slow
-              text-xl font-light">
+          text-xl font-light"
+      >
         {summary}
       </p>
       <div
         className="animate animate__animated animate__fadeIn animate__slow
-              flex items-center space-x-3"
+          flex items-center space-x-3"
       >
         {/* <img
           className="h-16 w-16 rounded-full object-cover shadow-lg"

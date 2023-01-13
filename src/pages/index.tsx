@@ -7,8 +7,8 @@ import { /* GetServerSideProps, */ GetServerSideProps, NextPage } from "next/typ
 import { useTranslation } from "next-i18next";
 
 import { Hero } from "../components/partials/blog/Hero";
-import { Feed } from "../components/partials/blog/Feed";
-import { Featured } from "../components/partials/blog/FeaturedPosts";
+// import { Feed } from "../components/partials/blog/Feed";
+// import { Featured } from "../components/partials/blog/FeaturedPosts";
 import { AnimatedPage } from "../components/AnimatedPage";
 import { getRandomElementsImproved } from "../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../helpers/cloudinary";
@@ -21,7 +21,10 @@ import { StrapiPost } from "../types/post.types";
 import { StrapiMedia } from "../types/media.types";
 import { fullUrl } from "../utils/strapiUtils";
 import { getPostUrl } from "../utils/pathUtils";
-import { PostComponentProps } from "../components/partials/blog/Post";
+import { PostComponentProps } from "../components/partials/blog/PostComponent";
+import { ContentGrid } from "../components/partials/ContentGrid";
+import { ProjectComponent } from "../components/partials/projects/ProjectComponent";
+import { Featured } from "../components/partials/Featured";
 
 type IBlogPost = StrapiPopulate<StrapiPost, {
   cover: {
@@ -104,11 +107,21 @@ const BlogPage: NextPage<BlogPageProps> = ({
         />
       )}
 
-      {featuredPosts
-        && featuredPosts.length > 0
-        && <Featured posts={convertPosts(featuredPosts)} />}
+      {featuredPosts.length > 0
+        && (
+          <Featured
+            title={t("common:featured")}
+            Component={ProjectComponent}
+            items={convertPosts(featuredPosts)}
+          />
+        )}
 
-      <Feed posts={convertPosts(initialPosts)} />
+      {/* <Feed posts={convertPosts(initialPosts)} /> */}
+      <ContentGrid
+        title={t("common:latestPosts")}
+        Component={ProjectComponent}
+        items={convertPosts(initialPosts)}
+      />
     </AnimatedPage>
   );
 };

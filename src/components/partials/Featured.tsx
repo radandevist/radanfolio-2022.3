@@ -14,7 +14,7 @@ export function Featured<T>({
   return (
     <div className="w-full">
       {title && (
-        <div className="mxw-sm w-full flex justify-start my-24">
+        <div className="mxw-sm w-full flex justify-start my-24 mb-12">
           <h2 className="text-4xl md:text-6xl">{title}</h2>
         </div>
       )}
