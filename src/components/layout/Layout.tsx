@@ -4,7 +4,7 @@ import React, { PropsWithChildren } from "react";
 
 import { ScrollRestore } from "../ScrollRestore";
 import { ScrollTopWidget } from "../ScrollTopWidget";
-import { albertSans, merriweather, rubikGlitch } from "../../fonts";
+import { balsamiqSans, oxygen } from "../../fonts";
 
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
@@ -14,7 +14,8 @@ type Props = PropsWithChildren<{}>;
 export const Layout = ({ children }: Props) => (
   <div
     className={`min-h-screen w-full pt-36
-      ${rubikGlitch.variable} ${albertSans.className} ${merriweather.className}`}
+      ${oxygen.variable} ${balsamiqSans.variable}
+      ${oxygen.className} ${balsamiqSans.className}`}
     // className="min-h-screen w-full"
   >
     <ScrollTopWidget />

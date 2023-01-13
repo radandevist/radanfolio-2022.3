@@ -9,7 +9,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        future : ["var(--font-rubik)"]
+        // future : ["var(--font-rubik)"]
+        oxygen: ["var(--font-oxygen)"],
+        balsamiq: ["var(--font-balsamiq-sans)"],
       },
       colors: {
         brand1: {

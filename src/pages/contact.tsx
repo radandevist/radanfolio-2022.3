@@ -75,7 +75,7 @@ const Home: NextPage = () => {
               onClick={(event) => {
                 event.preventDefault();
               }}
-              className="bg-brand1-contrasted w-full pb-4 pt-5 text-slate-50 text-2xl font-future"
+              className="bg-brand1-contrasted w-full pb-4 pt-5 text-slate-50 text-2xl"
             >
               Submit
             </button>
