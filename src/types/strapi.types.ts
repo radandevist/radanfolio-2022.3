@@ -19,7 +19,7 @@ export type StrapiEntity<A extends AnyObj = AnyObj> = {
 
 export type StrapiPopulate<
   E extends StrapiEntity,
-  P extends Record<string, { data: StrapiEntity | StrapiEntity[] }>
+  P extends Record<string, { data: StrapiEntity | StrapiEntity[] | null }>
 > = E & {
   attributes: {
     [K in keyof P]: P[K] | null;

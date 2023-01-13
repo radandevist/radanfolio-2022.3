@@ -27,7 +27,7 @@ type ISinglePost = StrapiPopulate<StrapiPost, {
       profilePic: {
         data: StrapiMedia;
       };
-    }>;
+    }> | null;
   };
   cover: {
     data: StrapiMedia;
@@ -55,14 +55,14 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({
         <meta
           name="description"
           content={post.attributes.summary
-            || `A blog post by ${post.attributes.author?.data.attributes.fullName}`}
+            || `A blog post by ${post.attributes.author?.data?.attributes.fullName}`}
         />
 
         {/* opengraph */}
         <meta
           property="og:description"
           content={post.attributes.summary
-            || `A blog post by ${post.attributes.author?.data.attributes.fullName}`}
+            || `A blog post by ${post.attributes.author?.data?.attributes.fullName}`}
         />
         <meta
           property="og:image"
@@ -89,17 +89,17 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({
           }) || []}
           publishDate={new Date(post.attributes.publishedAt).toDateString()}
           author={{
-            fullName: post.attributes.author?.data.attributes.fullName || "",
+            fullName: post.attributes.author?.data?.attributes.fullName || "",
             profilePic: {
               url: fullUrl(
-                post.attributes.author?.data.attributes.profilePic?.data.attributes.url || ""
+                post.attributes.author?.data?.attributes.profilePic?.data.attributes.url || ""
               ),
               width:
-                post.attributes.author?.data.attributes.profilePic?.data.attributes.width || 100,
+                post.attributes.author?.data?.attributes.profilePic?.data.attributes.width || 100,
               height:
-                post.attributes.author?.data.attributes.profilePic?.data.attributes.height || 100,
+                post.attributes.author?.data?.attributes.profilePic?.data.attributes.height || 100,
               alt:
-                post.attributes.author?.data.attributes.profilePic?.data.attributes.alternativeText
+                post.attributes.author?.data?.attributes.profilePic?.data.attributes.alternativeText
                 || "User's profile picture", 
             },
           }}
@@ -110,7 +110,7 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({
           <Image
             className="h-[70vh] w-full object-cover object-center"
             src={fullUrl(post.attributes.cover?.data.attributes.url || "")}
-            alt={post.attributes.cover?.data.attributes.alternativeText || ""}
+            alt={post.attributes.cover?.data.attributes.alternativeText || "post cover"}
             width={post.attributes.cover?.data.attributes.width || 1200}
             height={post.attributes.cover?.data.attributes.height || 630}
             placeholder="blur"

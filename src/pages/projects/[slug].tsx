@@ -73,11 +73,11 @@ const SingleProjectPage: NextPage<SingleProjectPageProps> = ({
         {/* cover image */}
         <figure>
           <Image
-            className="w-full object-cover object-center"
+            className="h-[70vh] w-full object-cover object-center"
             src={fullUrl(project.attributes.cover?.data.attributes.url || "")}
             alt={project.attributes.cover?.data.attributes.alternativeText || "project cover image"}
-            width={project.attributes.cover?.data.attributes.width}
-            height={project.attributes.cover?.data.attributes.height}
+            width={project.attributes.cover?.data.attributes.width || 1200}
+            height={project.attributes.cover?.data.attributes.height || 630}
             placeholder="blur"
             blurDataURL={LOCAL_BLUR_PLACEHOLDER_IMAGE}
           />

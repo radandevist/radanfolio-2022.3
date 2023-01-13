@@ -6,11 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prebuild": "yarn generate",
-    "predev": "yarn generate",
-    "generate": "yarn generate:projects-front-matters",
-    "generate:projects-front-matters": "node -r @swc-node/register src/scripts/generateProjectsFrontMatterFiles.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@ctrl/react-adsense": "^1.6.1",
