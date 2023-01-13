@@ -6,6 +6,7 @@
   "contact": "Contact",
   "posts": "Articles",
   "latestPosts": "Derniers articles",
+  "featured": "Favoris",
   "builtFrom": "Ce portfolio est construit à partir du modèle de portfolio gratuit de Chris Hansen (<1>Hyggedev</1>): <2>Forkez le</2>",
   "customizedBy": "Personnalisation et ajout de nouvelles fonctionnalités réalisées par moi ( Radan Devist )",
   "craftedWithLove": "Conçu avec <heartIcon /> et un peu de Next.js",

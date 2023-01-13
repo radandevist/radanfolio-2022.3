@@ -10,5 +10,8 @@
   // },
   "tailwindCSS.includeLanguages": {
     "typescriptreact": "html"
-  }
+  },
+  "cSpell.words": [
+    "Strapi"
+  ]
 }

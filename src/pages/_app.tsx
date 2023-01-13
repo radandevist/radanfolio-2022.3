@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        {/* Common opengraphs meta tags */}
+        {/* Common openGraph meta tags */}
         {/* The og:url meta tag is important for sharing on linkedin */}
         <meta property="og:url" content={`https://radanfolio.vercel.app${router.asPath}`} />
         <meta property="og:site_name" content="radanfolio" />

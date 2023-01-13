@@ -34,14 +34,14 @@ export const PostComponent: FC<PostComponentProps> = ({
 }) => (
   <Link href={url}>
     <article className="w-full min-h-64 cursor-pointer">
-      <figure className="">
-        <div id="imageWrapper" className="h-full w-full">
+      <figure>
+        <div className="animate animate__animated animate__fadeIn h-full w-full">
           <Image
-            className="w-full h-52 object-cover rounded-lg shadow-xl"
+            className="w-full h-56 object-cover rounded-lg shadow-xl"
+            src={cover.url}
             alt={cover.alt}
             width={cover.width}
             height={cover.height}
-            src={cover.url}
             placeholder="blur"
             blurDataURL={LOCAL_BLUR_PLACEHOLDER_IMAGE}
           />
@@ -55,8 +55,8 @@ export const PostComponent: FC<PostComponentProps> = ({
               </div>
             )}
           </div>
-          <h2 className="text-xl font-bold capitalize line-clamp-3">{title}</h2>
-          <p className="line-clamp-2">{summary}</p>
+          <h2 className="text-xl md:text-2xl font-bold capitalize line-clamp-3">{title}</h2>
+          <p className="text-md md:text-lg line-clamp-2">{summary}</p>
         </figcaption>
       </figure>
     </article>

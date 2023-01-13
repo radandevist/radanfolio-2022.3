@@ -8,7 +8,7 @@ import { useTranslation } from "next-i18next";
 
 import { Hero } from "../components/partials/blog/Hero";
 import { Feed } from "../components/partials/blog/Feed";
-import { Featured } from "../components/partials/blog/Featured";
+import { Featured } from "../components/partials/blog/FeaturedPosts";
 import { AnimatedPage } from "../components/AnimatedPage";
 import { getRandomElementsImproved } from "../utils/arrayUtils";
 import { getCloudinaryOpenGraphImage } from "../helpers/cloudinary";
@@ -22,6 +22,12 @@ import { StrapiMedia } from "../types/media.types";
 import { fullUrl } from "../utils/strapiUtils";
 import { getPostUrl } from "../utils/pathUtils";
 import { PostComponentProps } from "../components/partials/blog/Post";
+
+type IBlogPost = StrapiPopulate<StrapiPost, {
+  cover: {
+    data: StrapiMedia;
+  };
+}>;
 
 type BlogPageProps = {
   heroPost: IBlogPost;
@@ -106,12 +112,6 @@ const BlogPage: NextPage<BlogPageProps> = ({
     </AnimatedPage>
   );
 };
-
-type IBlogPost = StrapiPopulate<StrapiPost, {
-  cover: {
-    data: StrapiMedia;
-  };
-}>;
 
 export const getServerSideProps: GetServerSideProps<BlogPageProps> = async ({
   locale,

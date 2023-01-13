@@ -10,8 +10,6 @@ export async function getSinglePost<T>(slug: string) {
       }
     },
     populate: ["author.profilePic", "cover", "tags", "seo.sharedImage.media"],
-  }, {
-    encode: false,
   });
 
   return await client.get<T>(`/posts?${singlePostQuery}`);
