@@ -47,7 +47,11 @@ export const Footer = () => {
       >
         <p><Trans i18nKey="builtFrom" components={{ 1: <Link1 />, 2: <Link2 /> }} /></p>
   
-        <p>{t("common:customizedBy")}</p>
+        <p>
+          {t("common:customizedBy") === "common:customizedBy"
+            ? "Just ping me at my contacts, if this error persists."
+            : "common:customizedBy"}
+        </p>
   
         <p className="flex justify-center items-center space-x-4">
           <Trans

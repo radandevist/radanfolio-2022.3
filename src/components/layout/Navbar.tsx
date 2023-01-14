@@ -12,6 +12,7 @@ import { ThemeSwitcher } from "../ThemeSwitcher";
 
 import { MobileNav } from "./MobileNav";
 
+
 export const Navbar = () => {
   const router = useRouter();
   const { toggleTheme } = useTheme();
@@ -19,21 +20,26 @@ export const Navbar = () => {
   const [isMobileNavVisible, setMobileNavVisibility] = useState(false);
   const isMedium = useMediaQuery("(min-width: 768px)");
 
+  function getLinkLabel(key: string, defaultValue: string) {
+    const computed = t(key);
+    return computed === key ? defaultValue : computed;
+  }
+
   const links = [
     {
-      name: t("common:blog"),
+      name: getLinkLabel("common:blog", "Blog"),
       route: PATH_NAMES.home,
     },
     {
-      name: t("common:about"),
+      name: getLinkLabel("common:about", "About"),
       route: PATH_NAMES.about,
     },
     {
-      name: t("common:projects"),
+      name: getLinkLabel("common:projects", "Projects"),
       route: PATH_NAMES.projects,
     },
     // {
-    //   name: t("common:contact"),
+    //   name: getLinkLabel("common:contact"),
     //   route: PATH_NAMES.contact,
     // },
   ];
