@@ -3,9 +3,7 @@ export const ScrollTopWidget = () => (
     onClick={() => {
       window.scrollTo({top: 0, behavior: "smooth"});
     }}
-    className="z-50
-      fixed bottom-10 right-5 md:right-10
-      hidden md:block"
+    className="z-50 fixed bottom-10 right-5 md:right-10"
     role="button"
     aria-label="scroll-to-top"
     id="scroll-top-widget"
