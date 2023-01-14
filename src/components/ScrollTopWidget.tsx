@@ -4,7 +4,6 @@ export const ScrollTopWidget = () => (
       window.scrollTo({top: 0, behavior: "smooth"});
     }}
     className="z-50
-      animate animate__animated radan_animate__slideInLeft
       fixed bottom-10 right-5 md:right-10
       hidden md:block"
     role="button"

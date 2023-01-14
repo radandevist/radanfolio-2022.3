@@ -113,45 +113,13 @@ of codes inside of any blog post
   @apply pr-4;
 }
 
-/* overriding animate css for resolving LCS web vital */
-.radan_animate__slideInLeft {
-  -webkit-animation-name: slideInLeft;
-  animation-name: customSlideInRight;
+/* set lists style */
+ul, ol {
+  @apply ml-6 list-outside;
 }
-@-webkit-keyframes customSlideInRight {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-    /* -webkit-transform: translateX(100%);
-    transform: translateX(100%); */
-    /* visibility: visible; */
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    /* -webkit-transform: translateX(0);
-    transform: translateX(0); */
-  }
+ul {
+  @apply list-disc;
 }
-@keyframes customSlideInRight {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-    /* -webkit-transform: translateX(100%);
-    transform: translateX(100%); */
-    /* visibility: visible; */
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    /* -webkit-transform: translateX(0);
-    transform: translateX(0); */
-  }
+ol {
+  @apply list-decimal;
 }
-
-/* Adjust list in mdx content */
-/* .radan-list li {
-  @apply font-;
-} */
