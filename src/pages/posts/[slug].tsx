@@ -143,27 +143,41 @@ export const getServerSideProps: GetServerSideProps<SinglePostPageProps, SingleP
   locale,
   locales,
 }) => {
-  const [
-    post,
-    translations,
-  ] = await Promise.all([
-    (async () => {
-      const { data: { 0: post }} = 
-        await getSinglePost<StraPiResponse<ISinglePost[]>>(params?.slug || "");
-
-      post.attributes.content = await bundleStrapiContent(post.attributes.content);
-
-      return post;
-    })(),
-    serverSideTranslations(locale!, ["common", "blog"], null, locales),
-  ]);
-
-  return {
-    props: {
+  try {
+    const [
       post,
-      ...translations,
-    },
-  };
+      translations,
+    ] = await Promise.all([
+      (async () => {
+        const result =
+          await getSinglePost<StraPiResponse<ISinglePost[]>>(params?.slug || "");
+        
+        if (result.data.length < 1) {
+          throw new Error("post not found");
+        }
+  
+        const post = result.data[0];
+        post.attributes.content = await bundleStrapiContent(post.attributes.content);
+  
+        return post;
+      })(),
+      serverSideTranslations(locale!, ["common", "blog"], null, locales),
+    ]);
+  
+    return {
+      props: {
+        post,
+        ...translations,
+      },
+    };
+  } catch (error: any) {
+    if (error.message === "post not found") {
+      return {
+        notFound: true,
+      };
+    }
+    throw new Error(error);
+  }
 };
 
 export default SinglePostPage;

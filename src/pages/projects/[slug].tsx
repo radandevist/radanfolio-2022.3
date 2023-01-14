@@ -118,27 +118,41 @@ export const getServerSideProps: GetServerSideProps<SingleProjectPageProps, Sing
   locale,
   locales,
 }) => {
-  const [
-    translations,
-    project,
-  ] = await Promise.all([
-    serverSideTranslations(locale!, ["common", "projects"], null, locales),
-    (async () => {
-      const { data: { 0: project }} = 
-        await getSingleProject<StraPiResponse<ISingleProject[]>>(params?.slug || "");
-
-      project.attributes.content = await bundleStrapiContent(project.attributes.content);
-
-      return project;
-    })()
-  ]);
-
-  return {
-    props: {
+  try {
+    const [
+      translations,
       project,
-      ...translations,
-    },
-  };
+    ] = await Promise.all([
+      serverSideTranslations(locale!, ["common", "projects"], null, locales),
+      (async () => {
+        const result = 
+          await getSingleProject<StraPiResponse<ISingleProject[]>>(params?.slug || "");
+
+        if (result.data.length < 1) {
+          throw new Error("project not found");
+        }
+
+        const project = result.data[0];
+        project.attributes.content = await bundleStrapiContent(project.attributes.content);
+  
+        return project;
+      })()
+    ]);
+  
+    return {
+      props: {
+        project,
+        ...translations,
+      },
+    };
+  } catch (error: any) {
+    if (error.message === "project not found") {
+      return {
+        notFound: true,
+      };
+    }
+    throw new Error(error);
+  }
 };
 
 export default SingleProjectPage;
