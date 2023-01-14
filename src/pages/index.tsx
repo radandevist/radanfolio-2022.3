@@ -110,10 +110,10 @@ const BlogPage: NextPage<BlogPageProps> = ({
     <AnimatedPage>
       <NextSeo
         title={`${t("blog:openGraph.title")}`}
-        description={t("blog:openGraph.description")}
+        description={`${t("blog:openGraph.description")}`}
         openGraph={{
           title: `${t("blog:openGraph.title")}`,
-          description: t("blog:openGraph.description"),
+          description: `${t("blog:openGraph.description")}`,
           type: "blog",
           images: [
             {
@@ -155,14 +155,14 @@ const BlogPage: NextPage<BlogPageProps> = ({
       {featuredPosts.length > 0
         && (
           <Featured
-            title={t("common:featured")}
+            title={`${t("common:featured")}`}
             Component={PostComponent}
             items={convertPosts(featuredPosts)}
           />
         )}
 
       <ContentGrid
-        title={t("common:latestPosts")}
+        title={`${t("common:latestPosts")}`}
         Component={PostComponent}
         items={convertPosts(loadedPosts)}
         loading={fetchNexPageResult.isLoading}

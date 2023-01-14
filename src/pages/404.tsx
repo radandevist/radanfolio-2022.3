@@ -15,10 +15,10 @@ const Page404 = () => {
   return (
     <AnimatedPage>
       <NextSeo
-        title={t("common:pageNotFound")}
+        title={`${t("common:pageNotFound")}`}
         description={`${t("common:sorryPageNotFound").replace("<1/>", " ")}`}
         openGraph={{
-          title: t("common:pageNotFound"),
+          title: `${t("common:pageNotFound")}`,
           description: `${t("common:sorryPageNotFound").replace("<1/>", " ")}`,
           images: [
             {

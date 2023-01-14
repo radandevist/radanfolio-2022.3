@@ -21,11 +21,11 @@ const AboutPage: NextPage = () => {
   return (
     <AnimatedPage>
       <NextSeo
-        title={t("common:about")}
-        description={t("home:openGraph.description")}
+        title={`${t("common:about")}`}
+        description={`${t("home:openGraph.description")}`}
         openGraph={{
-          title: t("home:openGraph.title"),
-          description: t("home:openGraph.description"),
+          title: `${t("home:openGraph.title")}`,
+          description: `${t("home:openGraph.description")}`,
           type: "profile",
           images: [
             {

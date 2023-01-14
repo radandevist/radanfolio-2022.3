@@ -54,15 +54,15 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({
   return (
     <AnimatedPage>
       <NextSeo
-        title={t("projects:openGraph.title")}
-        description={t("projects:openGraph.description")}
+        title={`${t("projects:openGraph.title")}`}
+        description={`${t("projects:openGraph.description")}`}
         openGraph={{
-          title: t("projects:openGraph.title"),
-          description: t("projects:openGraph.description"),
+          title: `${t("projects:openGraph.title")}`,
+          description: `${t("projects:openGraph.description")}`,
           images: [
             {
               url: `${NEXT_APP_DOMAIN_URL}/images/meta/projects_og_image.jpg`,
-              alt: t("projects:openGraph.title"),
+              alt: `${t("projects:openGraph.title")}`,
             },
           ],
         }}
