@@ -1,16 +1,8 @@
 import { FC } from "react";
-// import Image from "next/image";
-// import Link from "next/link";
 
-// import { ProjectIndex } from "../../../types/project";
-// import { getCloudinaryThumbnail } from "../../../helpers/cloudinary";
-// import { LOCAL_BLUR_PLACEHOLDER_IMAGE } from "../../../constants";
 import { ContentItem, ContentItemSummary, ContentItemTitle } from "../ContentItem";
 
-// import { Link } from "./Link";
-
-export type ProjectComponentProps = {
-  // project: ProjectIndex;
+export type LoadedProjectComponentProps = {
   title: string;
   summary: string;
   url: string;
@@ -22,44 +14,41 @@ export type ProjectComponentProps = {
   };
 };
 
+export type ProjectComponentProps =
+| LoadedProjectComponentProps & { loading?: false }
+| Partial<LoadedProjectComponentProps> & { loading: true }; 
+
 export const ProjectComponent: FC<ProjectComponentProps> = ({
   title,
   summary,
   url,
   cover,
-}) => (
-  // <div className="w-full">
-  // <Link href={url} /* state={project} */>
-  //   <article className="w-full min-h-64 cursor-pointer">
-  //     <figure>
-  //       <div className="animate animate__animated animate__fadeIn h-full w-full">
-  //         <Image
-  //           className="w-full h-56 object-cover rounded-lg shadow-xl"
-  //           src={cover.url}
-  //           alt={cover.alt}
-  //           width={cover.width}
-  //           height={cover.height}
-  //           placeholder="blur"
-  //           blurDataURL={LOCAL_BLUR_PLACEHOLDER_IMAGE}
-  //         />
-  //       </div>
-  //       <figcaption className="py-4 space-y-3">
-  //         <h2 className="text-xl md:text-2xl font-bold capitalize line-clamp-3">{title}</h2>
-  //         <p className="text-md md:text-lg line-clamp-2">{summary}</p>
-  //       </figcaption>
-  //     </figure>
-  //   </article>
-  // </Link>
-
-  <ContentItem
-    url={url}
-    image={cover}
-    body={(
-      <>
-        <ContentItemTitle text={title} />
-        <ContentItemSummary text={summary} />
-      </>
-    )}
-  />
-  // </div>
-);
+  loading,
+}) => {
+  if (!loading) {
+    return (
+      <ContentItem
+        url={url}
+        image={cover}
+        body={(
+          <>
+            <ContentItemTitle text={title} />
+            <ContentItemSummary text={summary} />
+          </>
+        )}
+      />
+    );
+  } else {
+    return (
+      <ContentItem
+        loading
+        body={(
+          <>
+            <ContentItemTitle loading />
+            <ContentItemSummary loading />
+          </>
+        )}
+      />
+    );
+  }
+};

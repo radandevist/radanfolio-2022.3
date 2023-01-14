@@ -12,7 +12,7 @@ export function getRandomElements<T>(arr: T[], n: number = 1): T[] {
   return result;
 }
 
-export function objectFromArray (array: string[], defaultValues?: any[]) {
+export function objectFromArray(array: string[], defaultValues?: any[]) {
   const obj: Record<string, any> = {};
 
   if (!defaultValues) {

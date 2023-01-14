@@ -1,6 +1,6 @@
 import qs from "qs";
 
-import { getPostsPageQuery } from "../../query/post.query";
+import { getPostsPageQuery } from "../../utils/qsUtils";
 import { client } from "../client";
 
 export async function getSinglePost<T>(slug: string) {

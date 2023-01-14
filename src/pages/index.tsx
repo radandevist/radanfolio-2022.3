@@ -16,13 +16,22 @@ import { getPostUrl } from "../utils/pathUtils";
 import { PostComponent, PostComponentProps } from "../components/partials/blog/PostComponent";
 import { ContentGrid } from "../components/partials/ContentGrid";
 import { Featured } from "../components/partials/Featured";
-import { NEXT_APP_DOMAIN_URL } from "../constants";
+import { DEFAULT_PAGE_SIZE_QUERY, NEXT_APP_DOMAIN_URL } from "../constants";
 import { about } from "../data/about";
 import { mainApi } from "../redux/services/mainApi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectPostPage, setPostPage } from "../redux/features/post/post.reducer";
+import {
+  appendLoadedPosts,
+  incrementPage,
+  selectIsLastPage,
+  selectLoadedPosts,
+  selectPostPage,
+  setIsLastPage,
+  setLoadedPosts,
+  setPostPage,
+} from "../redux/features/post/post.reducer";
 
-type IBlogPost = StrapiPopulate<StrapiPost, {
+export type IBlogPost = StrapiPopulate<StrapiPost, {
   cover: {
     data: StrapiMedia;
   };
@@ -44,14 +53,35 @@ const BlogPage: NextPage<BlogPageProps> = ({
   const { t } = useTranslation();
   const [
     triggerFetchNextPage,
-    fetchNextPageResult,
+    fetchNexPageResult,
   ] = mainApi.endpoints.getPostsByPage.useLazyQuery();
   const dispatch = useAppDispatch();
+
+  const loadedPosts = useAppSelector(selectLoadedPosts) as IBlogPost[];
   const page = useAppSelector(selectPostPage);
+  const isLastPage = useAppSelector(selectIsLastPage);
 
   useEffect(() => {
-    dispatch(setPostPage(initialPage));
+    if (loadedPosts.length === 0) {
+      dispatch(setPostPage(initialPage));
+      dispatch(setLoadedPosts(initialPosts));
+    }
   });
+
+  useEffect(() => {
+    if (fetchNexPageResult.data) {
+      if (fetchNexPageResult.data.data.length > 0) {
+        dispatch(appendLoadedPosts(fetchNexPageResult.data.data));
+        dispatch(incrementPage(1));
+
+        if (fetchNexPageResult.data.data.length < DEFAULT_PAGE_SIZE_QUERY) {
+          dispatch(setIsLastPage(true));
+        }
+      } else { // if data.length === )
+        dispatch(setIsLastPage(true));
+      }
+    }
+  }, [dispatch, fetchNexPageResult.data]);
 
   function convertPosts(posts: IBlogPost[]): PostComponentProps[] {
     return posts.map((post) => {
@@ -73,7 +103,7 @@ const BlogPage: NextPage<BlogPageProps> = ({
   }
 
   function handleLoadMorePosts() {
-    triggerFetchNextPage({ page });
+    triggerFetchNextPage({ page: page + 1 });
   }
 
   return (
@@ -134,18 +164,27 @@ const BlogPage: NextPage<BlogPageProps> = ({
       <ContentGrid
         title={t("common:latestPosts")}
         Component={PostComponent}
-        items={convertPosts(initialPosts)}
+        items={convertPosts(loadedPosts)}
+        loading={fetchNexPageResult.isLoading}
       />
 
       {/* Load more button */}
-      <div className="mxw-sm">
-        <button
-          onClick={handleLoadMorePosts}
-          className="inline-block my-1 bg-brand1-contrasted text-white
-            font-semibold py-2 px-3 mr-4"
-        >
-          Load More
-        </button>
+      <div className="mxw-sm mb-16">
+        <div className="flex justify-center">
+          {!isLastPage
+            ? (
+              <button
+                onClick={handleLoadMorePosts}
+                className="bg-brand1-contrasted text-white text-lg
+              font-semibold px-5 pb-2 pt-3.5"
+              >
+                Load More
+              </button>
+            )
+            : (
+              <p className="text-lg">Congrats! 🎉 You reached the end of all posts.</p>
+            )}
+        </div>
       </div>
     </AnimatedPage>
   );
