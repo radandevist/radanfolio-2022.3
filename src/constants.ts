@@ -22,4 +22,4 @@ const defaultDomain = process.env.NODE_ENV === "production"
 export const NEXT_APP_DOMAIN_URL =
   process.env.NEXT_PUBLIC_NEXT_APP_DOMAIN_URL || defaultDomain;
 
-export const DEFAULT_PAGE_SIZE_QUERY = 3;
+export const DEFAULT_PAGE_SIZE_QUERY = 6;
