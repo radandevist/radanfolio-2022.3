@@ -15,11 +15,11 @@ export const READ_ONLY_TOKEN =
 
 export const LOCAL_BLUR_PLACEHOLDER_IMAGE = "/images/blur_image.jpg";
 
-const defaultDomain = process.env.NODE_ENV === "production"
-  ? "https://devist.xyz"
-  : "http://localhost:3000";
+// const defaultDomain = process.env.NODE_ENV === "production"
+//   ? "https://devist.xyz"
+//   : "http://localhost:3000";
 
 export const NEXT_APP_DOMAIN_URL =
-  process.env.NEXT_PUBLIC_NEXT_APP_DOMAIN_URL || defaultDomain;
+  process.env.NEXT_PUBLIC_NEXT_APP_DOMAIN_URL || "http://localhost:3000";
 
 export const DEFAULT_PAGE_SIZE_QUERY = 6;
