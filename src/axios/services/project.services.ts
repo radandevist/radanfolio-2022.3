@@ -45,3 +45,19 @@ export async function getSingleProject<T>(slug: string) {
 
   return await client.get<T>(`/projects?${query}`);
 };
+
+
+export async function getSitemapProjects<T>(page: number) {
+  // we chose 25 items per page because it is the default strapi config
+  // const query = getPostsPageQuery(page, 25);
+  const query = qs.stringify({
+    sort: ["updatedAt:desc"],
+    pagination: {
+      page,
+      pageSize: 25,
+    },
+  });
+
+  return await client.get<T>(`/projects?${query}`);
+}
+

@@ -63,3 +63,17 @@ export async function getFeaturedPosts<T>() {
 export async function getInitialPosts<T>() {
   return await client.get<T>(`/posts?${getPostsPageQuery(1)}`);;
 };
+
+export async function getSitemapPosts<T>(page: number) {
+  // we chose 25 items per page because it is the default strapi config
+  // const query = getPostsPageQuery(page, 25);
+  const query = qs.stringify({
+    sort: ["updatedAt:desc"],
+    pagination: {
+      page,
+      pageSize: 25,
+    },
+  });
+
+  return await client.get<T>(`/posts?${query}`);
+};

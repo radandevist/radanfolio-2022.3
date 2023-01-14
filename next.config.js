@@ -11,6 +11,14 @@ const nextConfig = {
       "media.giphy.com",
       "localhost"
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/server-sitemap-:page.xml",
+        destination: "/sitemap/:page"
+      }
+    ];
   }
 };
 
