@@ -46,7 +46,9 @@ export const ContentItem: FC<ContentItemProps> = ({
           </div>
         )
         : (
-          <div className="w-full h-56 object-cover rounded-lg shadow-xl" />
+          <div
+            className="w-full h-56 object-cover rounded-lg shadow-xl dark:bg-gray-200 bg-gray-700"
+          />
         )}
       <figcaption className="py-4 space-y-3">
         {body}
@@ -75,7 +77,7 @@ export const ContentItemTitle: FC<ContentItemTitleProps> = ({ text, loading }) =
   } else {
     return (
       <div
-        className={`h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-[45%] mb-4
+        className={`h-3 dark:bg-gray-200 rounded-full bg-gray-700 w-[45%] mb-4
           ${loading && "animate-pulse"}`}
       />
     );
@@ -101,11 +103,11 @@ export const ContentItemSummary: FC<ContentItemSummaryProps> = ({ text, loading 
     return (
       <>
         <div
-          className={`h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5 w-10/12
+          className={`h-2 dark:bg-gray-200 rounded-full bg-gray-700 mb-2.5 w-10/12
             ${loading && "animate-pulse"}`}
         />
         <div
-          className={`h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5 w-9/12
+          className={`h-2 dark:bg-gray-200 rounded-full bg-gray-700 mb-2.5 w-9/12
             ${loading && "animate-pulse"}`}
         />
       </>
