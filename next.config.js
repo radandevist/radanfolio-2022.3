@@ -9,7 +9,10 @@ const nextConfig = {
       "images.pexels.com",
       "res.cloudinary.com",
       "media.giphy.com",
-      "localhost"
+      "localhost",
+      "radanfolio-strapi.devist.xyz", // otherwise images won't load
+      "radanfolio-preview.devist.xyz", // vercel preview url
+      "devist.xyz", // vercel production urls
     ],
   },
   async rewrites() {
