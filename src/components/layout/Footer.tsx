@@ -50,7 +50,7 @@ export const Footer = () => {
         <p>
           {t("common:customizedBy") === "common:customizedBy"
             ? "Just ping me at my contacts, if this error persists."
-            : "common:customizedBy"}
+            : t("common:customizedBy")}
         </p>
   
         <p className="flex justify-center items-center space-x-4">
