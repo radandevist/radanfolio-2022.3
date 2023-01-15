@@ -1,8 +1,6 @@
-import { NEXT_APP_DOMAIN_URL } from "./../constants";
-
 export const about = {
   avatar: {
-    url: `${NEXT_APP_DOMAIN_URL}/images/radan_profile_pic.jpg`,
+    url: "/images/radan_profile_pic.jpg",
     width: 255,
     height: 340,
   },
