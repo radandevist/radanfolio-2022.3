@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 
 import { ContentItem, ContentItemSummary, ContentItemTitle } from "../ContentItem";
@@ -32,7 +33,9 @@ export const ProjectComponent: FC<ProjectComponentProps> = ({
         image={cover}
         body={(
           <>
-            <ContentItemTitle text={title} />
+            <Link href={url} className="hover:text-brand1-contrasted">
+              <ContentItemTitle text={title} />
+            </Link>
             <ContentItemSummary text={summary} />
           </>
         )}

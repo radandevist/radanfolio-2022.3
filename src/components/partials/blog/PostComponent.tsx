@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 
 import { FeaturedStarIcon } from "../../icon/FeaturedStarIcon";
@@ -47,7 +48,9 @@ export const PostComponent: FC<PostComponentProps> = ({
                 )
                 : (<div />)}
             </div>
-            <ContentItemTitle text={title} />
+            <Link href={url} className="hover:text-brand1-contrasted">
+              <ContentItemTitle text={title} />
+            </Link>
             <ContentItemSummary text={summary} />
           </>
         )}
