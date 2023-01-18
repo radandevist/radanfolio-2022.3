@@ -33,7 +33,7 @@ export const ProjectComponent: FC<ProjectComponentProps> = ({
         image={cover}
         body={(
           <>
-            <Link href={url} className="hover:text-brand1-contrasted">
+            <Link href={url}>
               <ContentItemTitle text={title} />
             </Link>
             <ContentItemSummary text={summary} />
